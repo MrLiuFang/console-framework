@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.pepper</groupId>
+		<artifactId>pepper</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>console-framework</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<pepper.version>1.0.0-SNAPSHOT</pepper.version>
+	</properties>
+	
+	<modules>
+		<module>console-service</module>
+		<module>console-business</module>
+		<module>console-model</module>
+		<module>console-web</module>
+		<module>console-run</module>
+  </modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>pepper-core</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-customize-jstl</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-file-service</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-file-business</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-authentication-service</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-authentication-business</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>pepper-core</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

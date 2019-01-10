@@ -1,0 +1,114 @@
+package com.pepper.service.console.admin.user.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.pepper.core.Pager;
+import com.pepper.core.base.impl.BaseServiceImpl;
+import com.pepper.dao.console.admin.user.AdminUserDao;
+import com.pepper.model.console.admin.user.AdminUser;
+import com.pepper.model.console.role.RoleUser;
+import com.pepper.service.console.admin.user.AdminUserService;
+import com.pepper.service.console.role.RoleUserService;
+import com.pepper.util.Md5Util;
+
+
+/**
+ *
+ * @author mrliu
+ *
+ * @param <T>
+ */
+@Service(interfaceClass = AdminUserService.class)
+public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements AdminUserService{
+
+	@SuppressWarnings("unused")
+	private static Logger log = LoggerFactory.getLogger(AdminUserServiceImpl.class);
+
+	@Resource
+	private AdminUserDao adminUserDao;
+
+	@Reference
+	private RoleUserService roleUserService;
+
+	@Override
+	public AdminUser queryAdminUserByAccountPaasword(String account, String password) {
+		return adminUserDao.queryAdminUserByAccountPaasword(account,Md5Util.encodeByMD5(Md5Util.PUBLIC_SALT + password));
+	}
+
+	@Override
+	public Pager<AdminUser> list(Pager<AdminUser> pager) {
+		pager = adminUserDao.findNavigator(pager);
+		
+//		pager = adminUserDao.list(pager, pager.getJpqlParameter().getSearchParameter(), pager.getJpqlParameter().getSortParameter());
+		return pager;
+	}
+
+	@Override
+	public AdminUser findByAccount(String account) {
+		return adminUserDao.findByAccount(account);
+	}
+
+	@Override
+	public void deleteUser(String id) {
+		RoleUser roleUsers = roleUserService.findRoleUserByUserId(id);
+		roleUserService.delete(roleUsers);
+		adminUserDao.deleteById(id);
+	}
+
+	@Override
+	public AdminUser saveUser(AdminUser adminUser, String roleId) {
+		adminUser = adminUserDao.save(adminUser);
+		RoleUser roleUser = new RoleUser();
+		roleUser.setCreateDate(new Date());
+		roleUser.setCreateUser(adminUser.getCreateUser());
+		roleUser.setRoleId(roleId);
+		roleUser.setUserId(adminUser.getId());
+		roleUserService.save(roleUser);
+		return adminUser;
+	}
+
+	@Override
+	public void saveUserRole(RoleUser roleUser) {
+		roleUserService.deleteRoleUserByUserId(roleUser.getUserId());
+		roleUserService.save(roleUser);
+	}
+
+	@Override
+	public void updateUser(AdminUser adminUser, String roleId) {
+		save(adminUser);
+		if (StringUtils.hasText(roleId)) {
+			roleUserService.deleteRoleUserByUserId(adminUser.getId());
+			RoleUser roleUser = new RoleUser();
+			roleUser.setCreateDate(new Date());
+			roleUser.setRoleId(roleId);
+			roleUser.setUserId(adminUser.getId());
+			roleUser.setCreateUser(adminUser.getUpdateUser());
+			roleUserService.save(roleUser);
+		}
+	}
+
+	@Override
+	public void updateLoginTime(String userId) {
+		List<String> args = new ArrayList<String>();
+		args.add(userId);
+		
+	}
+
+	@Override
+	public Long findOnLineCount() {
+		
+		return adminUserDao.findOnLineCount();
+	}
+
+
+}

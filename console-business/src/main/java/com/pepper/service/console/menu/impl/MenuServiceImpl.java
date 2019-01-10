@@ -1,0 +1,187 @@
+package com.pepper.service.console.menu.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Resource;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.util.StringUtils;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.pepper.common.emuns.Scope;
+import com.pepper.common.emuns.Status;
+import com.pepper.core.base.impl.BaseServiceImpl;
+import com.pepper.core.constant.SearchConstant;
+import com.pepper.dao.console.menu.MenuDao;
+import com.pepper.model.console.enums.Level;
+import com.pepper.model.console.enums.MenuType;
+import com.pepper.model.console.menu.Menu;
+import com.pepper.service.console.menu.MenuService;
+
+/**
+ *
+ * @author Mr.Liu
+ *
+ * @param <T>
+ */
+@Service(interfaceClass = MenuService.class)
+public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuService {
+
+	@Resource
+	private MenuDao menuDao;
+
+	@Override
+	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Integer status) {
+		return menuDao.queryRoleChildMenu(parentMenuId, roleId, status);
+	}
+
+	@Override
+	public List<Menu> queryRootMenuByRoleId(String roleId, Integer status) {
+		return menuDao.queryRoleRootMenuByRoleId(roleId, status);
+	}
+
+	@Override
+	public Menu findByCode(String code) {
+		return menuDao.findByCode(code);
+	}
+
+	@Override
+	public List<Menu> getMenuTreeList(Map<String, Object> searchParameter) {
+		List<Menu> returnList = new ArrayList<Menu>();
+		setChildMenu(searchParameter, returnList);
+		return returnList;
+
+	}
+
+	/**
+	 * 查询子菜单
+	 *
+	 * @param list
+	 * @param id
+	 * @param level
+	 */
+	public void setChildMenu(Map<String, Object> searchParameter, List<Menu> list) {
+		
+		Map<String, Object> sortParameter = new HashMap<String, Object>();
+		sortParameter.put("sort", Direction.ASC.name());
+		List<Menu> listChildMenu = menuDao.findAll(searchParameter, sortParameter);
+
+		if (listChildMenu==null || listChildMenu.size()<=0) {
+			return;
+		}
+		for (Menu childMenu : listChildMenu) {
+			list.add(childMenu);
+			searchParameter.put(SearchConstant.EQUAL + "_parentId", childMenu.getId());
+			if (MenuType.MENU == childMenu.getMenuType()) {
+				setChildMenu(searchParameter, list);
+			}
+		}
+	}
+	
+	@Override
+	public List<Menu> queryMenu(Status status, Scope scope, String parentId) {
+		Map<String, Object> searchParameter = new HashMap<String, Object>();
+		searchParameter.put(SearchConstant.EQUAL + "_status", status.getKey());
+		searchParameter.put(SearchConstant.EQUAL + "_scope", scope.getKey());
+		searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
+		return menuDao.findAll(searchParameter);
+	}
+
+	@Override
+	public List<Menu> findByParentId(String parentId) {
+		return menuDao.findByParentId(parentId);
+	}
+
+	/**
+	 * 新增菜单
+	 */
+	@Override
+	public void addMenu(Menu menu) {
+		// 新增菜单
+		if (menu.getMenuType() == MenuType.MENU) {
+			// 新增一级菜单
+			if (StringUtils.hasText(menu.getParentId())) {
+				menu.setUrl(null);
+				menu.setParentId("0");
+				menu.setLevel(Level.ZERO);
+				menu.setIsLeaf(true);
+			} else {
+				// 新增二级菜单
+				Menu parentMenu = findById(menu.getParentId()).get();
+				if (parentMenu!=null && parentMenu.getIsLeaf()) {
+					parentMenu.setIsLeaf(false);
+					menuDao.update(parentMenu);
+				}
+				menu.setLevel(Level.ONE);
+				menu.setIsLeaf(true);
+			}
+			// 新增资源
+		} else if (menu.getMenuType() == MenuType.RESOURCE) {
+			Menu parentMenu = findById(menu.getParentId()).get();
+			if (parentMenu!=null && parentMenu.getIsLeaf()) {
+				parentMenu.setIsLeaf(false);
+				menuDao.update(parentMenu);
+			}
+			menu.setLevel(Level.TWO);
+			menu.setIsLeaf(true);
+		}
+		save(menu);
+	}
+
+	/**
+	 * 修改菜单
+	 */
+	@Override
+	public void updateMenu(Menu menu) {
+		// 修改前的menu
+		Menu oldMenu = findById(menu.getId()).get();
+		if (menu.getParentId().equals(oldMenu.getParentId())) {
+			menuDao.update(menu);
+			return;
+		}
+		if (!oldMenu.getParentId().equals("0")) {
+			// 修改前的parentMenu，判断当前菜单从原来的父菜单移走后，原来的父菜单还有没有孩子
+			Menu parentMenu = findById(oldMenu.getParentId()).get();
+			List<Menu> list = menuDao.findByParentId(parentMenu.getId(), oldMenu.getId());
+			if (list.size() == 0) {
+				parentMenu.setIsLeaf(true);
+			}
+			menuDao.update(parentMenu);
+		}
+		if (!menu.getParentId().equals("0")) {
+			// 修改后的parentMenu，判断当前菜单移到现在的父菜单后，将当前父菜单变成isLeaf=NO
+			Menu updateParentMenu = findById(menu.getParentId()).get();
+			updateParentMenu.setIsLeaf(false);
+			menuDao.update(updateParentMenu);
+		}
+		menuDao.update(menu);
+	}
+
+	/**
+	 * 删除menu
+	 */
+	@Override
+	public void deleteMenu(Menu menu) {
+		if (!"0".equals(menu.getParentId())) {
+			Menu parentMenu = findById(menu.getParentId()).get();
+			List<Menu> list = menuDao.findByParentId(menu.getParentId(), menu.getId());
+			if (list.size() == 0) {
+				parentMenu.setIsLeaf(true);
+				menuDao.update(parentMenu);
+			}
+		}
+		deleteById(menu.getId());
+	}
+
+	@Override
+	public List<Map<String, Object>> findAllToMap() {
+		List<Map<String, Object>> menuList = menuDao.findAllToMap();
+		return menuList;
+	}
+
+	@Override
+	public List<String> findAllResourceUrl() {
+		return menuDao.findAllResourceUrl();
+	}
+
+}

@@ -1,0 +1,547 @@
+console-web:
+  adminUser:
+    name: 管理员
+    account: admin
+    password: DB70C07DAE366E5D801ED777B87993B8
+    nickName: 管理员
+    status: 0
+    type: 1
+  parameter:
+  - code: login_page_title
+    value: 旗云管理平台--登录
+    remarks: 后台管理登陆时的title
+  - code: main_page_title
+    value: 旗云管理平台
+    remarks: 后台管理登陆后的title
+  - code: admin_user_init_pwd
+    value: '123456'
+    remarks: 后台管理员初始化密码
+  role:
+    name: 管理员角色
+    code: ADMIN_ROLE
+    remarks: 管理员角色
+    scope: 1
+    status: 0
+    menuCode:
+    - SYSTEM_SETTINGS
+    - SYSTEM_SETTINGS_ROLE
+    - SYSTEM_SETTINGS_ADMIN_ROLE_LIST
+    - SYSTEM_SETTINGS_ADMIN_ROLE_TOADD
+    - SYSTEM_SETTINGS_ADMIN_ROLE_TOEDIT
+    - SYSTEM_SETTINGS_ADMIN_ROLE_ADD
+    - SYSTEM_SETTINGS_ADMIN_ROLE_UPDATE
+    - SYSTEM_SETTINGS_ADMIN_ROLE_MENU
+    - SYSTEM_SETTINGS_ADMIN_SAVE_ROLE_MENU
+    - SYSTEM_SETTINGS_ADMIN_ROLE_TOVIEW
+    - SYSTEM_SETTINGS_ADMIN_USER
+    - SYSTEM_SETTINGS_ADMIN_USER_LIST
+    - SYSTEM_SETTINGS_ADMIN_USER_TOADD
+    - SYSTEM_SETTINGS_ADMIN_USER_TOEDIT
+    - SYSTEM_SETTINGS_ADMIN_USER_TOVIEW
+    - SYSTEM_SETTINGS_ADMIN_USER_VIEW
+    - SYSTEM_SETTINGS_ADMIN_USER_ADD
+    - SYSTEM_SETTINGS_ADMIN_USER_UPDATE
+    - SYSTEM_SETTINGS_ADMIN_USER_DELETE
+    - SYSTEM_SETTINGS_ADMIN_USER_ROLE_LIST
+    - SYSTEM_SETTINGS_ADMIN_USER_SAVE_ROLE
+    - SYSTEM_SETTINGS_ADMIN_USER_RE_PWD
+  roleUser:
+    roleCode: ADMIN_ROLE
+    adminUserAccount: admin
+  menu:
+    name: 系统设置
+    code: SYSTEM_SETTINGS
+    url: null
+    parentId: '0'
+    scope: 1
+    sort: 0
+    status: 0
+    isLeaf: 0
+    level: 0
+    menuType: 0
+    child:
+    - name: 菜单管理
+      code: SYSTEM_SETTINGS_MENU
+      url: admin/menu/index
+      parentId: null
+      scope: 1
+      sort: 0
+      status: 0
+      isLeaf: 0
+      level: 1
+      menuType: 0
+      child:
+      - name: 菜单列表页面
+        url: admin/menu/list
+        code: SYSTEM_SETTINGS_MENU_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 0
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 菜单新增页面
+        url: admin/menu/toAdd
+        code: SYSTEM_SETTINGS_MENU_TO_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 1
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 菜单新增
+        url: admin/menu/add
+        code: SYSTEM_SETTINGS_MENU_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 2
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 菜单修改页面
+        url: admin/menu/toEdit
+        code: SYSTEM_SETTINGS_MENU_TO_EDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 3
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 菜单修改
+        url: admin/menu/update
+        code: SYSTEM_SETTINGS_MENU_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 4
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 菜单删除
+        url: admin/menu/delete
+        code: SYSTEM_SETTINGS_MENU_DELETE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 5
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 资源新增页面
+        url: admin/menu/resources/toAdd
+        code: SYSTEM_SETTINGS_MENU_RESOURCES_TO_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 6
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 资源新增
+        url: admin/menu/resources/add
+        code: SYSTEM_SETTINGS_MENU_RESOURCES_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 7
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 资源修改页面
+        url: admin/menu/resources/toEdit
+        code: SYSTEM_SETTINGS_MENU_RESOURCES_TO_EDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 8
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 资源修改
+        url: admin/menu/resources/update
+        code: SYSTEM_SETTINGS_MENU_RESOURCES_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 9
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 资源删除
+        url: admin/menu/resources/delete
+        code: SYSTEM_SETTINGS_MENU_RESOURCES_DELETE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 10
+        isLeaf: 1
+        level: 2
+        menuType: 1
+    - name: 参数管理
+      code: SYSTEM_SETTINGS_PARAMETER
+      url: admin/parameter/index
+      parentId: null
+      scope: 1
+      sort: 1
+      status: 0
+      isLeaf: 0
+      level: 1
+      menuType: 0
+      child:
+      - name: 查看参数列表
+        url: admin/parameter/list
+        code: SYSTEM_SETTINGS_PARAMETER_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 0
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增参数页面
+        url: admin/parameter/toAdd
+        code: SYSTEM_SETTINGS_PARAMETER_TOADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 1
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改参数页面
+        url: admin/parameter/toEdit
+        code: SYSTEM_SETTINGS_PARAMETER_TOEDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 2
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增参数
+        url: admin/parameter/add
+        code: SYSTEM_SETTINGS_PARAMETER_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 3
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改参数
+        url: admin/parameter/update
+        code: SYSTEM_SETTINGS_PARAMETER_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 4
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 删除参数
+        url: admin/parameter/delete
+        code: SYSTEM_SETTINGS_PARAMETER_DELETE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 5
+        isLeaf: 1
+        level: 2
+        menuType: 1
+    - name: 用户管理
+      code: SYSTEM_SETTINGS_ADMIN_USER
+      url: admin/user/index
+      parentId: null
+      scope: 1
+      sort: 2
+      status: 0
+      isLeaf: 0
+      level: 1
+      menuType: 0
+      child:
+      - name: 查看列表
+        url: admin/user/list
+        code: SYSTEM_SETTINGS_ADMIN_USER_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 0
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增页面
+        url: admin/user/toAdd
+        code: SYSTEM_SETTINGS_ADMIN_USER_TOADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 1
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改页面
+        url: admin/user/toEdit
+        code: SYSTEM_SETTINGS_ADMIN_USER_TOEDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 2
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 查看页面
+        url: admin/user/toView
+        code: SYSTEM_SETTINGS_ADMIN_USER_TOVIEW
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 3
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增
+        url: admin/user/add
+        code: SYSTEM_SETTINGS_ADMIN_USER_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 4
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改
+        url: admin/user/update
+        code: SYSTEM_SETTINGS_ADMIN_USER_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 5
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 删除
+        url: admin/user/delete
+        code: SYSTEM_SETTINGS_ADMIN_USER_DELETE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 6
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 查看
+        url: admin/user/view
+        code: SYSTEM_SETTINGS_ADMIN_USER_VIEW
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 7
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 获取角色列表
+        url: admin/user/roleList
+        code: SYSTEM_SETTINGS_ADMIN_USER_ROLE_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 8
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 保存用户角色
+        url: admin/user/saveUserRole
+        code: SYSTEM_SETTINGS_ADMIN_USER_SAVE_ROLE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 9
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 重置用户密码
+        url: admin/user/rePwd
+        code: SYSTEM_SETTINGS_ADMIN_USER_RE_PWD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 10
+        isLeaf: 1
+        level: 2
+        menuType: 1
+    - name: 角色管理
+      code: SYSTEM_SETTINGS_ROLE
+      url: admin/role/index
+      parentId: null
+      scope: 1
+      sort: 3
+      status: 0
+      isLeaf: 0
+      level: 1
+      menuType: 0
+      child:
+      - name: 查看角色列表
+        url: admin/role/list
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 0
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增页面
+        url: admin/role/toAdd
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_TOADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 1
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改页面
+        url: admin/role/toEdit
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_TOEDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 2
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 新增
+        url: admin/role/add
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 3
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 修改
+        url: admin/role/update
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 4
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 角色菜单
+        url: admin/role/roleMenu
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_MENU
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 6
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 角色菜单保存
+        url: admin/role/saveRoleMenu
+        code: SYSTEM_SETTINGS_ADMIN_SAVE_ROLE_MENU
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 7
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 查看页面
+        url: admin/role/toView
+        code: SYSTEM_SETTINGS_ADMIN_ROLE_TOVIEW
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 8
+        isLeaf: 1
+        level: 2
+        menuType: 1
+    - name: 地区管理
+      code: SYSTEM_SETTINGS_SUPPORT_AREA
+      url: admin/supportArea/index
+      parentId: null
+      scope: 1
+      sort: 4
+      status: 0
+      isLeaf: 0
+      level: 1
+      menuType: 0
+      child:
+      - name: 地区列表
+        url: admin/supportArea/list
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_LIST
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 0
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区新增
+        url: admin/supportArea/toAdd
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_TOADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 1
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区新增提交
+        url: admin/supportArea/add
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_ADD
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 2
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区修改
+        url: admin/supportArea/toEdit
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_TOEDIT
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 3
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区修改提交
+        url: admin/supportArea/update
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_UPDATE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 4
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区查看
+        url: admin/supportArea/toView
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_TOVIEW
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 6
+        isLeaf: 1
+        level: 2
+        menuType: 1
+      - name: 地区删除
+        url: admin/supportArea/delete
+        code: SYSTEM_SETTINGS_SUPPORT_AREA_DELETE
+        status: 0
+        parentId: null
+        scope: 1
+        sort: 7
+        isLeaf: 1
+        level: 2
+        menuType: 1
