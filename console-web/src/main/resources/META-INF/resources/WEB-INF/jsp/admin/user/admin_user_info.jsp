@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">设置我的资料</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/user/updateUserInfo"
+				<form class="layui-form " action="${ctx}/console/user/updateUserInfo"
 					id="form-addOrUpdate" returnType="json">
 					<input name="id" id="id" value="${adminUser.id}"
 						style="display: none;">

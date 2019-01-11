@@ -31,14 +31,14 @@
 			<dl class="layui-nav-child ">
 				<dd>
 					<a style="cursor: pointer;"
-						onclick="page.loadPage('${ctx }/admin/user/userInfo?id=${adminUser.id }')">我的资料</a>
+						onclick="page.loadPage('${ctx }/console/user/userInfo?id=${adminUser.id }')">我的资料</a>
 				</dd>
 				<dd>
 					<a style="cursor: pointer;"
-						onclick="page.loadPage('${ctx }/admin/user/toRePwd?id=${adminUser.id }')">密码设置</a>
+						onclick="page.loadPage('${ctx }/console/user/toRePwd?id=${adminUser.id }')">密码设置</a>
 				</dd>
 				<dd>
-					<a href="${ctx}/admin/loginOut">退出</a>
+					<a href="${ctx}/console/loginOut">退出</a>
 				</dd>
 			</dl></li>
 	</ul>

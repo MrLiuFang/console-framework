@@ -38,7 +38,7 @@
 	<div class="box">
 		<footer class="header"></footer>
 		<form class="login-form" method="post" id="loginForm"
-			action="${ctx}/admin/login">
+			action="${ctx}/console/login">
 			<section class="login">
 				<div class='message-top'>
 					<img alt="" src="${ctx}/assets/img/login-logo.png">
@@ -90,7 +90,7 @@
 		});
 
 		var cookieParams1 = {
-			path : "${ctx}" + "/admin/"
+			path : "${ctx}" + "/console/"
 		}
 		var cookieParams2 = {
 			path : "${ctx}" + "/"
@@ -147,7 +147,7 @@
 			var that = $(this);
 			$.ajax({
 				type : "POST",
-				url : "${ctx}/admin/flashVCode",
+				url : "${ctx}/console/flashVCode",
 				data : {},
 				success : function(data) {
 					that.attr("src", "data:image/png;base64," + data.data.vcodeImage);

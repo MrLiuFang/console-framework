@@ -38,7 +38,7 @@
 		 * @param provinceCode：用于省下拉条回显，地区编码，String类型；
 		 * @param cityCode：用于市下拉条回显，地区编码，String类型； 
 		 * @param townCode：用于城镇下拉条回显，地区编码，String类型；
-		 * @param regionUrl：获取数据的url，默认${ctx}/admin/supportArea/getAreaChilds。
+		 * @param regionUrl：获取数据的url，默认${ctx}/console/supportArea/getAreaChilds。
 		 * @param required 是否必选，可选值true|false。默认false。必选时没有"请选择"选项。
 		 *
 		 * 例子：
@@ -51,7 +51,7 @@
 		 */
 		initRegionSelect : function(selectId, provinceCode, cityCode, townCode, regionUrl, required, provinceSelectFn, citySelectFn, townSelectFn) {
 			if (!regionUrl) {
-				regionUrl = "${ctx}/admin/supportArea/getAreaChilds";
+				regionUrl = "${ctx}/console/supportArea/getAreaChilds";
 			}
 
 			//添加组件框架

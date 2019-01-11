@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/supportArea/add"
+				<form class="layui-form " action="${ctx}/console/supportArea/add"
 					id="form-addOrUpdate" returnType="json">
 					<div class="layui-form-item ">
 						<label class="layui-form-label">地区名<span class="qi-req">*</span></label>
@@ -66,7 +66,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/supportArea/index")
+			page.loadPage("${ctx}/console/supportArea/index")
 		});
 
 		//选择类型为省，那么的父级编号必须为0
@@ -93,7 +93,7 @@
 				}
 				var exist = false;
 				baseUtil.AJpost(
-						"${ctx}/admin/supportArea/checkSupportAreaExist", {
+						"${ctx}/console/supportArea/checkSupportAreaExist", {
 							code : value
 						}, function(d) {
 							exist = d.data.exist;
@@ -118,7 +118,7 @@
 				}
 				var exist = false;
 				baseUtil.AJpost(
-						"${ctx}/admin/supportArea/checkParentAreaExist", {
+						"${ctx}/console/supportArea/checkParentAreaExist", {
 							parentCode : value,
 							level : $("#level").val()
 						}, function(d) {

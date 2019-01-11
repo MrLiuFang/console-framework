@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/department/add"
+				<form class="layui-form " action="${ctx}/console/department/add"
 					id="form-addOrUpdate" returnType="json">
 					<div class="layui-form-item ">
 						<label class="layui-form-label">所属公司</label>
@@ -76,7 +76,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/department/index");
+			page.loadPage("${ctx}/console/department/index");
 		});
 		
 		$("#parentName").click(function (){
@@ -107,7 +107,7 @@
 				var treeTable = treeGrid.render({
 					elem : '#departmentTreeTable',
 					method : "post",
-					url : '${ctx}/admin/department/getDepartment?companyId='+companyId,
+					url : '${ctx}/console/department/getDepartment?companyId='+companyId,
 					treeId : 'id'//树形id字段名称
 					,
 					treeUpId : 'parentId'//树形父id字段名称
@@ -180,7 +180,7 @@
 				var treeTable = treeGrid.render({
 					elem : '#companyTreeTable',
 					method : "post",
-					url : '${ctx}/admin/company/list',
+					url : '${ctx}/console/company/list',
 					treeId : 'id'//树形id字段名称
 					,
 					treeUpId : 'parentId'//树形父id字段名称

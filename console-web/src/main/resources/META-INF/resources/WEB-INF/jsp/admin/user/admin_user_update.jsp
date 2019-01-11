@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">修改</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/user/update"
+				<form class="layui-form " action="${ctx}/console/user/update"
 					id="form-addOrUpdate" returnType="json">
 					<input name="id" id="id" value="${adminUser.id}" type="hidden" />
 					<div class="layui-form-item ">
@@ -101,7 +101,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/user/index");
+			page.loadPage("${ctx}/console/user/index");
 		});
 
 		//action=view时只读
@@ -123,7 +123,7 @@
 					return '必填项不能为空';
 				}
 				var exist = false;
-				baseUtil.AJpost("${ctx}/admin/user/checkExist", {
+				baseUtil.AJpost("${ctx}/console/user/checkExist", {
 					account : value
 				}, function(d) {
 					exist = d.data.exist;

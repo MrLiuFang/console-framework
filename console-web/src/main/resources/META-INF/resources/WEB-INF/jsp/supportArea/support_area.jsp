@@ -76,7 +76,7 @@
 		//表格渲染
 		table.render({
 			elem : '#mainTable',
-			url : '${ctx}/admin/supportArea/list?sort_level=asc',
+			url : '${ctx}/console/supportArea/list?sort_level=asc',
 			method : "post",
 			cols : [ [ {
 				field : 'areaName',
@@ -133,23 +133,23 @@
 			var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 			var tr = obj.tr; //获得当前行 tr 的DOM对象
 			if (layEvent === 'view') { //查看
-				page.loadPage("${ctx}/admin/supportArea/toView?id=" + data["id"])
+				page.loadPage("${ctx}/console/supportArea/toView?id=" + data["id"])
 			} else if (layEvent === 'del') { //删除
 				layui.layer.confirm('确定删除该行？', function(index) {
 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 					layui.layer.close(index);
 					//向服务端发送删除指令
-					common.deleteData('${ctx}/admin/supportArea/delete', data["id"]);
+					common.deleteData('${ctx}/console/supportArea/delete', data["id"]);
 					table.reload('mainTable');
 				});
 			} else if (layEvent === 'update') { //修改
-				page.loadPage("${ctx}/admin/supportArea/toEdit?id=" + data["id"]);
+				page.loadPage("${ctx}/console/supportArea/toEdit?id=" + data["id"]);
 			}
 		});
 
 		//新增跳转
 		$("#button_add").click(function() {
-			page.loadPage("${ctx}/admin/supportArea/toAdd");
+			page.loadPage("${ctx}/console/supportArea/toAdd");
 		})
 
 	});

@@ -20,7 +20,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/role/add"
+				<form class="layui-form " action="${ctx}/console/role/add"
 					id="form-addOrUpdate" returnType="json">
 					<div class="layui-form-item ">
 						<label class="layui-form-label">角色名称<span class="qi-req">*</span></label>
@@ -88,7 +88,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/role/index")
+			page.loadPage("${ctx}/console/role/index")
 		});
 
 		$("#selectResource").click(function() {
@@ -180,7 +180,7 @@
 				var opt = {
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/admin/role/roleMenu?search_EQ_scope=' + $("#scope").val(),
+					url : '${ctx}/console/role/roleMenu?search_EQ_scope=' + $("#scope").val(),
 					//树形id字段名称
 					treeId : 'id',
 					//树形父id字段名称

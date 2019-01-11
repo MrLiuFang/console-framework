@@ -86,7 +86,7 @@
 		//表格渲染
 		table.render({
 			elem : '#mainTable',
-			url : '${ctx}/admin/role/list',
+			url : '${ctx}/console/role/list',
 			method : "post",
 			cols : [ [ {
 				field : 'name',
@@ -150,17 +150,17 @@
 			var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 			var tr = obj.tr; //获得当前行 tr 的DOM对象
 			if (layEvent === 'view') { //查看
-				page.loadPage("${ctx}/admin/role/toView?id=" + data["id"])
+				page.loadPage("${ctx}/console/role/toView?id=" + data["id"])
 			} else if (layEvent === 'del') { //删除
 				layui.layer.confirm('确定删除该行？', function(index) {
 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 					layui.layer.close(index);
 					//向服务端发送删除指令
-					common.deleteData('${ctx}/admin/role/delete', data["id"]);
+					common.deleteData('${ctx}/console/role/delete', data["id"]);
 					table.reload('mainTable');
 				});
 			} else if (layEvent === 'update') { //修改
-				page.loadPage("${ctx}/admin/role/toEdit?id=" + data["id"]);
+				page.loadPage("${ctx}/console/role/toEdit?id=" + data["id"]);
 			} else if (layEvent === 'opt-resource') { //修改角色权限
 				openResource(data.scope, data.id);
 			}
@@ -168,7 +168,7 @@
 
 		//新增跳转
 		$("#button_add").click(function() {
-			page.loadPage("${ctx}/admin/role/toAdd");
+			page.loadPage("${ctx}/console/role/toAdd");
 		})
 
 		//弹出权限树窗口
@@ -179,7 +179,7 @@
 				$("#resourceWin table [type=checkbox]:checked").each(function() {
 					resIds.push($(this).attr("cbid"));
 				});
-				baseUtil.AJpost('${ctx}/admin/role/saveRoleMenu', {
+				baseUtil.AJpost('${ctx}/console/role/saveRoleMenu', {
 					roleId : roleId,
 					resourceIds : resIds.join(";")
 				})
@@ -256,7 +256,7 @@
 				var opt = {
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/admin/role/roleMenu?search_EQ_scope=' + scope + "&roleId=" + roleId,
+					url : '${ctx}/console/role/roleMenu?search_EQ_scope=' + scope + "&roleId=" + roleId,
 					//树形id字段名称
 					treeId : 'id',
 					//树形父id字段名称

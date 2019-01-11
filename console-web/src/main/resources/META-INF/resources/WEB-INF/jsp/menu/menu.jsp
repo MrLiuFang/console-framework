@@ -58,7 +58,7 @@
 				elem : '#treeTable',
 				method : "post",
 				height : 710,
-				url : '${ctx}/admin/menu/list',
+				url : '${ctx}/console/menu/list',
 				treeId : 'id'//树形id字段名称
 				,
 				treeUpId : 'parentId'//树形父id字段名称
@@ -118,11 +118,11 @@
 					time : 10000, //20s后自动关闭
 					btn : [ '菜单', '资源', '取消' ],
 					yes : function(index, layero) {
-						page.loadPage("${ctx}/admin/menu/toAdd?type=0");
+						page.loadPage("${ctx}/console/menu/toAdd?type=0");
 						layui.layer.close(index);
 					},
 					btn2 : function(index, layero) {
-						page.loadPage("${ctx}/admin/menu/toAdd?type=1");
+						page.loadPage("${ctx}/console/menu/toAdd?type=1");
 						layui.layer.close(index);
 					},
 					btn3 : function(index, layero) {
@@ -141,12 +141,12 @@
 						$.cookie("menu-scroll", $(".layui-table-body").scrollTop());
 						layui.layer.close(index);
 						//向服务端发送删除指令
-						common.deleteData('${ctx}/admin/menu/delete', data["id"]);
+						common.deleteData('${ctx}/console/menu/delete', data["id"]);
 						treeGrid.reload('treeTable');
 					});
 				} else if (layEvent === 'update') { //修改
 					$.cookie("menu-scroll", $(".layui-table-body").scrollTop());
-					page.loadPage("${ctx}/admin/menu/toEdit?id=" + data["id"]);
+					page.loadPage("${ctx}/console/menu/toEdit?id=" + data["id"]);
 				}
 			});
 		})

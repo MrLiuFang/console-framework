@@ -18,7 +18,7 @@
 				</c:choose>
 			</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/supportArea/update"
+				<form class="layui-form " action="${ctx}/console/supportArea/update"
 					id="form-addOrUpdate" returnType="json">
 					<input name="id" id="id" value="${supportArea.id}" type="hidden" />
 					<div class="layui-form-item ">
@@ -77,7 +77,7 @@
 					function() {
 						//返回
 						$("#button_return").click(function() {
-							page.loadPage("${ctx}/admin/supportArea/index")
+							page.loadPage("${ctx}/console/supportArea/index")
 						});
 
 						//action=view时只读
@@ -120,7 +120,7 @@
 										var exist = false;
 										baseUtil
 												.AJpost(
-														"${ctx}/admin/supportArea/checkSupportAreaExist",
+														"${ctx}/console/supportArea/checkSupportAreaExist",
 														{
 															code : value
 														},
@@ -158,7 +158,7 @@
 										var exist = false;
 										baseUtil
 												.AJpost(
-														"${ctx}/admin/supportArea/checkParentAreaExist",
+														"${ctx}/console/supportArea/checkParentAreaExist",
 														{
 															parentCode : value,
 															level : $("#level")

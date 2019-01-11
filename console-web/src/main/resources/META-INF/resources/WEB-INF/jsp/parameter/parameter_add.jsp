@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/parameter/add"
+				<form class="layui-form " action="${ctx}/console/parameter/add"
 					id="form-addOrUpdate" returnType="json">
 					<div class="layui-form-item ">
 						<label class="layui-form-label">编码<span class="qi-req">*</span></label>
@@ -53,7 +53,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/parameter/index")
+			page.loadPage("${ctx}/console/parameter/index")
 		});
 	});
 </script>

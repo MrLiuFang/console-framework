@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/company/update"
+				<form class="layui-form " action="${ctx}/console/company/update"
 					id="form-addOrUpdate" returnType="json">
 					<input type="hidden" id="id" name="id" value="${company.id}">
 					<div class="layui-form-item ">
@@ -101,7 +101,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/company/index");
+			page.loadPage("${ctx}/console/company/index");
 		});
 
 regionUtil.initRegionSelect("regionSelect");
@@ -129,7 +129,7 @@ regionUtil.initRegionSelect("regionSelect");
 				var treeTable = treeGrid.render({
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/admin/company/list',
+					url : '${ctx}/console/company/list',
 					treeId : 'id'//树形id字段名称
 					,
 					treeUpId : 'parentId'//树形父id字段名称

@@ -72,7 +72,7 @@
 				elem : '#treeTable',
 				method : "post",
 				height : 600,
-				url : '${ctx}/admin/department/list',
+				url : '${ctx}/console/department/list',
 				treeId : 'id'//树形id字段名称
 				,
 				treeUpId : 'parentId'//树形父id字段名称
@@ -118,7 +118,7 @@
 			});
 
 			$("#button_add").click(function() {
-				page.loadPage("${ctx}/admin/department/toAdd");
+				page.loadPage("${ctx}/console/department/toAdd");
 			});
 			//监听工具条
 			treeGrid.on('tool(treeTable)', function(obj) { //注：tool是工具条事件名，mainTable是table原始容器的属性 lay-filter="对应的值"
@@ -130,11 +130,11 @@
 						obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 						layui.layer.close(index);
 						//向服务端发送删除指令
-						common.deleteData('${ctx}/admin/department/delete', data["id"]);
+						common.deleteData('${ctx}/console/department/delete', data["id"]);
 						treeGrid.reload('treeTable');
 					});
 				} else if (layEvent === 'update') { //修改
-					page.loadPage("${ctx}/admin/department/toEdit?id=" + data["id"]);
+					page.loadPage("${ctx}/console/department/toEdit?id=" + data["id"]);
 				}
 			});
 			

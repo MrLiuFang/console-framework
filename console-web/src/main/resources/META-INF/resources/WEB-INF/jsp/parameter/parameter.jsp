@@ -91,7 +91,7 @@
 		//表格渲染
 		table.render({
 			elem : '#mainTable',
-			url : '${ctx}/admin/parameter/list',
+			url : '${ctx}/console/parameter/list',
 			method : "post",
 			cols : [ [ {
 				field : 'code',
@@ -147,16 +147,16 @@
 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 					layui.layer.close(index);
 					//向服务端发送删除指令
-					common.deleteData('${ctx}/admin/parameter/delete', data["id"]);
+					common.deleteData('${ctx}/console/parameter/delete', data["id"]);
 				});
 			} else if (layEvent === 'update') { //修改
-				page.loadPage("${ctx}/admin/parameter/toEdit?id=" + data["id"]);
+				page.loadPage("${ctx}/console/parameter/toEdit?id=" + data["id"]);
 			}
 		});
 
 		//新增跳转
 		$("#button_add").click(function() {
-			page.loadPage("${ctx}/admin/parameter/toAdd");
+			page.loadPage("${ctx}/console/parameter/toAdd");
 		})
 	});
 </script>

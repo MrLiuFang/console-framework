@@ -11,7 +11,7 @@
 			<div class="layui-card-header">修改密码</div>
 			<div>
 				<div class="layui-card-body">
-					<form class="layui-form " action="${ctx}/admin/user/changePwd"
+					<form class="layui-form " action="${ctx}/console/user/changePwd"
 						id="form-addOrUpdate" returnType="json">
 						<input type="hidden" name="userId" id="userId"
 							value="${adminUser.id}" />

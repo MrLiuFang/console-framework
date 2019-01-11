@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">修改</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/menu/update"
+				<form class="layui-form " action="${ctx}/console/menu/update"
 					id="form-addOrUpdate" returnType="json" refreshElement="">
 					<input name="id" id="id" value="${menu.id}" style="display: none;">
 					<!-- 菜单类型 -->
@@ -180,7 +180,7 @@
 				var scope = $("#scope").val();
 				$.ajax({
 					type : 'POST',
-					url : "${ctx}/admin/menu/getMenuList",
+					url : "${ctx}/console/menu/getMenuList",
 					data : {
 						scope : scope,
 						parentId : value
@@ -218,7 +218,7 @@
 			if (typeof (value) != "undefined") {
 				$.ajax({
 					type : 'POST',
-					url : "${ctx}/admin/menu/getMenuList",
+					url : "${ctx}/console/menu/getMenuList",
 					data : {
 						scope : value
 					},
@@ -259,7 +259,7 @@
 		}
 
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/menu/index")
+			page.loadPage("${ctx}/console/menu/index")
 		});
 		layui.form.on('select(scope)', function(data) {
 			var value = data.value;

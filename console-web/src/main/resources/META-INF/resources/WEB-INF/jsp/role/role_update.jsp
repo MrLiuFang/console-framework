@@ -21,7 +21,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">修改</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/role/update"
+				<form class="layui-form " action="${ctx}/console/role/update"
 					id="form-addOrUpdate" returnType="json">
 					<input name="id" id="id" value="${role.id}" style="display: none;">
 					<div class="layui-form-item ">
@@ -94,7 +94,7 @@
 <script type="text/javascript">
 	$(function() {
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/role/index")
+			page.loadPage("${ctx}/console/role/index")
 		});
 
 		$("#selectResource").click(function() {
@@ -186,7 +186,7 @@
 				var opt = {
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/admin/role/roleMenu?search_EQ_scope=' + $("#scope").val() + "&roleId=${role.id}",
+					url : '${ctx}/console/role/roleMenu?search_EQ_scope=' + $("#scope").val() + "&roleId=${role.id}",
 					//树形id字段名称
 					treeId : 'id',
 					//树形父id字段名称

@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">新增</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/user/add"
+				<form class="layui-form " action="${ctx}/console/user/add"
 					id="form-addOrUpdate" returnType="json">
 					<div class="layui-form-item ">
 						<label class="layui-form-label">账号<span class="qi-req">*</span></label>
@@ -98,7 +98,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/user/index");
+			page.loadPage("${ctx}/console/user/index");
 		});
 
 		//校验
@@ -109,7 +109,7 @@
 					return '必填项不能为空';
 				}
 				var exist = false;
-				baseUtil.AJpost("${ctx}/admin/user/checkExist", {
+				baseUtil.AJpost("${ctx}/console/user/checkExist", {
 					account : value
 				}, function(d) {
 					exist = d.data.exist;

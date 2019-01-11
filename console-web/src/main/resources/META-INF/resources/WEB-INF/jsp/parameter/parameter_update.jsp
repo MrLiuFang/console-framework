@@ -10,7 +10,7 @@
 		<div class="layui-card">
 			<div class="layui-card-header">修改</div>
 			<div class="layui-card-body">
-				<form class="layui-form " action="${ctx}/admin/parameter/update"
+				<form class="layui-form " action="${ctx}/console/parameter/update"
 					id="form-addOrUpdate" returnType="json">
 					<input name="id" id="id" value="${parameter.id}"
 						style="display: none;">
@@ -58,7 +58,7 @@
 
 		//返回
 		$("#button_return").click(function() {
-			page.loadPage("${ctx}/admin/parameter/index")
+			page.loadPage("${ctx}/console/parameter/index")
 		});
 
 		//action=view时只读
