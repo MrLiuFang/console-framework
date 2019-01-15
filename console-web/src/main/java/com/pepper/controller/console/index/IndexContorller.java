@@ -71,7 +71,6 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 
 	@RequestMapping("/")
 	public String index() {
-		System.out.println("1111");
 		AdminUser adminUser = (AdminUser) consoleAuthorize.getCurrentUser();
 		if (adminUser !=null ) {
 			if (StringUtils.hasText(adminUser.getHeadPortrait())) {
