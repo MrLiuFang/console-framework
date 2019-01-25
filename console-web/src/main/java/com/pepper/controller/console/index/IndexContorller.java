@@ -147,7 +147,7 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 //			for (Menu childMennu : listChildMenu) {
 //				listChileMenu.add(childMennu);
 //			}
-			rootMenu.getChilds();
+			rootMenu.getChild();
 
 		}
 		request.setAttribute("listMenu", listMenu);

@@ -10,7 +10,7 @@ import com.pepper.core.IEnum;
  */
 public enum UserType implements IEnum {
 
-	EMPLOYEE(0, "职员（后台管理员用户）"), ADMIN(1, "管理员");
+	EMPLOYEE(0, "员工/会员"), ADMIN(1, "管理员"), SUPER_ADMIN(2, "超级管理员");
 
 	private final int key;
 

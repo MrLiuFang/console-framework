@@ -16,6 +16,7 @@ import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseModel;
 import com.pepper.model.console.enums.Level;
 import com.pepper.model.console.enums.MenuType;
+import com.pepper.model.console.enums.UserType;
 
 @Entity()
 @Table(name = "t_menu")
@@ -76,7 +77,7 @@ public class Menu extends BaseModel {
 	private String remarks;
 
 	/**
-	 * 采单级别
+	 * 菜单级别
 	 */
 	@Column(name = "level",nullable=false)
 	private Level level;
@@ -88,17 +89,23 @@ public class Menu extends BaseModel {
 	private Boolean isLeaf;
 
 	/**
-	 * 采单类型
+	 * 菜单类型
 	 */
 	@Column(name = "menu_type",nullable=false)
 	private MenuType menuType;
+	
+	/**
+	 * 使用用户角色（超级管理员&管理员不能使用功能模块，只能使用某些权限配置）
+	 */
+	@Column(name = "use_type",nullable=false)
+	private UserType useType;
 
 	/**
 	 * 子节点(采单)
 	 */
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "parent_id", referencedColumnName = "id")
-	private List<Menu> childs;
+	private List<Menu> child;
 
 	public String getName() {
 		return name;
@@ -187,15 +194,22 @@ public class Menu extends BaseModel {
 	public void setMenuType(MenuType menuType) {
 		this.menuType = menuType;
 	}
-
-	public List<Menu> getChilds() {
-		return childs;
+	
+	public UserType getUseType() {
+		return useType;
 	}
 
-	public void setChilds(List<Menu> childs) {
-		this.childs = childs;
+	public void setUseType(UserType useType) {
+		this.useType = useType;
 	}
-	
-	
 
+	public List<Menu> getChild() {
+		return child;
+	}
+
+	public void setChild(List<Menu> child) {
+		this.child = child;
+	}
+
+	
 }
