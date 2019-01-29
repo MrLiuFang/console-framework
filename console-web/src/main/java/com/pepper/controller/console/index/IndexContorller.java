@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -147,12 +148,12 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 //			for (Menu childMennu : listChildMenu) {
 //				listChileMenu.add(childMennu);
 //			}
-			rootMenu.getChild();
+//			rootMenu.getChild();
 
 		}
 		request.setAttribute("listMenu", listMenu);
 	}
-
+	
 	@RequestMapping("/404")
 	public String error404() {
 		return "404";

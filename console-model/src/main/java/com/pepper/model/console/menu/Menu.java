@@ -1,12 +1,7 @@
 package com.pepper.model.console.menu;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -99,13 +94,6 @@ public class Menu extends BaseModel {
 	 */
 	@Column(name = "use_type",nullable=false)
 	private UserType useType;
-
-	/**
-	 * 子节点(采单)
-	 */
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "parent_id", referencedColumnName = "id")
-	private List<Menu> child;
 
 	public String getName() {
 		return name;
@@ -202,14 +190,4 @@ public class Menu extends BaseModel {
 	public void setUseType(UserType useType) {
 		this.useType = useType;
 	}
-
-	public List<Menu> getChild() {
-		return child;
-	}
-
-	public void setChild(List<Menu> child) {
-		this.child = child;
-	}
-
-	
 }

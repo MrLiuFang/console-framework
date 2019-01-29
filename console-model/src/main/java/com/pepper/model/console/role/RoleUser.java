@@ -3,7 +3,6 @@ package com.pepper.model.console.role;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.hibernate.annotations.DynamicUpdate;
 import com.pepper.core.base.BaseModel;
 
@@ -45,27 +44,4 @@ public class RoleUser extends BaseModel {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	@Transient
-	private String roleCode;
-
-	@Transient
-	private String adminUserAccount;
-
-	public String getRoleCode() {
-		return roleCode;
-	}
-
-	public void setRoleCode(String roleCode) {
-		this.roleCode = roleCode;
-	}
-
-	public String getAdminUserAccount() {
-		return adminUserAccount;
-	}
-
-	public void setAdminUserAccount(String adminUserAccount) {
-		this.adminUserAccount = adminUserAccount;
-	}
-
 }

@@ -1,8 +1,12 @@
 package com.pepper.init.data;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationListener;
@@ -13,16 +17,22 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pepper.core.YamlPropertySourceFactory;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.menu.Menu;
 import com.pepper.model.console.parameter.Parameter;
 import com.pepper.model.console.role.Role;
+import com.pepper.model.console.role.RoleMenu;
+import com.pepper.model.console.role.RoleUser;
 import com.pepper.service.console.admin.user.AdminUserService;
 import com.pepper.service.console.menu.MenuService;
 import com.pepper.service.console.parameter.ParameterService;
+import com.pepper.service.console.role.RoleMenuService;
 import com.pepper.service.console.role.RoleService;
+import com.pepper.service.console.role.RoleUserService;
 
 /**
  * 后台基础数据初始化
@@ -41,13 +51,17 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	@Autowired
    private Environment environment;
 	
-	private AdminUser adminUser;
+	private List<AdminUser> adminUser;
 	
 	private List<Parameter> parameter;
 	
-	private Role role;
+	private List<Role> role;
 	
-	private Menu menu;
+	private MenuVo menu;
+	
+	private Map<String, String> roleUser;
+	
+	private Map<String, List<String>> roleMenu;
 	
 	@Reference
 	private AdminUserService adminUserService;
@@ -59,7 +73,13 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	private RoleService roleService;
 	
 	@Reference
+	private RoleUserService roleUserService;
+	
+	@Reference
 	private MenuService menuService;
+	
+	@Reference
+	private RoleMenuService roleMenuService;
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
@@ -69,7 +89,11 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 			saveAdminUser();
 			saveParameter();
 			saveRole();
-			saveMenu();
+			List<MenuVo> list = new ArrayList<MenuVo>();
+			list.add(menu);
+			saveMenu(list, null);
+			saveRoleUser();
+			saveRoleMenu();
 		}
 		logger.info("结束初始化数据！");
 	}
@@ -78,9 +102,11 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	 * 创建初始化用户
 	 */
 	private void saveAdminUser(){
-		AdminUser user = adminUserService.findByAccount(adminUser.getAccount());
-		if(user == null){
-			adminUserService.save(adminUser);
+		for(AdminUser entity : adminUser){
+			AdminUser user = adminUserService.findByAccount(entity.getAccount());
+			if(user == null){
+				adminUserService.save(entity);
+			}
 		}
 	}
 	
@@ -99,28 +125,72 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	 * 创建初始化角色
 	 */
 	private void saveRole(){
-		if(roleService.findByCode(role.getCode()) == null ){
-			roleService.save(role);
+		for(Role entity : role){
+			if(roleService.findByCode(entity.getCode()) == null ){
+				roleService.save(entity);
+			}
 		}
 	}
 	
 	/**
 	 * 创建初始化菜单
 	 */
-	private void saveMenu(){
-		if(menuService.findByCode(menu.getCode()) == null){
-			menuService.save(menu);
+	private void saveMenu(List<MenuVo> list, Menu parentMenu){
+		for(MenuVo bean : list){
+			Menu entity = new Menu();
+			BeanUtils.copyProperties(bean, entity);
+			if(parentMenu!=null && StringUtils.hasText(parentMenu.getId())){
+				entity.setParentId(parentMenu.getId());
+			}
+			Menu oldMenu = menuService.findByCode(entity.getCode());
+			if(oldMenu == null ){
+				entity = menuService.save(entity);
+			}else{
+				entity = oldMenu;
+			}
+			if(bean.getChild()!=null && !bean.getChild().isEmpty()){
+				saveMenu(bean.getChild(), entity);
+			}
 		}
 	}
 	
-	public AdminUser getAdminUser() {
-		return adminUser;
+	
+	
+	/**
+	 * 保存角色用户
+	 */
+	private void saveRoleUser(){
+		for (String roleCode : roleUser.keySet()) {
+			String roleId = roleService.findByCode(roleCode).getId();
+			String userId = adminUserService.findByAccount(roleUser.get(roleCode)).getId();
+			if(roleUserService.findByRoleIdAndUserId(roleId, userId) == null){
+				RoleUser roleUser = new RoleUser();
+				roleUser.setRoleId(roleId);
+				roleUser.setUserId(userId);
+				roleUserService.save(roleUser);
+			}
+		}
 	}
-
-	public void setAdminUser(AdminUser adminUser) {
-		this.adminUser = adminUser;
+	
+	/**
+	 * 保存角色菜单资源
+	 */
+	private void saveRoleMenu(){
+		for (String roleCode : roleMenu.keySet()) {
+			String roleId = roleService.findByCode(roleCode).getId();
+			List<String> list = roleMenu.get(roleCode);
+			for(String menuCode : list){
+				String menuId = menuService.findByCode(menuCode).getId();
+				if(roleMenuService.findByRoleAndMenu(roleId, menuId) == null ){
+					RoleMenu roleMenu = new RoleMenu();
+					roleMenu.setMenuId(menuId);
+					roleMenu.setRoleId(roleId);
+					roleMenuService.save(roleMenu);
+				}
+			}
+		}
 	}
-
+	
 	public List<Parameter> getParameter() {
 		return parameter;
 	}
@@ -128,21 +198,46 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	public void setParameter(List<Parameter> parameter) {
 		this.parameter = parameter;
 	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public Menu getMenu() {
+	
+	public MenuVo getMenu() {
 		return menu;
 	}
 
-	public void setMenu(Menu menu) {
+	public void setMenu(MenuVo menu) {
 		this.menu = menu;
 	}
 
+	public List<AdminUser> getAdminUser() {
+		return adminUser;
+	}
+
+	public void setAdminUser(List<AdminUser> adminUser) {
+		this.adminUser = adminUser;
+	}
+
+	public List<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(List<Role> role) {
+		this.role = role;
+	}
+
+	public Map<String, String> getRoleUser() {
+		return roleUser;
+	}
+
+	public void setRoleUser(Map<String, String> roleUser) {
+		this.roleUser = roleUser;
+	}
+
+	public Map<String, List<String>> getRoleMenu() {
+		return roleMenu;
+	}
+
+	public void setRoleMenu(Map<String, List<String>> roleMenu) {
+		this.roleMenu = roleMenu;
+	}
+
+	
 }

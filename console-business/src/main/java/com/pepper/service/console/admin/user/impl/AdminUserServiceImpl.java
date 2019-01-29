@@ -42,7 +42,7 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 
 	@Override
 	public AdminUser queryAdminUserByAccountPaasword(String account, String password) {
-		return adminUserDao.queryAdminUserByAccountPaasword(account,Md5Util.encodeByMD5(Md5Util.PUBLIC_SALT + password));
+		return adminUserDao.queryAdminUserByAccountPaasword(account,Md5Util.encryptPassword(password.toUpperCase(), account));
 	}
 
 	@Override
