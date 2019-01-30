@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +38,7 @@ public class AreaController extends BaseControllerImpl {
 	@Reference
 	AreaService areaService;
 
-	@Reference
+	@Resource
 	ConsoleAuthorize consoleAuthorize;
 
 	/**

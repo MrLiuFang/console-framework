@@ -31,16 +31,18 @@
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-config</artifactId>
-			<version>${pepper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-cache-business</artifactId>
-			<version>${pepper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-authentication-business</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>discreteness-file-business</artifactId>
 		</dependency>
 
 		<!-- spring cloud config client 重试机制需要引入spring-retry -->

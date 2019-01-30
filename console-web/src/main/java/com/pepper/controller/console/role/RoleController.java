@@ -3,6 +3,8 @@ package com.pepper.controller.console.role;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Reference
 	private RoleMenuService roleMenuService;
 
-	@Reference
+	@Resource
 	ConsoleAuthorize consoleAuthorize;
 
 	@Reference

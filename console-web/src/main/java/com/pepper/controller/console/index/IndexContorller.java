@@ -3,16 +3,20 @@ package com.pepper.controller.console.index;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pepper.common.emuns.Status;
@@ -21,6 +25,7 @@ import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.menu.Menu;
+import com.pepper.model.console.menu.MenuVo;
 import com.pepper.model.console.parameter.Parameter;
 import com.pepper.model.console.role.RoleUser;
 import com.pepper.service.authentication.ConsoleAuthorize;
@@ -55,7 +60,7 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 	@Reference
 	ParameterService parameterService;
 
-	@Reference
+	@Resource
 	private ConsoleAuthorize consoleAuthorize;
 
 	@Reference
@@ -136,20 +141,22 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 	private void setUserMenu(AdminUser adminUer) {
 		RoleUser roleUser = roleUserService.findByUserId(adminUer.getId());
 		// 用户菜单组装
-		List<Menu> listMenu = new ArrayList<Menu>();
+		List<MenuVo> listMenu = new ArrayList<MenuVo>();
 		// 用户权限菜单根节点
 		List<Menu> listRootMenu = menuService.queryRootMenuByRoleId(roleUser.getRoleId(), Status.NORMAL.getKey());
 		for (Menu rootMenu : listRootMenu) {
-			listMenu.add(rootMenu);
-//			// 用户权限菜单子节点
-//			List<Menu> listChildMenu = menuService.queryRoleChildMenu(rootMenu.getId(), roleUser.getRoleId(),
-//					Status.NORMAL.getKey());
-//			List<Menu> listChileMenu = new ArrayList<Menu>();
-//			for (Menu childMennu : listChildMenu) {
-//				listChileMenu.add(childMennu);
-//			}
-//			rootMenu.getChild();
-
+			MenuVo menuVo = new MenuVo();
+			BeanUtils.copyProperties(rootMenu, menuVo);
+			listMenu.add(menuVo);
+			// 用户权限菜单子节点
+			List<Menu> listChildMenu = menuService.queryRoleChildMenu(rootMenu.getId(), roleUser.getRoleId(),Status.NORMAL.getKey());
+			List<MenuVo> listChileMenu = new ArrayList<MenuVo>();
+			for (Menu childMennu : listChildMenu) {
+				MenuVo childMenuVo = new MenuVo();
+				BeanUtils.copyProperties(childMennu, childMenuVo);
+				listChileMenu.add(childMenuVo);
+			}
+			menuVo.setChild(listChileMenu);
 		}
 		request.setAttribute("listMenu", listMenu);
 	}

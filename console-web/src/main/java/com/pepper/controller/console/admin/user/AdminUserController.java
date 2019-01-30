@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +65,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Reference
 	private FileService fileService;
 	
-	@Reference
+	@Resource
 	private ConsoleAuthorize consoleAuthorize;
 
 	/**

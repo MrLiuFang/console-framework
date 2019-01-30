@@ -16,10 +16,10 @@
 				id="form-query">
 				<div class="layui-form-item">
 					<div class="layui-inline">
-						<label class="layui-form-label">作用域</label>
+						<label class="layui-form-label">作用域3</label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="scope"
-								enumClass="com.qicloud.common.emuns.model.Scope"
+								enumClass="com.pepper.common.emuns.Scope"
 								documentName="scope" selectedValue="1" noDefault="true" />
 						</div>
 					</div>

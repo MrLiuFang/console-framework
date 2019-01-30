@@ -17,14 +17,17 @@
 			<artifactId>console-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-customize-jstl</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-file-service</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-authentication-service</artifactId>
@@ -42,7 +45,7 @@
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

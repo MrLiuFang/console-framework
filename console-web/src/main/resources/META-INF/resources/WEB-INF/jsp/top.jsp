@@ -20,13 +20,13 @@
 		<li class="layui-nav-item" lay-unselect=""><a href="javascript:;">
 				<c:choose>
 					
-					<c:when test="${adminUser.photo == null || adminUser.photo == ''}">
+					<c:when test="${adminUser.headPortrait == null || adminUser.headPortrait == ''}">
 						<%-- <img src="${ctx }/assets/img/logo.png" class="layui-nav-img" /> --%>
 					</c:when>
 					<c:otherwise>
-						<img src="${adminUser.photo}" class="layui-nav-img" />
+						<img src="${adminUser.headPortrait}" class="layui-nav-img" />
 					</c:otherwise>
-				</c:choose> <samp style="color: red;">在线人数 ： ${onLineCount}  &nbsp&nbsp&nbsp&nbsp&nbsp </samp> ${adminUser.name}
+				</c:choose>  ${adminUser.name}
 		</a>
 			<dl class="layui-nav-child ">
 				<dd>

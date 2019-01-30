@@ -1,8 +1,6 @@
-package com.pepper.init.data;
+package com.pepper.model.console.menu;
 
 import java.util.List;
-
-import com.pepper.model.console.menu.Menu;
 
 /**
  * 

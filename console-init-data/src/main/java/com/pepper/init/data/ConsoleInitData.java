@@ -23,6 +23,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.pepper.core.YamlPropertySourceFactory;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.menu.Menu;
+import com.pepper.model.console.menu.MenuVo;
 import com.pepper.model.console.parameter.Parameter;
 import com.pepper.model.console.role.Role;
 import com.pepper.model.console.role.RoleMenu;
@@ -39,7 +40,7 @@ import com.pepper.service.console.role.RoleUserService;
  * @author mrliu
  *
  */
-@PropertySource(value = "console-init-data.yml", ignoreResourceNotFound = true, encoding = "UTF-8",factory=YamlPropertySourceFactory.class)
+@PropertySource(value = "classpath:console-init-data.yml", ignoreResourceNotFound = true, encoding = "UTF-8",factory=YamlPropertySourceFactory.class)
 @Component
 @Order(value=Ordered.LOWEST_PRECEDENCE)
 @ConfigurationProperties(prefix="console")

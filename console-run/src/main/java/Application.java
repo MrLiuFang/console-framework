@@ -11,13 +11,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 import com.pepper.core.BaseDaoFactoryBean;
 
-@DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**","com.pepper.core.**","com.pepper.init.data.**" })
-@SpringBootApplication(scanBasePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**","com.pepper.core.**", "com.pepper.model.**","com.pepper.init.data.**" })
+@DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
+		"com.pepper.core.**", "com.pepper.init.data.**" })
+@SpringBootApplication(scanBasePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
+		"com.pepper.core.**", "com.pepper.model.**", "com.pepper.init.data.**"})
 @EnableJpaRepositories(basePackages = "com.pepper.dao.**", repositoryFactoryBeanClass = BaseDaoFactoryBean.class)
 @EntityScan("com.pepper.model.**")
 @EnableAutoConfiguration()
 @PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
-public class Application extends SpringBootServletInitializer{
+public class Application extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -25,9 +27,10 @@ public class Application extends SpringBootServletInitializer{
 	}
 
 	public static void main(String args[]) {
-		/*new SpringApplicationBuilder(Application.class)
-        .web(WebApplicationType.NONE)
-        .run(args);*/
+		/*
+		 * new SpringApplicationBuilder(Application.class)
+		 * .web(WebApplicationType.NONE) .run(args);
+		 */
 		SpringApplication.run(Application.class, args);
 	}
 }

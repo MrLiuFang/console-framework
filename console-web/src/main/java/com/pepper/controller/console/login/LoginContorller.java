@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 	private static Logger log = LoggerFactory.getLogger(LoginContorller.class);
 
 	
-	@Reference
+	@Resource
 	private ConsoleAuthorize consoleAuthorize;
 	
 	@SuppressWarnings("unused")
