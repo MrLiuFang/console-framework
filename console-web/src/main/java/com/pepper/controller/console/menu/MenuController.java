@@ -66,19 +66,12 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@ResponseBody
 	public Object list() throws BusinessException {
 		JpqlParameter jpqlParameter = new JpqlParameter();
-		Integer scope = null;
-		String scopeStr = jpqlParameter.getSearchParameter().get(SearchConstant.EQUAL + "_scope").toString();
-		if (StringUtils.hasText(scopeStr)) {
-			scope = Integer.valueOf(scopeStr);
-		}
 		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_parentId", "0");
 		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_status", Status.NORMAL.getKey());
 		TreeData<List<Menu>> menuTree = new TreeData<List<Menu>>();
-		if (scope != null) {
-			List<Menu> returnList = menuService.getMenuTreeList(jpqlParameter.getSearchParameter());
-			menuTree.setData(returnList);
-			menuTree.setCount(returnList.size());
-		}
+		List<Menu> returnList = menuService.getMenuTreeList(jpqlParameter.getSearchParameter());
+		menuTree.setData(returnList);
+		menuTree.setCount(returnList.size());
 		return menuTree;
 	}
 

@@ -158,7 +158,6 @@
 				return false;
 			}
 			page.isLoad = true;
-			//把之前的socket关闭，谷哥浏览器达到六个socket连接就不能正常使用了
 			$.ajax({
 				type : 'POST',
 				url : url,

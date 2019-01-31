@@ -16,13 +16,14 @@
 				id="form-query">
 				<div class="layui-form-item">
 					<div class="layui-inline">
-						<label class="layui-form-label">作用域3</label>
+						<label class="layui-form-label">作用域</label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="scope"
 								enumClass="com.pepper.common.emuns.Scope"
 								documentName="scope" selectedValue="1" noDefault="true" />
 						</div>
 					</div>
+					
 					<div class="layui-inline qc-list-bar">
 						<button class="layui-btn" id="button_query" type="button"
 							data-type="reload">查询</button>
@@ -52,6 +53,9 @@
 	$(function($) {
 
 		var $ = layui.$;
+		var where = {
+				"search_EQUAL_scope" : $('#scope').val()
+		};
 		layui.use('treeGrid', function() {
 			var treeGrid = layui.treeGrid; //很重要
 			var treeTable = treeGrid.render({
@@ -98,17 +102,15 @@
 						$.cookie("menu-scroll", "");
 					}
 				},
-				where : {
-					"search_EQ_scope" : $('#scope').val()
-				}
+				where : where
 			});
+			
+			
 
 			//点击“搜索”
 			$('#button_query').on('click', function() {
 				treeGrid.reload('treeTable', {
-					where : {
-						"search_EQ_scope" : $('#scope').val()
-					}
+					where : where
 				});
 			});
 

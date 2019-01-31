@@ -52,13 +52,7 @@
 
 			<dependency>
 				<groupId>com.pepper</groupId>
-				<artifactId>discreteness-authentication-service</artifactId>
-				<version>${pepper.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.pepper</groupId>
-				<artifactId>discreteness-authentication-business</artifactId>
+				<artifactId>discreteness-authentication</artifactId>
 				<version>${pepper.version}</version>
 			</dependency>
 
