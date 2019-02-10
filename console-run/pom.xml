@@ -13,11 +13,11 @@
 
 
 	<dependencies>
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>console-init-data</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>console-business</artifactId>

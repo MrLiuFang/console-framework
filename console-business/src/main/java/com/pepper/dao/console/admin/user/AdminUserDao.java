@@ -10,7 +10,7 @@ import com.pepper.model.console.admin.user.AdminUser;
  *
  * @param <T>
  */
-public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx {
+public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx<AdminUser> {
 
 	/**
 	 * 根据account和password获取用户。
