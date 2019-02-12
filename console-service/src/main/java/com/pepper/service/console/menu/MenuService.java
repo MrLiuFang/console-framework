@@ -23,7 +23,7 @@ public interface MenuService extends BaseService<Menu> {
 	 * @return
 	 */
 
-	public List<Menu> queryRoleChildMenu(String parentId, String roleId, Integer status);
+	public List<Menu> queryRoleChildMenu(String parentId, String roleId, Status status);
 
 	/**
 	 * 根据角色Id查找第一级菜单
@@ -32,7 +32,7 @@ public interface MenuService extends BaseService<Menu> {
 	 * @return
 	 */
 
-	public List<Menu> queryRootMenuByRoleId(String roleId, Integer status);
+	public List<Menu> queryRootMenuByRoleId(String roleId, Status status);
 
 	/**
 	 * 根据菜单使用用户类型，菜单状态，菜单作用域,父节点ID 查找菜单（parentId=null 查找第一级菜单,parentId<>null

@@ -67,7 +67,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	public Object list() throws BusinessException {
 		JpqlParameter jpqlParameter = new JpqlParameter();
 		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_parentId", "0");
-		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_status", Status.NORMAL.getKey());
+		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_status", Status.NORMAL);
 		TreeData<List<Menu>> menuTree = new TreeData<List<Menu>>();
 		List<Menu> returnList = menuService.getMenuTreeList(jpqlParameter.getSearchParameter());
 		menuTree.setData(returnList);
@@ -84,12 +84,12 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "/getMenuList")
 	@Authorize(authorizeResources = false)
 	@ResponseBody
-	public ResultData getMenuList(Integer scope, String parentId) {
+	public ResultData getMenuList(Scope scope, String parentId) {
 		ResultData resultData = new ResultData();
 		if (scope == null) {
 			return resultData;
 		}
-		List<Menu> listRootMenu = menuService.queryMenu(Status.NORMAL, Scope.get(scope),!StringUtils.hasLength(parentId) ? "0" : parentId);
+		List<Menu> listRootMenu = menuService.queryMenu(Status.NORMAL, scope,!StringUtils.hasLength(parentId) ? "0" : parentId);
 		resultData.setData("list", listRootMenu);
 		return resultData;
 	}

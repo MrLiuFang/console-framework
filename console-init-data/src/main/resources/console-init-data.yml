@@ -4,13 +4,13 @@ console:
     account: superadmin
     password: F9C46FC697DE86FF84911DA0415B9619
     nickName: 超级管理员
-    status: 0
+    status: 1
     userType: 2
   - name: 管理员
     account: admin
     password: D5192E0F0A31CA052052277FF53A1F29
     nickName: 管理员
-    status: 0
+    status: 1
     userType: 1
   parameter:
   - code: login_page_title
@@ -27,12 +27,12 @@ console:
     code: SUPER_ADMIN_ROLE
     remarks: 超级管理员角色
     scope: 1
-    status: 0
+    status: 1
   - name: 管理员角色
     code: ADMIN_ROLE
     remarks: 管理员角色
     scope: 1
-    status: 0
+    status: 1
   roleUser:
     SUPER_ADMIN_ROLE: superadmin
     ADMIN_ROLE: admin
@@ -88,7 +88,7 @@ console:
     parentId: '0'
     scope: 1
     sort: 0
-    status: 0
+    status: 1
     isLeaf: false
     level: 0
     menuType: 0
@@ -100,7 +100,7 @@ console:
       parentId: null
       scope: 1
       sort: 0
-      status: 0
+      status: 1
       isLeaf: false
       level: 1
       menuType: 0
@@ -109,7 +109,7 @@ console:
       - name: 菜单列表页面
         url: /console/menu/list
         code: SYSTEM_SETTINGS_MENU_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 0
@@ -120,7 +120,7 @@ console:
       - name: 菜单新增页面
         url: /console/menu/toAdd
         code: SYSTEM_SETTINGS_MENU_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 1
@@ -131,7 +131,7 @@ console:
       - name: 菜单新增
         url: /console/menu/add
         code: SYSTEM_SETTINGS_MENU_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 2
@@ -142,7 +142,7 @@ console:
       - name: 菜单修改页面
         url: /console/menu/toEdit
         code: SYSTEM_SETTINGS_MENU_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 3
@@ -153,7 +153,7 @@ console:
       - name: 菜单修改
         url: /console/menu/update
         code: SYSTEM_SETTINGS_MENU_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 4
@@ -164,7 +164,7 @@ console:
       - name: 菜单删除
         url: /console/menu/delete
         code: SYSTEM_SETTINGS_MENU_DELETE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 5
@@ -175,7 +175,7 @@ console:
       - name: 资源新增页面
         url: /console/menu/resources/toAdd
         code: SYSTEM_SETTINGS_MENU_RESOURCES_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 6
@@ -186,7 +186,7 @@ console:
       - name: 资源新增
         url: /console/menu/resources/add
         code: SYSTEM_SETTINGS_MENU_RESOURCES_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 7
@@ -197,7 +197,7 @@ console:
       - name: 资源修改页面
         url: /console/menu/resources/toEdit
         code: SYSTEM_SETTINGS_MENU_RESOURCES_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 8
@@ -208,7 +208,7 @@ console:
       - name: 资源修改
         url: /console/menu/resources/update
         code: SYSTEM_SETTINGS_MENU_RESOURCES_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 9
@@ -219,7 +219,7 @@ console:
       - name: 资源删除
         url: /console/menu/resources/delete
         code: SYSTEM_SETTINGS_MENU_RESOURCES_DELETE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 10
@@ -233,7 +233,7 @@ console:
       parentId: null
       scope: 1
       sort: 1
-      status: 0
+      status: 1
       isLeaf: false
       level: 1
       menuType: 0
@@ -242,7 +242,7 @@ console:
       - name: 查看参数列表
         url: /console/parameter/list
         code: SYSTEM_SETTINGS_PARAMETER_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 0
@@ -253,7 +253,7 @@ console:
       - name: 新增参数页面
         url: /console/parameter/toAdd
         code: SYSTEM_SETTINGS_PARAMETER_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 1
@@ -264,7 +264,7 @@ console:
       - name: 修改参数页面
         url: /console/parameter/toEdit
         code: SYSTEM_SETTINGS_PARAMETER_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 2
@@ -275,7 +275,7 @@ console:
       - name: 新增参数
         url: /console/parameter/add
         code: SYSTEM_SETTINGS_PARAMETER_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 3
@@ -286,7 +286,7 @@ console:
       - name: 修改参数
         url: /console/parameter/update
         code: SYSTEM_SETTINGS_PARAMETER_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 4
@@ -297,7 +297,7 @@ console:
       - name: 删除参数
         url: /console/parameter/delete
         code: SYSTEM_SETTINGS_PARAMETER_DELETE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 5
@@ -311,7 +311,7 @@ console:
       parentId: null
       scope: 1
       sort: 2
-      status: 0
+      status: 1
       isLeaf: false
       level: 1
       menuType: 0
@@ -320,7 +320,7 @@ console:
       - name: 查看列表
         url: /console/user/list
         code: SYSTEM_SETTINGS_ADMIN_USER_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 0
@@ -331,7 +331,7 @@ console:
       - name: 新增页面
         url: /console/user/toAdd
         code: SYSTEM_SETTINGS_ADMIN_USER_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 1
@@ -342,7 +342,7 @@ console:
       - name: 修改页面
         url: /console/user/toEdit
         code: SYSTEM_SETTINGS_ADMIN_USER_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 2
@@ -353,7 +353,7 @@ console:
       - name: 查看页面
         url: /console/user/toView
         code: SYSTEM_SETTINGS_ADMIN_USER_TO_VIEW
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 3
@@ -364,7 +364,7 @@ console:
       - name: 新增
         url: /console/user/add
         code: SYSTEM_SETTINGS_ADMIN_USER_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 4
@@ -375,7 +375,7 @@ console:
       - name: 修改
         url: /console/user/update
         code: SYSTEM_SETTINGS_ADMIN_USER_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 5
@@ -386,7 +386,7 @@ console:
       - name: 删除
         url: /console/user/delete
         code: SYSTEM_SETTINGS_ADMIN_USER_DELETE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 6
@@ -397,7 +397,7 @@ console:
       - name: 查看
         url: /console/user/view
         code: SYSTEM_SETTINGS_ADMIN_USER_VIEW
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 7
@@ -408,7 +408,7 @@ console:
       - name: 获取角色列表
         url: /console/user/roleList
         code: SYSTEM_SETTINGS_ADMIN_USER_ROLE_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 8
@@ -419,7 +419,7 @@ console:
       - name: 保存用户角色
         url: /console/user/saveUserRole
         code: SYSTEM_SETTINGS_ADMIN_USER_SAVE_ROLE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 9
@@ -430,7 +430,7 @@ console:
       - name: 重置用户密码
         url: /console/user/rePwd
         code: SYSTEM_SETTINGS_ADMIN_USER_RE_PWD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 10
@@ -444,7 +444,7 @@ console:
       parentId: null
       scope: 1
       sort: 3
-      status: 0
+      status: 1
       isLeaf: false
       level: 1
       menuType: 0
@@ -453,7 +453,7 @@ console:
       - name: 查看角色列表
         url: /console/role/list
         code: SYSTEM_SETTINGS_ADMIN_ROLE_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 0
@@ -464,7 +464,7 @@ console:
       - name: 新增页面
         url: /console/role/toAdd
         code: SYSTEM_SETTINGS_ADMIN_ROLE_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 1
@@ -475,7 +475,7 @@ console:
       - name: 修改页面
         url: /console/role/toEdit
         code: SYSTEM_SETTINGS_ADMIN_ROLE_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 2
@@ -486,7 +486,7 @@ console:
       - name: 新增
         url: /console/role/add
         code: SYSTEM_SETTINGS_ADMIN_ROLE_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 3
@@ -497,7 +497,7 @@ console:
       - name: 修改
         url: /console/role/update
         code: SYSTEM_SETTINGS_ADMIN_ROLE_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 4
@@ -508,7 +508,7 @@ console:
       - name: 角色菜单
         url: /console/role/roleMenu
         code: SYSTEM_SETTINGS_ADMIN_ROLE_MENU
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 6
@@ -519,7 +519,7 @@ console:
       - name: 角色菜单保存
         url: /console/role/saveRoleMenu
         code: SYSTEM_SETTINGS_ADMIN_SAVE_ROLE_MENU
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 7
@@ -530,7 +530,7 @@ console:
       - name: 查看页面
         url: /console/role/toView
         code: SYSTEM_SETTINGS_ADMIN_ROLE_TO_VIEW
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 8
@@ -544,7 +544,7 @@ console:
       parentId: null
       scope: 1
       sort: 4
-      status: 0
+      status: 1
       isLeaf: false
       level: 1
       menuType: 0
@@ -553,7 +553,7 @@ console:
       - name: 地区列表
         url: /console/area/list
         code: SYSTEM_SETTINGS_AREA_LIST
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 0
@@ -564,7 +564,7 @@ console:
       - name: 地区新增
         url: /console/area/toAdd
         code: SYSTEM_SETTINGS_AREA_TO_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 1
@@ -575,7 +575,7 @@ console:
       - name: 地区新增提交
         url: /console/area/add
         code: SYSTEM_SETTINGS_AREA_ADD
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 2
@@ -586,7 +586,7 @@ console:
       - name: 地区修改
         url: /console/area/toEdit
         code: SYSTEM_SETTINGS_AREA_TO_EDIT
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 3
@@ -597,7 +597,7 @@ console:
       - name: 地区修改提交
         url: /console/area/update
         code: SYSTEM_SETTINGS_AREA_UPDATE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 4
@@ -608,7 +608,7 @@ console:
       - name: 地区查看
         url: /console/area/toView
         code: SYSTEM_SETTINGS_AREA_TO_VIEW
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 6
@@ -619,7 +619,7 @@ console:
       - name: 地区删除
         url: /console/area/delete
         code: SYSTEM_SETTINGS_AREA_DELETE
-        status: 0
+        status: 1
         parentId: null
         scope: 1
         sort: 7

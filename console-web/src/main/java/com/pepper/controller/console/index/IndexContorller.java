@@ -143,13 +143,13 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 		// 用户菜单组装
 		List<MenuVo> listMenu = new ArrayList<MenuVo>();
 		// 用户权限菜单根节点
-		List<Menu> listRootMenu = menuService.queryRootMenuByRoleId(roleUser.getRoleId(), Status.NORMAL.getKey());
+		List<Menu> listRootMenu = menuService.queryRootMenuByRoleId(roleUser.getRoleId(), Status.NORMAL);
 		for (Menu rootMenu : listRootMenu) {
 			MenuVo menuVo = new MenuVo();
 			BeanUtils.copyProperties(rootMenu, menuVo);
 			listMenu.add(menuVo);
 			// 用户权限菜单子节点
-			List<Menu> listChildMenu = menuService.queryRoleChildMenu(rootMenu.getId(), roleUser.getRoleId(),Status.NORMAL.getKey());
+			List<Menu> listChildMenu = menuService.queryRoleChildMenu(rootMenu.getId(), roleUser.getRoleId(),Status.NORMAL);
 			List<MenuVo> listChileMenu = new ArrayList<MenuVo>();
 			for (Menu childMennu : listChildMenu) {
 				MenuVo childMenuVo = new MenuVo();

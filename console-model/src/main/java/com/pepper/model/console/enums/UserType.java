@@ -14,30 +14,26 @@ public enum UserType implements IEnum {
 
 	private final int key;
 
-	private final String name;
+	private final String desc;
 
-	private UserType(int key, String name) {
+	private UserType(int key, String desc) {
 		this.key = key;
-		this.name = name;
+		this.desc = desc;
 	}
 
 	@Override
-	@JsonValue
 	public Integer getKey() {
 		return key;
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return this.toString();
 	}
-
-	public static UserType get(int key) {
-		for (UserType e : UserType.values()) {
-			if (e.getKey() == key) {
-				return e;
-			}
-		}
-		return EMPLOYEE;
+	
+	@Override
+	@JsonValue
+	public String getDesc(){
+		return desc;
 	}
 }

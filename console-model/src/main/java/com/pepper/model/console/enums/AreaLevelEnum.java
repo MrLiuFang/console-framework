@@ -14,31 +14,27 @@ public enum AreaLevelEnum implements IEnum {
 
 	private final int key;
 
-	private final String name;
+	private final String desc;
 
-	private AreaLevelEnum(int key, String name) {
+	private AreaLevelEnum(int key, String desc) {
 		this.key = key;
-		this.name = name;
+		this.desc = desc;
 	}
 
 	@Override
-	@JsonValue
 	public Integer getKey() {
 		return key;
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return this.toString();
 	}
-
-	public static AreaLevelEnum get(int key) {
-		for (AreaLevelEnum e : AreaLevelEnum.values()) {
-			if (e.getKey() == key) {
-				return e;
-			}
-		}
-		return PROVINCE;
+	
+	@Override
+	@JsonValue
+	public String getDesc(){
+		return desc;
 	}
 
 }

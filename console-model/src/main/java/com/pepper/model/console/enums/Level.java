@@ -13,31 +13,27 @@ public enum Level implements IEnum {
 
 	private final int key;
 
-	private final String name;
+	private final String desc;
 
-	private Level(int key, String name) {
+	private Level(int key, String desc) {
 		this.key = key;
-		this.name = name;
+		this.desc = desc;
 	}
 
 	@Override
-	@JsonValue
 	public Integer getKey() {
 		return key;
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return this.toString();
 	}
-
-	public static Level get(int key) {
-		for (Level e : Level.values()) {
-			if (e.getKey() == key) {
-				return e;
-			}
-		}
-		return ZERO;
+	
+	@Override
+	@JsonValue
+	public String getDesc(){
+		return desc;
 	}
 
 }

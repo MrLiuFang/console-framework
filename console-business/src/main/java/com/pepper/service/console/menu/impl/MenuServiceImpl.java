@@ -31,13 +31,13 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	private MenuDao menuDao;
 
 	@Override
-	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Integer status) {
-		return menuDao.queryRoleChildMenu(parentMenuId, roleId, status);
+	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Status status) {
+		return menuDao.queryRoleChildMenu(parentMenuId, roleId, status.getKey());
 	}
 
 	@Override
-	public List<Menu> queryRootMenuByRoleId(String roleId, Integer status) {
-		return menuDao.queryRoleRootMenuByRoleId(roleId, status);
+	public List<Menu> queryRootMenuByRoleId(String roleId, Status status) {
+		return menuDao.queryRoleRootMenuByRoleId(roleId, status.getKey());
 	}
 
 	@Override

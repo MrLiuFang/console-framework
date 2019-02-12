@@ -23,7 +23,7 @@ public interface RoleDao extends BaseDao<Role> {
 	 * @param userId
 	 * @return
 	 */
-	@Query(" select c.url from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=0 ")
+	@Query(" select c.url from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=1 ")
 	List<String> queryUserAllResources(String userId);
 
 	/**
@@ -32,7 +32,7 @@ public interface RoleDao extends BaseDao<Role> {
 	 * @param userId
 	 * @return
 	 */
-	@Query(" select c from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=0 ")
+	@Query(" select c from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=1 ")
 	List<Menu> queryUserAllMenu(String userId);
 
 	/**
@@ -41,7 +41,7 @@ public interface RoleDao extends BaseDao<Role> {
 	 * @param userId
 	 * @return
 	 */
-	@Query(" select c.code from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=0 ")
+	@Query(" select c.code from RoleUser a, RoleMenu b, Menu c where a.roleId=b.roleId and b.menuId=c.id and a.userId=?1 and c.status=1 ")
 	List<String> queryUserAllMenuCode(String userId);
 
 	/**

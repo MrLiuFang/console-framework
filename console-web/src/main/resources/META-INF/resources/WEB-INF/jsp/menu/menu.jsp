@@ -53,9 +53,6 @@
 	$(function($) {
 
 		var $ = layui.$;
-		var where = {
-				"search_EQUAL_scope" : $('#scope').val()
-		};
 		layui.use('treeGrid', function() {
 			var treeGrid = layui.treeGrid; //很重要
 			var treeTable = treeGrid.render({
@@ -85,7 +82,7 @@
 					width : 60,
 					title : '排序'
 				}, {
-					field : 'statusStr',
+					field : 'status',
 					width : 60,
 					title : '状态'
 				}, {
@@ -102,7 +99,9 @@
 						$.cookie("menu-scroll", "");
 					}
 				},
-				where : where
+				where : {
+					"search_EQUAL_scope" : $('#scope').val()
+				}
 			});
 			
 			
@@ -110,7 +109,9 @@
 			//点击“搜索”
 			$('#button_query').on('click', function() {
 				treeGrid.reload('treeTable', {
-					where : where
+					where : {
+						"search_EQUAL_scope" : $('#scope').val()
+					}
 				});
 			});
 
