@@ -120,7 +120,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "toEdit")
 	public String toEdit(String id) {
-		Role role = roleService.findById(id).get();
+		Role role = roleService.findById(id);
 		List<String> menuIds = roleMenuService.findMenuIdsByRoleId(id);
 		request.setAttribute("role", role);
 		StringBuffer res = new StringBuffer("");
@@ -143,7 +143,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "update")
 	@ResponseBody
 	public ResultData update(Role role, String resourceIds) throws BusinessException {
-		Role old = roleService.findById(role.getId()).get();
+		Role old = roleService.findById(role.getId());
 		if (!role.getName().equals(old.getName()) && roleService.findByName(role.getName())!=null) {
 			throw new BusinessException("角色名已存在，请重新输入！");
 		}
@@ -179,7 +179,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "/toView")
 	@Authorize
 	public String toView(String id) {
-		Role role = roleService.findById(id).get();
+		Role role = roleService.findById(id);
 		request.setAttribute("role", role);
 		return "role/role_view";
 	}

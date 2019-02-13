@@ -50,7 +50,6 @@ public interface RoleDao extends BaseDao<Role> {
 	 * @param code
 	 * @return
 	 */
-	@Query(" from Role where code = ?1")
 	Role findByCode(String code);
 
 	/**
@@ -70,7 +69,6 @@ public interface RoleDao extends BaseDao<Role> {
 	 * @param code
 	 * @return
 	 */
-	@Query(" from Role where name = ?1")
 	Role findByName(String name);
 
 }

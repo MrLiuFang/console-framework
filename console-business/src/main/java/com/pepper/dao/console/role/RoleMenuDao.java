@@ -15,10 +15,8 @@ import com.pepper.model.console.role.RoleMenu;
 
 public interface RoleMenuDao extends BaseDao<RoleMenu> {
 
-	@Query(" from RoleMenu where menuId=?1")
 	List<RoleMenu> findByMenuId(String menuId);
 
-	@Query(" from RoleMenu where roleId=?1")
 	List<RoleMenu> findByRoleId(String roleId);
 
 	/**
@@ -28,8 +26,7 @@ public interface RoleMenuDao extends BaseDao<RoleMenu> {
 	 * @param menuId
 	 * @return
 	 */
-	@Query(" from RoleMenu where roleId = ?1 and menuId=?2 ")
-	RoleMenu findByRoleAndMenu(String roleId, String menuId);
+	RoleMenu findByRoleIdAndMenuId(String roleId, String menuId);
 
 	/**
 	 * 根据角色id返回menuId，格式List<String>

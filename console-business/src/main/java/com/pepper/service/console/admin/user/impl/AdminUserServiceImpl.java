@@ -41,8 +41,8 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 	private RoleUserService roleUserService;
 
 	@Override
-	public AdminUser queryAdminUserByAccountPaasword(String account, String password) {
-		return adminUserDao.queryAdminUserByAccountPaasword(account,Md5Util.encryptPassword(password.toUpperCase(), account));
+	public AdminUser findByAccountAndPassword(String account, String password) {
+		return adminUserDao.findByAccountAndPassword(account,Md5Util.encryptPassword(password.toUpperCase(), account));
 	}
 
 	@Override
@@ -103,12 +103,5 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 		args.add(userId);
 		
 	}
-
-	@Override
-	public Long findOnLineCount() {
-		
-		return adminUserDao.findOnLineCount();
-	}
-
 
 }

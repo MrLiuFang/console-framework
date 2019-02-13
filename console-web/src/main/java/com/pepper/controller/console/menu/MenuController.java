@@ -114,10 +114,10 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "/toEdit")
 	@Authorize
 	public String toEdit(String id) {
-		Menu menu = menuService.findById(id).get();
+		Menu menu = menuService.findById(id);
 		if (menu!=null) {
 			if (menu.getMenuType() == MenuType.RESOURCE) {
-				request.setAttribute("menuFirstId", menuService.findById(menu.getParentId()).get().getParentId());
+				request.setAttribute("menuFirstId", menuService.findById(menu.getParentId()).getParentId());
 			}
 			request.setAttribute("menu", menu);
 		}
@@ -160,7 +160,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	public ResultData update(Menu menu) throws BusinessException {
 		ResultData resultData = new ResultData();
 		Menu queryMenu = menuService.findByCode(menu.getCode());
-		Menu old = menuService.findById(menu.getId()).get();
+		Menu old = menuService.findById(menu.getId());
 		if (queryMenu != null && !menu.getId().equals(queryMenu.getId())) {
 			throw new BusinessException("该编码已存在！");
 		}
@@ -176,8 +176,8 @@ public class MenuController extends BaseControllerImpl implements BaseController
 			if (!StringUtils.hasText(menu.getParentId())) {
 				throw new BusinessException("菜单修改父节点时，只能同级平移！");
 			} else {
-				Menu newParent = menuService.findById(menu.getParentId()).get();
-				Menu oldParent = menuService.findById(old.getParentId()).get();
+				Menu newParent = menuService.findById(menu.getParentId());
+				Menu oldParent = menuService.findById(old.getParentId());
 				if (!newParent.getLevel().equals(oldParent.getLevel())) {
 					throw new BusinessException("菜单修改父节点时，只能同级平移！");
 				}
@@ -202,7 +202,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@ResponseBody
 	public ResultData delete(String id) throws BusinessException {
 		ResultData resultData = new ResultData();
-		Menu menu = menuService.findById(id).get();
+		Menu menu = menuService.findById(id);
 		if (menu != null && !menu.getIsLeaf()) {
 			throw new BusinessException("该菜单不是叶子节点不能删除！");
 		} else {

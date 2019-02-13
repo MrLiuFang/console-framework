@@ -3,6 +3,7 @@ package com.pepper.controller.console.parameter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pepper.core.Pager;
 import com.pepper.core.ResultData;
@@ -45,7 +46,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/list")
 	@Authorize
 	@ResponseBody
-	public Object list() {
+	public Pager<Parameter> list() {
 		Pager<Parameter> pager = new Pager<Parameter>();
 		pager = parameterService.findNavigator(pager);
 		return pager;
@@ -84,7 +85,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	public ResultData add(Parameter parameter) {
 		parameterService.save(parameter);
-		return new ResultData().setLoadUrl("/admin/parameter/index");
+		return new ResultData().setLoadUrl("/console/parameter/index");
 	}
 
 	/**
@@ -97,7 +98,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	public ResultData update(Parameter parameter) {
 		parameterService.update(parameter);
-		return new ResultData().setLoadUrl("/admin/parameter/index");
+		return new ResultData().setLoadUrl("/console/parameter/index");
 	}
 
 	/**

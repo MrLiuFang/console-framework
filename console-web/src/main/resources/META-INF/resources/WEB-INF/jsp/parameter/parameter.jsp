@@ -27,7 +27,7 @@
 					<div class="layui-inline">
 						<button class="layui-btn" id="button_query" type="button"
 							data-type="reload">查询</button>
-						<pepper:auth code="SYSTEM_SETTINGS_PARAMETER_TOADD">
+						<pepper:auth code="SYSTEM_SETTINGS_PARAMETER_TO_ADD">
 							<button class="layui-btn layui-btn-normal" id="button_add"
 								type="button">新增</button>
 						</pepper:auth>
@@ -48,7 +48,7 @@
 </script>
 
 <script type="text/html" id="barDemo">
-	<pepper:auth code="SYSTEM_SETTINGS_PARAMETER_TOEDIT">
+	<pepper:auth code="SYSTEM_SETTINGS_PARAMETER_TO_EDIT">
 		<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
 	</pepper:auth>
 	<pepper:auth code="SYSTEM_SETTINGS_PARAMETER_DELETE">

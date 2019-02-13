@@ -27,14 +27,14 @@ public class RoleUserServiceImpl extends BaseServiceImpl<RoleUser> implements Ro
 
 	@Override
 	public void deleteRoleUserByUserId(String userId) {
-		RoleUser roleUser = roleUserDao.findRoleUserByUserId(userId);
+		RoleUser roleUser = roleUserDao.findByUserId(userId);
 		if (roleUser != null) {
 			roleUserDao.delete(roleUser);
 		}
 	}
 	@Override
 	public RoleUser findByUserId(String userId) {
-		return roleUserDao.findRoleUserByUserId(userId);
+		return roleUserDao.findByUserId(userId);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class RoleUserServiceImpl extends BaseServiceImpl<RoleUser> implements Ro
 	}
 	@Override
 	public RoleUser findRoleUserByUserId(String userId) {
-		return roleUserDao.findRoleUserByUserId(userId);
+		return roleUserDao.findByUserId(userId);
 	}
 
 }

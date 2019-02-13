@@ -84,9 +84,9 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-		logger.info("开始初始化数据！");
 		String initData = environment.getProperty("console-init-data", "false").trim();
 		if(arg0.getApplicationContext().getParent() == null && initData.toLowerCase().equals("true")){
+			logger.info("开始初始化数据！");
 			saveAdminUser();
 			saveParameter();
 			saveRole();
@@ -95,8 +95,8 @@ public class ConsoleInitData implements ApplicationListener<ContextRefreshedEven
 			saveMenu(list, null);
 			saveRoleUser();
 			saveRoleMenu();
+			logger.info("结束初始化数据！");
 		}
-		logger.info("结束初始化数据！");
 	}
 	
 	/**

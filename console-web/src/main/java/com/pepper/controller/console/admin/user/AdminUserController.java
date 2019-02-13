@@ -165,7 +165,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
 		// 账号不允许修改
-		AdminUser old = adminUserService.findById(adminUser.getId()).get();
+		AdminUser old = adminUserService.findById(adminUser.getId());
 		adminUser.setAccount(old.getAccount());
 		adminUserService.updateUser(adminUser, roleId);
 		return new ResultData().setLoadUrl("/admin/user/index");
@@ -187,7 +187,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 
 		List<Role> roles =  roleService.findAll(searchParameter);
 		if (roleUser!=null) {
-			Role role = roleService.findById(roleUser.getRoleId()).get();
+			Role role = roleService.findById(roleUser.getRoleId());
 			roles.add(role);
 		}
 		List<Map<String, Object>> roleSelectItems = new ArrayList<Map<String, Object>>();
@@ -285,7 +285,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Authorize
 	@ResponseBody
 	public ResultData rePwd(String userId) {
-		AdminUser adminUser = adminUserService.findById(userId).get();
+		AdminUser adminUser = adminUserService.findById(userId);
 		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
 		adminUserService.save(adminUser);
 		return new ResultData();
@@ -300,7 +300,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/toRePwd")
 	@Authorize(authorizeResources = false)
 	public String toRePwd(String id) {
-		AdminUser user = adminUserService.findById(id).get();
+		AdminUser user = adminUserService.findById(id);
 		request.setAttribute("adminUser", user);
 		return "/admin/user/admin_user_repwd";
 	}
@@ -319,7 +319,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		if (!StringUtils.hasText(oldPwd) || !StringUtils.hasText(newPwd)) {
 			throw new BusinessException("请输入原密码以及新密码！");
 		}
-		AdminUser user = adminUserService.findById(userId).get();
+		AdminUser user = adminUserService.findById(userId);
 		if (user.getPassword().equals(Md5Util.encryptPassword(oldPwd))) {
 			user.setPassword(Md5Util.encryptPassword(newPwd));
 			adminUserService.save(user);
@@ -341,7 +341,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	public String userInfo(String id) throws BusinessException, JsonProcessingException {
 		RoleUser roleUser = roleUserService.findByUserId(id);
 		List<Map<String, Object>> roleSelectItems = getRoleSelectItems(roleUser);
-		AdminUser user = adminUserService.findById(id).get();
+		AdminUser user = adminUserService.findById(id);
 		if (StringUtils.hasText(user.getHeadPortrait())) {
 			Map<String, Object> photo = new HashMap<String, Object>();
 			String url = fileService.getUrl(user.getHeadPortrait());
@@ -385,7 +385,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/statusOnOff")
 	@ResponseBody
 	public Object statusOnOff(String id, Status status) {
-		AdminUser user = adminUserService.findById(id).get();
+		AdminUser user = adminUserService.findById(id);
 		user.setStatus(status);
 		adminUserService.save(user);
 		return new ResultData();

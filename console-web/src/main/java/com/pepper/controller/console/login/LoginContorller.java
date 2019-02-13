@@ -98,7 +98,7 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 			return "forward:/";
 		}
 		
-		AdminUser userReal = adminUserService.queryAdminUserByAccountPaasword(user.getAccount(), user.getPassword());
+		AdminUser userReal = adminUserService.findByAccountAndPassword(user.getAccount(), user.getPassword());
 
 		if (userReal==null) {
 			request.setAttribute("message", "登录失败!用户名/密码错误!");

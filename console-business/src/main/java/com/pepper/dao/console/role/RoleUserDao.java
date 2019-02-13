@@ -14,10 +14,8 @@ import com.pepper.model.console.role.RoleUser;
 
 public interface RoleUserDao extends BaseDao<RoleUser> {
 
-	@Query(" from RoleUser where userId = ?1 ")
-	RoleUser findRoleUserByUserId(String userId);
+	RoleUser findByUserId(String userId);
 
-	@Query(" from RoleUser where roleId = ?1 ")
 	List<RoleUser> findByRoleId(String roleId);
 
 	/**
@@ -27,7 +25,6 @@ public interface RoleUserDao extends BaseDao<RoleUser> {
 	 * @param userId
 	 * @return
 	 */
-	@Query(" from RoleUser where roleId=?1 and userId=?2")
 	RoleUser findByRoleIdAndUserId(String roleId, String userId);
 
 }

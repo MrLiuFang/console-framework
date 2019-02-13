@@ -34,7 +34,7 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
 
 	@Override
 	public RoleMenu findByRoleAndMenu(String roleId, String menuId) {
-		return roleMenuDao.findByRoleAndMenu(roleId, menuId);
+		return roleMenuDao.findByRoleIdAndMenuId(roleId, menuId);
 	}
 
 	@Override

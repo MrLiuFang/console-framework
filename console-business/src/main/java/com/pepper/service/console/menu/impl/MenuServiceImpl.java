@@ -32,12 +32,12 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
 	@Override
 	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Status status) {
-		return menuDao.queryRoleChildMenu(parentMenuId, roleId, status.getKey());
+		return menuDao.queryRoleChildMenu(parentMenuId, roleId, status);
 	}
 
 	@Override
 	public List<Menu> queryRootMenuByRoleId(String roleId, Status status) {
-		return menuDao.queryRoleRootMenuByRoleId(roleId, status.getKey());
+		return menuDao.queryRoleRootMenuByRoleId(roleId, status);
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 				menu.setIsLeaf(true);
 			} else {
 				// 新增二级菜单
-				Menu parentMenu = findById(menu.getParentId()).get();
+				Menu parentMenu = findById(menu.getParentId());
 				if (parentMenu!=null && parentMenu.getIsLeaf()) {
 					parentMenu.setIsLeaf(false);
 					menuDao.update(parentMenu);
@@ -117,7 +117,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 			}
 			// 新增资源
 		} else if (menu.getMenuType() == MenuType.RESOURCE) {
-			Menu parentMenu = findById(menu.getParentId()).get();
+			Menu parentMenu = findById(menu.getParentId());
 			if (parentMenu!=null && parentMenu.getIsLeaf()) {
 				parentMenu.setIsLeaf(false);
 				menuDao.update(parentMenu);
@@ -134,15 +134,15 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	@Override
 	public void updateMenu(Menu menu) {
 		// 修改前的menu
-		Menu oldMenu = findById(menu.getId()).get();
+		Menu oldMenu = findById(menu.getId());
 		if (menu.getParentId().equals(oldMenu.getParentId())) {
 			menuDao.update(menu);
 			return;
 		}
 		if (!oldMenu.getParentId().equals("0")) {
 			// 修改前的parentMenu，判断当前菜单从原来的父菜单移走后，原来的父菜单还有没有孩子
-			Menu parentMenu = findById(oldMenu.getParentId()).get();
-			List<Menu> list = menuDao.findByParentId(parentMenu.getId(), oldMenu.getId());
+			Menu parentMenu = findById(oldMenu.getParentId());
+			List<Menu> list = menuDao.findByParentIdAndIdNot(parentMenu.getId(), oldMenu.getId());
 			if (list.size() == 0) {
 				parentMenu.setIsLeaf(true);
 			}
@@ -150,7 +150,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 		}
 		if (!menu.getParentId().equals("0")) {
 			// 修改后的parentMenu，判断当前菜单移到现在的父菜单后，将当前父菜单变成isLeaf=NO
-			Menu updateParentMenu = findById(menu.getParentId()).get();
+			Menu updateParentMenu = findById(menu.getParentId());
 			updateParentMenu.setIsLeaf(false);
 			menuDao.update(updateParentMenu);
 		}
@@ -163,8 +163,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	@Override
 	public void deleteMenu(Menu menu) {
 		if (!"0".equals(menu.getParentId())) {
-			Menu parentMenu = findById(menu.getParentId()).get();
-			List<Menu> list = menuDao.findByParentId(menu.getParentId(), menu.getId());
+			Menu parentMenu = findById(menu.getParentId());
+			List<Menu> list = menuDao.findByParentIdAndIdNot(menu.getParentId(), menu.getId());
 			if (list.size() == 0) {
 				parentMenu.setIsLeaf(true);
 				menuDao.update(parentMenu);

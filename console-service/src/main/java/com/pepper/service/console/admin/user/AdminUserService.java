@@ -20,7 +20,7 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	 * @param password
 	 * @return
 	 */
-	public AdminUser queryAdminUserByAccountPaasword(String account, String password);
+	public AdminUser findByAccountAndPassword(String account, String password);
 
 	/**
 	 * 根据account获取用户
@@ -77,10 +77,5 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	 */
 	public void updateLoginTime(String userId);
 	
-	/**
-	 * 获取登录用户总数
-	 * @return
-	 */
-	public Long findOnLineCount();
 
 }
