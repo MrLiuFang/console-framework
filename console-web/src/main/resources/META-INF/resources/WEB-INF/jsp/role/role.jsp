@@ -35,7 +35,7 @@
 						<label class="layui-form-label">作用域</label>
 						<div class="layui-input-inline" style="width: 190px;">
 							<pepper:Enum2Select documentId="scope"
-								enumClass="com.qicloud.common.emuns.model.Scope"
+								enumClass="com.pepper.common.emuns.Scope"
 								documentName="scope" />
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 						<label class="layui-form-label">状态</label>
 						<div class="layui-input-inline" style="width: 190px;">
 							<pepper:Enum2Select documentId="status"
-								enumClass="com.qicloud.common.emuns.model.Status"
+								enumClass="com.pepper.common.emuns.Status"
 								documentName="status" />
 						</div>
 					</div>
@@ -71,10 +71,10 @@
 	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_ROLE_UPDATE">
 		<a class="layui-btn layui-btn-xs" lay-event="opt-resource">权限</a>
 	</pepper:auth>
-	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_ROLE_TOVIEW">
+	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_ROLE_TO_VIEW">
 		<a class="layui-btn layui-btn-xs" lay-event="view">查看</a>
 	</pepper:auth>
-	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_ROLE_TOEDIT">
+	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_ROLE_TO_EDIT">
 		<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
 	</pepper:auth>
 </script>

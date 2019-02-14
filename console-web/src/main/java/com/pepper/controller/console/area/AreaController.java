@@ -32,7 +32,7 @@ import com.pepper.service.console.area.AreaService;
  *
  */
 @Controller
-@RequestMapping("/admin/Area")
+@RequestMapping("/admin/area")
 public class AreaController extends BaseControllerImpl {
 
 	@Reference
@@ -111,7 +111,7 @@ public class AreaController extends BaseControllerImpl {
 	@RequestMapping(value = "/add")
 	@Authorize
 	@ResponseBody
-	public ResultData add(Area area) throws BusinessException {
+	public ResultData add(Area area) {
 		area.setCreateDate(new Date());
 		AdminUser currentUser = (AdminUser) this.consoleAuthorize.getCurrentUser();
 		area.setCreateUser(currentUser.getId());
@@ -128,7 +128,7 @@ public class AreaController extends BaseControllerImpl {
 	@RequestMapping(value = "/update")
 	@Authorize
 	@ResponseBody
-	public ResultData update(Area area) throws BusinessException {
+	public ResultData update(Area area) {
 		area.setUpdateDate(new Date());
 		AdminUser currentUser = (AdminUser) this.consoleAuthorize.getCurrentUser();
 		area.setUpdateUser(currentUser.getId());

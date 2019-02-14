@@ -64,7 +64,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "/list")
 	@Authorize()
 	@ResponseBody
-	public Object list() throws BusinessException {
+	public Object list() {
 		JpqlParameter jpqlParameter = new JpqlParameter();
 		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_parentId", "0");
 		jpqlParameter.setSearchParameter(SearchConstant.EQUAL + "_status", Status.NORMAL);
@@ -134,7 +134,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "/add")
 	@ResponseBody
-	public ResultData add(Menu menu) throws BusinessException {
+	public ResultData add(Menu menu) {
 		ResultData resultData = new ResultData();
 		if (menuService.findByCode(menu.getCode())!=null) {
 			throw new BusinessException("该编码已存在！");
@@ -157,7 +157,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public ResultData update(Menu menu) throws BusinessException {
+	public ResultData update(Menu menu) {
 		ResultData resultData = new ResultData();
 		Menu queryMenu = menuService.findByCode(menu.getCode());
 		Menu old = menuService.findById(menu.getId());
@@ -200,7 +200,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "/delete")
 	@ResponseBody
-	public ResultData delete(String id) throws BusinessException {
+	public ResultData delete(String id){
 		ResultData resultData = new ResultData();
 		Menu menu = menuService.findById(id);
 		if (menu != null && !menu.getIsLeaf()) {

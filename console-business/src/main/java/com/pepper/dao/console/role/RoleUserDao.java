@@ -1,7 +1,6 @@
 package com.pepper.dao.console.role;
 
 import java.util.List;
-import org.springframework.data.jpa.repository.Query;
 
 import com.pepper.core.base.BaseDao;
 import com.pepper.model.console.role.RoleUser;

@@ -87,7 +87,7 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public String login(AdminUser user) throws Exception {
+	public String login(AdminUser user)  {
 
 		if (!StringUtils.hasText(user.getAccount())) {
 			request.setAttribute("message", "用户名不能为空!");

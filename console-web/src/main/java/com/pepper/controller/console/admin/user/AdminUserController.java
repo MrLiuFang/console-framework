@@ -90,9 +90,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Authorize
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public Object list() throws BusinessException {
+	public Object list() {
 		Pager<AdminUser> pager = new Pager<AdminUser>();
-		pager.getJpqlParameter().setSearchParameter(SearchConstant.EQUAL+"_type", UserType.EMPLOYEE);
+		pager.getJpqlParameter().setSearchParameter(SearchConstant.EQUAL+"_userType", UserType.EMPLOYEE);
 		pager = adminUserService.list(pager);
 		Role role = null;
 		for (AdminUser u : pager.getResults()) {
@@ -126,7 +126,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-	public ResultData add(AdminUser adminUser, String roleId) throws BusinessException {
+	public ResultData add(AdminUser adminUser, String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
@@ -160,7 +160,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/update")
 	@Authorize
-	public ResultData update(AdminUser adminUser, String roleId) throws BusinessException {
+	public ResultData update(AdminUser adminUser, String roleId) {
 		adminUser.setUpdateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
@@ -213,7 +213,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/updateUserInfo")
 	@Authorize(authorizeResources = false)
-	public ResultData updateUserInfo(AdminUser adminUser, String roleId) throws BusinessException {
+	public ResultData updateUserInfo(AdminUser adminUser, String roleId) {
 		adminUser.setUpdateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
@@ -315,7 +315,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/changePwd")
 	@Authorize(authorizeResources = false)
 	@ResponseBody
-	public ResultData changePwd(String userId, String oldPwd, String newPwd) throws BusinessException {
+	public ResultData changePwd(String userId, String oldPwd, String newPwd) {
 		if (!StringUtils.hasText(oldPwd) || !StringUtils.hasText(newPwd)) {
 			throw new BusinessException("请输入原密码以及新密码！");
 		}
@@ -338,7 +338,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/userInfo")
 	@Authorize(authorizeResources = false)
-	public String userInfo(String id) throws BusinessException, JsonProcessingException {
+	public String userInfo(String id) throws JsonProcessingException{
 		RoleUser roleUser = roleUserService.findByUserId(id);
 		List<Map<String, Object>> roleSelectItems = getRoleSelectItems(roleUser);
 		AdminUser user = adminUserService.findById(id);

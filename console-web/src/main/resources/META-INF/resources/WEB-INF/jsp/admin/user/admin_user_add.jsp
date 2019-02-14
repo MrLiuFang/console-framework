@@ -64,7 +64,7 @@
 						<div class="layui-input-inline">
 							<pepper:Enum2Select noDefault="true" documentId="status"
 								enumClass="com.pepper.common.emuns.Status"
-								documentName="status" />
+								documentName="status" selectedValue="NORMAL" />
 						</div>
 					</div>
 					<div class="layui-form-item">

@@ -34,7 +34,7 @@
 						<label class="layui-form-label">状态</label>
 						<div class="layui-input-inline" style="width: 190px;">
 							<pepper:Enum2Select documentId="status"
-								enumClass="com.qicloud.common.emuns.model.Status"
+								enumClass="com.pepper.common.emuns.Status"
 								documentName="status" />
 						</div>
 					</div>
@@ -54,7 +54,7 @@
 					<div class="layui-inline">
 						<button class="layui-btn" id="button_query" type="button"
 							data-type="reload">查询</button>
-						<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TOADD">
+						<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TO_ADD">
 							<button class="layui-btn layui-btn-normal" id="button_add"
 								type="button">新增</button>
 						</pepper:auth>
@@ -79,10 +79,10 @@
 	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_ROLE_LIST">
 		<a class="layui-btn layui-btn-xs" lay-event="opt-role">角色</a>
 	</pepper:auth>
-	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TOVIEW">
+	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TO_VIEW">
 		<a class="layui-btn layui-btn-xs" lay-event="view">查看</a>
 	</pepper:auth>
-	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TOEDIT">
+	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_TO_EDIT">
 		<a class="layui-btn layui-btn-xs" lay-event="update">编辑</a>
 	</pepper:auth>
 	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_RE_PWD">
@@ -91,7 +91,7 @@
 </script>
 
 <script type="text/html" id="statusDemo">
-      <input <pepper:noauth code="SYSTEM_SETTINGS_ADMIN_USER_TOEDIT">disabled</pepper:noauth> data-id="{{d.id}}" lay-filter="status-switch" type="checkbox" lay-skin="switch" lay-text="正常|禁用" {{ d.status == 0 ? 'checked' : '' }}/>
+      <input <pepper:noauth code="SYSTEM_SETTINGS_ADMIN_USER_TO_EDIT">disabled</pepper:noauth> data-id="{{d.id}}" lay-filter="status-switch" type="checkbox" lay-skin="switch" lay-text="禁用|正常" {{ d.status == 1 ? 'checked' : '' }}/>
 </script>
 
 <script type="text/javascript">
@@ -236,9 +236,9 @@
 
 		//点击状态开关
 		layui.form.on('switch(status-switch)', function(data) {
-			var status = 0;//正常
+			var status = 1;//正常
 			if (!data.elem.checked) {
-				status = 1;//禁用
+				status = 0;//禁用
 			}
 			var id = $(data.elem).attr("data-id");
 			baseUtil.AJpost("${ctx}/console/user/statusOnOff", {

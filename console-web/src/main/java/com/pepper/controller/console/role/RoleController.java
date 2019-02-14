@@ -98,7 +98,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ResultData add(Role role, String resourceIds) throws BusinessException {
+	public ResultData add(Role role, String resourceIds) {
 		if (roleService.findByName(role.getName())!=null) {
 			throw new BusinessException("角色名已存在，请重新输入！");
 		}
@@ -142,7 +142,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "update")
 	@ResponseBody
-	public ResultData update(Role role, String resourceIds) throws BusinessException {
+	public ResultData update(Role role, String resourceIds) {
 		Role old = roleService.findById(role.getId());
 		if (!role.getName().equals(old.getName()) && roleService.findByName(role.getName())!=null) {
 			throw new BusinessException("角色名已存在，请重新输入！");
@@ -225,7 +225,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "saveRoleMenu")
 	@ResponseBody
-	public ResultData saveRoleMenu(String roleId, String resourceIds) throws BusinessException {
+	public ResultData saveRoleMenu(String roleId, String resourceIds) {
 		ResultData resultData = new ResultData();
 		roleService.updateRoleMenu(roleId, resourceIds);
 		return resultData;
