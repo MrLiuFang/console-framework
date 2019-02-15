@@ -181,6 +181,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		Map<String, Object> searchParameter = new HashMap<String, Object>();
 		searchParameter.put(SearchConstant.EQUAL+"_scope", Scope.CONSOLE);
 		searchParameter.put(SearchConstant.EQUAL+"_status", Status.NORMAL);
+		searchParameter.put(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
 		if (roleUser!=null) {
 			searchParameter.put(SearchConstant.NOTEQUAL+"_id", roleUser.getRoleId());
 		}
