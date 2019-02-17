@@ -42,16 +42,16 @@
 						<label class="layui-form-label">作用域<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="scope"
-								enumClass="com.qicloud.common.emuns.model.Scope"
-								selectedValue="1" documentName="scope" />
+								enumClass="com.pepper.common.emuns.Scope"
+								selectedValue="CONSOLE" documentName="scope" />
 						</div>
 					</div>
 					<div class="layui-form-item ">
 						<label class="layui-form-label">状态<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="status"
-								enumClass="com.qicloud.common.emuns.model.Status"
-								selectedValue="0" documentName="status" />
+								enumClass="com.pepper.common.emuns.Status"
+								selectedValue="NORMAL" documentName="status" />
 						</div>
 					</div>
 					<div class="layui-form-item ">

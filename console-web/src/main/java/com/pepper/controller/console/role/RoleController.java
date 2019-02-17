@@ -72,7 +72,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public Object list() {
+	public Pager<Role> list() {
 		Pager<Role> pager = new Pager<Role>();
 		pager.getJpqlParameter().setSearchParameter(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
 		pager = roleService.findNavigator(pager);
@@ -110,7 +110,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		role.setCreateDate(new Date());
 		role.setCreateUser(user.getId());
 		roleService.saveRole(role, resourceIds);
-		return new ResultData().setLoadUrl("/admin/role/index");
+		return new ResultData().setLoadUrl("/console/role/index");
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		AdminUser user = (AdminUser) this.consoleAuthorize.getCurrentUser();
 		role.setUpdateUser(user.getId());
 		roleService.updateRole(role, resourceIds);
-		return new ResultData().setLoadUrl("/admin/role/index");
+		return new ResultData().setLoadUrl("/console/role/index");
 	}
 
 	/**

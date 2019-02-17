@@ -97,11 +97,11 @@
 				title : '编码',
 				width : 250
 			}, {
-				field : 'scopeLabel',
+				field : 'scope',
 				title : '角色作用域',
 				width : 150
 			}, {
-				field : 'statusLabel',
+				field : 'status',
 				title : '状态',
 				width : 100
 			}, {
@@ -126,6 +126,12 @@
 			},
 			page : {
 				layout : [ 'count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip' ]
+			},
+			where : {
+				"search_LIKE_name" : $('#name').val(),
+				"search_LIKE_code" : $('#code').val(),
+				"search_EQUAL_scope" : $('#scope').val(),
+				"search_EQUAL_status" : $('#status').val()
 			}
 		});
 
@@ -138,8 +144,8 @@
 				where : {
 					"search_LIKE_name" : $('#name').val(),
 					"search_LIKE_code" : $('#code').val(),
-					"search_EQ_scope" : $('#scope').val(),
-					"search_EQ_status" : $('#status').val()
+					"search_EQUAL_scope" : $('#scope').val(),
+					"search_EQUAL_status" : $('#status').val()
 				}
 			});
 		});
