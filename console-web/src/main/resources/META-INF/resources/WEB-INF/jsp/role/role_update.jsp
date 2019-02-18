@@ -45,18 +45,18 @@
 						<label class="layui-form-label">作用域<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="scope"
-								enumClass="com.qicloud.common.emuns.model.Scope"
+								enumClass="com.pepper.common.emuns.Scope"
 								documentName="scope"
-								selectedValue="${empty role.scope?'1':role.scope}" />
+								selectedValue="${empty role.scope?'CONSOLE':role.scope}" />
 						</div>
 					</div>
 					<div class="layui-form-item ">
 						<label class="layui-form-label">状态<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select required="true" documentId="status"
-								enumClass="com.qicloud.common.emuns.model.Status"
+								enumClass="com.pepper.common.emuns.Status"
 								documentName="status"
-								selectedValue="${empty role.status?'0':role.status}" />
+								selectedValue="${empty role.status?'NORMAL':role.status}" />
 						</div>
 					</div>
 					<div class="layui-form-item ">
@@ -186,7 +186,7 @@
 				var opt = {
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/console/role/roleMenu?search_EQ_scope=' + $("#scope").val() + "&roleId=${role.id}",
+					url : '${ctx}/console/role/roleMenu?roleId=${role.id}',
 					//树形id字段名称
 					treeId : 'id',
 					//树形父id字段名称

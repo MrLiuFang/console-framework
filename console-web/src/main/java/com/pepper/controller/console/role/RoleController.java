@@ -206,7 +206,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 			List<String> menuIds = roleMenuService.findMenuIdsByRoleId(roleId);
 			StringBuffer res = new StringBuffer("");
 			for (String s : menuIds) {
-				res.append(s + "");
+				res.append(s + ";");
 			}
 			if (StringUtils.hasText(res.toString())) {
 				menuTreeVo.setExtData(res.toString());
