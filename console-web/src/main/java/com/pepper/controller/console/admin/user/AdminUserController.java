@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
@@ -133,7 +133,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		adminUser.setCreateUser(user.getId());
 		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
 		adminUserService.saveUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/admin/user/index");
+		return new ResultData().setLoadUrl("/console/user/index");
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		AdminUser old = adminUserService.findById(adminUser.getId());
 		adminUser.setAccount(old.getAccount());
 		adminUserService.updateUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/admin/user/index");
+		return new ResultData().setLoadUrl("/console/user/index");
 	}
 
 	/**

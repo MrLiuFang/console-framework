@@ -17,7 +17,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.core.YamlPropertySourceFactory;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.menu.Menu;
