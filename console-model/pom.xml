@@ -18,6 +18,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-common-emun</artifactId>
 			<version>${pepper.version}</version>

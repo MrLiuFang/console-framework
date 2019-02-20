@@ -7,14 +7,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import javax.validation.constraints.Size;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
@@ -26,6 +32,7 @@ import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
 import com.pepper.core.constant.SearchConstant;
 import com.pepper.core.exception.BusinessException;
+import com.pepper.core.validator.Insert;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.enums.UserType;
 import com.pepper.model.console.role.Role;
@@ -48,6 +55,7 @@ import com.pepper.util.Md5Util;
  */
 @Controller
 @RequestMapping(value = "/console/user", method = { RequestMethod.POST })
+@Validated
 public class AdminUserController extends BaseControllerImpl implements BaseController {
 
 	@Reference
@@ -126,7 +134,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-	public ResultData add(AdminUser adminUser, String roleId) {
+	public ResultData add(@Validated({Insert.class})AdminUser adminUser, 
+			@Range(max=32,min=32,message="请选择正确的角色")@RequestParam(name = "roleId", required = true)String roleId,
+			BindingResult result) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
