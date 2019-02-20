@@ -167,6 +167,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		// 账号不允许修改
 		AdminUser old = adminUserService.findById(adminUser.getId());
 		adminUser.setAccount(old.getAccount());
+		
 		adminUserService.updateUser(adminUser, roleId);
 		return new ResultData().setLoadUrl("/console/user/index");
 	}
@@ -182,15 +183,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		searchParameter.put(SearchConstant.EQUAL+"_scope", Scope.CONSOLE);
 		searchParameter.put(SearchConstant.EQUAL+"_status", Status.NORMAL);
 		searchParameter.put(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
-		if (roleUser!=null) {
-			searchParameter.put(SearchConstant.NOTEQUAL+"_id", roleUser.getRoleId());
-		}
-
 		List<Role> roles =  roleService.findAll(searchParameter);
-		if (roleUser!=null) {
-			Role role = roleService.findById(roleUser.getRoleId());
-			roles.add(role);
-		}
 		List<Map<String, Object>> roleSelectItems = new ArrayList<Map<String, Object>>();
 		Map<String, Object> roleItems = null;
 		for (Role r : roles) {

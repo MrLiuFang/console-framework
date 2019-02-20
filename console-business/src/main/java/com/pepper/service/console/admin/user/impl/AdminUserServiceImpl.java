@@ -82,7 +82,7 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 
 	@Override
 	public void updateUser(AdminUser adminUser, String roleId) {
-		save(adminUser);
+		update(adminUser);
 		if (StringUtils.hasText(roleId)) {
 			roleUserService.deleteRoleUserByUserId(adminUser.getId());
 			RoleUser roleUser = new RoleUser();

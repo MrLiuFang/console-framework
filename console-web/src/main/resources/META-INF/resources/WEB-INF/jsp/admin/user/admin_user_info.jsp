@@ -70,7 +70,7 @@
 							<pepper:Enum2Select required="true" documentId="gender"
 								enumClass="com.pepper.common.emuns.Gender"
 								documentName="gender"
-								selectedValue="${empty adminUser.gender?'1':adminUser.gender}" />
+								selectedValue="${empty adminUser.gender?'FEMALE':adminUser.gender}" />
 						</div>
 					</div>
 					<div class="layui-form-item ">
@@ -79,7 +79,7 @@
 							<pepper:Enum2Select required="true" documentId="status"
 								enumClass="com.pepper.common.emuns.Status" disabled="true"
 								documentName="status"
-								selectedValue="${empty adminUser.status?'0':adminUser.status}" />
+								selectedValue="${empty adminUser.status?'NORMAL':adminUser.status}" />
 						</div>
 					</div>
 					<div class="layui-form-item">

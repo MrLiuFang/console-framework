@@ -58,7 +58,7 @@
 						<label class="layui-form-label">性别<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select noDefault="true" documentId="gender"
-								enumClass="com.qicloud.common.emuns.model.Gender"
+								enumClass="com.pepper.common.emuns.Gender"
 								documentName="gender" selectedValue="${adminUser.gender}" />
 						</div>
 					</div>
@@ -66,7 +66,7 @@
 						<label class="layui-form-label">状态<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<pepper:Enum2Select noDefault="true" documentId="status"
-								enumClass="com.qicloud.common.emuns.model.Status"
+								enumClass="com.pepper.common.emuns.Status"
 								documentName="status" selectedValue="${adminUser.status}" />
 						</div>
 					</div>
