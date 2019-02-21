@@ -35,7 +35,7 @@ public class AdminUser extends BaseModel {
 	/**
 	 * 用户姓名
 	 */
-	@NotBlank
+	@NotBlank(message="用户姓名不能为空",groups={Insert.class,Update.class})
 	@Length(min=1,max=30,message="用戶姓名'${validatedValue}'长度在{min}和{max}之间",groups={Insert.class,Update.class})
 	@Column(name = "name",length=30,nullable=false)
 	private String name;

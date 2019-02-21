@@ -17,7 +17,11 @@
 			<artifactId>console-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>discreteness-configuration</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-customize-jstl</artifactId>

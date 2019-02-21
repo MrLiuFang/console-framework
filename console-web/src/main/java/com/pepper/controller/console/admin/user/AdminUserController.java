@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.Size;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.hibernate.validator.constraints.Length;
@@ -55,7 +54,6 @@ import com.pepper.util.Md5Util;
  */
 @Controller
 @RequestMapping(value = "/console/user", method = { RequestMethod.POST })
-@Validated
 public class AdminUserController extends BaseControllerImpl implements BaseController {
 
 	@Reference
@@ -135,7 +133,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/add")
 	@Authorize
 	public ResultData add(@Validated({Insert.class})AdminUser adminUser, 
-			@Range(max=32,min=32,message="请选择正确的角色")@RequestParam(name = "roleId", required = true)String roleId,
+			@Length(max=32,min=32,message="请选择正确的角色")@RequestParam(name = "roleId", required = true)String roleId,
 			BindingResult result) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
