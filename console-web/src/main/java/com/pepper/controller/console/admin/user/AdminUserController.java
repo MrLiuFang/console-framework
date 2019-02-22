@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -54,6 +56,7 @@ import com.pepper.util.Md5Util;
  */
 @Controller
 @RequestMapping(value = "/console/user", method = { RequestMethod.POST })
+@Validated
 public class AdminUserController extends BaseControllerImpl implements BaseController {
 
 	@Reference
@@ -132,9 +135,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-	public ResultData add(@Validated({Insert.class})AdminUser adminUser, 
-			@Length(max=32,min=32,message="请选择正确的角色")@RequestParam(name = "roleId", required = true)String roleId,
-			BindingResult result) {
+	public ResultData add(@Validated({Insert.class})AdminUser adminUser,BindingResult bindingResult,@NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();

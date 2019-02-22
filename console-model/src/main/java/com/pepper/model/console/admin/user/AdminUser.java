@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import com.pepper.common.emuns.Gender;
 import com.pepper.common.emuns.Status;
@@ -22,6 +23,7 @@ import com.pepper.model.console.enums.UserType;
  * @author mrliu
  *
  */
+//@ScriptAssert()
 @Entity()
 @Table(name = "t_admin_user")
 @DynamicUpdate(true)
