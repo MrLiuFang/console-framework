@@ -1,8 +1,11 @@
 package com.pepper.service.console.role.impl;
 
 import java.util.List;
+
 import javax.annotation.Resource;
-import com.alibaba.dubbo.config.annotation.Service;
+
+import org.apache.dubbo.config.annotation.Service;
+
 import com.pepper.core.base.impl.BaseServiceImpl;
 import com.pepper.dao.console.role.RoleMenuDao;
 import com.pepper.model.console.role.RoleMenu;

@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.pepper.core.Pager;
 import com.pepper.core.base.impl.BaseServiceImpl;
 import com.pepper.core.constant.SearchConstant;

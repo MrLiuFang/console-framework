@@ -13,6 +13,7 @@
 
 
 	<dependencies>
+	
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>console-init-data</artifactId>

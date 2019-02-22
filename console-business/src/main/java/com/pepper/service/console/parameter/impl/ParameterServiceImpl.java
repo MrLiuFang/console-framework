@@ -3,7 +3,8 @@ package com.pepper.service.console.parameter.impl;
 
 import javax.annotation.Resource;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.Service;
+
 import com.pepper.core.base.impl.BaseServiceImpl;
 import com.pepper.dao.console.parameter.ParameterDao;
 import com.pepper.model.console.parameter.Parameter;

@@ -168,7 +168,7 @@
 			} else if (layEvent === 'update') { //修改
 				page.loadPage("${ctx}/console/role/toEdit?id=" + data["id"]);
 			} else if (layEvent === 'opt-resource') { //修改角色权限
-				openResource(data.scope, data.id);
+				openResource(data.id);
 			}
 		});
 
@@ -178,7 +178,7 @@
 		})
 
 		//弹出权限树窗口
-		function openResource(scope, roleId) {
+		function openResource(roleId) {
 			basePlugin.win("选择权限（点击行即可选中）", "resourceWin", "<table class='layui-hidden' id='treeTable' lay-filter='treeTable'></table>", function() {
 				//checkbox保存
 				var resIds = [];
@@ -262,7 +262,7 @@
 				var opt = {
 					elem : '#treeTable',
 					method : "post",
-					url : '${ctx}/console/role/roleMenu?search_EQ_scope=' + scope + "&roleId=" + roleId,
+					url : '${ctx}/console/role/roleMenu?roleId=' + roleId,
 					//树形id字段名称
 					treeId : 'id',
 					//树形父id字段名称

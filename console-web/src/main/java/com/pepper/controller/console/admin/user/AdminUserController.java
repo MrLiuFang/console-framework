@@ -7,14 +7,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
@@ -26,6 +33,7 @@ import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
 import com.pepper.core.constant.SearchConstant;
 import com.pepper.core.exception.BusinessException;
+import com.pepper.core.validator.Insert;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.enums.UserType;
 import com.pepper.model.console.role.Role;
@@ -48,6 +56,7 @@ import com.pepper.util.Md5Util;
  */
 @Controller
 @RequestMapping(value = "/console/user", method = { RequestMethod.POST })
+@Validated
 public class AdminUserController extends BaseControllerImpl implements BaseController {
 
 	@Reference
@@ -126,14 +135,14 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-	public ResultData add(AdminUser adminUser, String roleId) {
+	public ResultData add(@Validated({Insert.class})AdminUser adminUser,BindingResult bindingResult,@NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setCreateUser(user.getId());
 		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
 		adminUserService.saveUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/admin/user/index");
+		return new ResultData().setLoadUrl("/console/user/index");
 	}
 
 	/**
@@ -167,8 +176,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		// 账号不允许修改
 		AdminUser old = adminUserService.findById(adminUser.getId());
 		adminUser.setAccount(old.getAccount());
+		
 		adminUserService.updateUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/admin/user/index");
+		return new ResultData().setLoadUrl("/console/user/index");
 	}
 
 	/**
@@ -182,15 +192,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		searchParameter.put(SearchConstant.EQUAL+"_scope", Scope.CONSOLE);
 		searchParameter.put(SearchConstant.EQUAL+"_status", Status.NORMAL);
 		searchParameter.put(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
-		if (roleUser!=null) {
-			searchParameter.put(SearchConstant.NOTEQUAL+"_id", roleUser.getRoleId());
-		}
-
 		List<Role> roles =  roleService.findAll(searchParameter);
-		if (roleUser!=null) {
-			Role role = roleService.findById(roleUser.getRoleId());
-			roles.add(role);
-		}
 		List<Map<String, Object>> roleSelectItems = new ArrayList<Map<String, Object>>();
 		Map<String, Object> roleItems = null;
 		for (Role r : roles) {

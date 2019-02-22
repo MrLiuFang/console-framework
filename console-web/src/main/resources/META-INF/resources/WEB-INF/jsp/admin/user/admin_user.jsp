@@ -114,7 +114,7 @@
 				field : 'email',
 				title : '邮箱'
 			}, {
-				field : 'genderLabel',
+				field : 'gender',
 				title : '性别'
 			}, {
 				field : 'mobile',

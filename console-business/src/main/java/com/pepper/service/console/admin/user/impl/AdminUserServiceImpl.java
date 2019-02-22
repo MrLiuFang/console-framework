@@ -3,15 +3,12 @@ package com.pepper.service.console.admin.user.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
-
+import org.apache.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.pepper.core.Pager;
 import com.pepper.core.base.impl.BaseServiceImpl;
 import com.pepper.dao.console.admin.user.AdminUserDao;
@@ -85,7 +82,7 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 
 	@Override
 	public void updateUser(AdminUser adminUser, String roleId) {
-		save(adminUser);
+		update(adminUser);
 		if (StringUtils.hasText(roleId)) {
 			roleUserService.deleteRoleUserByUserId(adminUser.getId());
 			RoleUser roleUser = new RoleUser();

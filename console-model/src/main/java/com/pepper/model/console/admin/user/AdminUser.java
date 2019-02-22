@@ -4,10 +4,17 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.ScriptAssert;
+
 import com.pepper.common.emuns.Gender;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseModel;
+import com.pepper.core.validator.Insert;
+import com.pepper.core.validator.Update;
 import com.pepper.model.console.enums.UserType;
 
 /**
@@ -16,6 +23,7 @@ import com.pepper.model.console.enums.UserType;
  * @author mrliu
  *
  */
+//@ScriptAssert()
 @Entity()
 @Table(name = "t_admin_user")
 @DynamicUpdate(true)
@@ -29,7 +37,9 @@ public class AdminUser extends BaseModel {
 	/**
 	 * 用户姓名
 	 */
-	@Column(name = "name")
+	@NotBlank(message="用户姓名不能为空",groups={Insert.class,Update.class})
+	@Length(min=1,max=30,message="用戶姓名'${validatedValue}'长度在{min}和{max}之间",groups={Insert.class,Update.class})
+	@Column(name = "name",length=30,nullable=false)
 	private String name;
 
 	/**
@@ -41,25 +51,25 @@ public class AdminUser extends BaseModel {
 	/**
 	 * 帐号密码
 	 */
-	@Column(name = "password")
+	@Column(name = "password", nullable=false,length=32)
 	private String password;
 
 	/**
 	 * 用户昵称
 	 */
-	@Column(name = "nick_name")
+	@Column(name = "nick_name",length=32)
 	private String nickName;
 
 	/**
 	 * 用户手机
 	 */
-	@Column(name = "mobile")
+	@Column(name = "mobile",length=20)
 	private String mobile;
 
 	/**
 	 * 邮箱
 	 */
-	@Column(name = "email")
+	@Column(name = "email",length=32)
 	private String email;
 
 	/**

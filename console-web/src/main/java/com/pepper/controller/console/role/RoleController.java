@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.JpqlParameter;
 import com.pepper.core.Pager;
@@ -126,7 +126,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		request.setAttribute("role", role);
 		StringBuffer res = new StringBuffer("");
 		for (String s : menuIds) {
-			res.append(s + "");
+			res.append(s + ";");
 		}
 		if (StringUtils.hasText(res.toString())) {
 			request.setAttribute("menuIds",res.toString());
@@ -206,7 +206,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 			List<String> menuIds = roleMenuService.findMenuIdsByRoleId(roleId);
 			StringBuffer res = new StringBuffer("");
 			for (String s : menuIds) {
-				res.append(s + "");
+				res.append(s + ";");
 			}
 			if (StringUtils.hasText(res.toString())) {
 				menuTreeVo.setExtData(res.toString());
