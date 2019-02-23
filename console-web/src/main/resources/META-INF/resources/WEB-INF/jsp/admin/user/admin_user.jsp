@@ -75,7 +75,7 @@
 	{{/each}}
 </script>
 
-<script type="text/html" id="barDemo">
+<script type="text/html" id="bar">
 	<pepper:auth code="SYSTEM_SETTINGS_ADMIN_USER_ROLE_LIST">
 		<a class="layui-btn layui-btn-xs" lay-event="opt-role">角色</a>
 	</pepper:auth>
@@ -90,8 +90,8 @@
 	</pepper:auth>
 </script>
 
-<script type="text/html" id="statusDemo">
-      <input <pepper:noauth code="SYSTEM_SETTINGS_ADMIN_USER_TO_EDIT">disabled</pepper:noauth> data-id="{{d.id}}" lay-filter="status-switch" type="checkbox" lay-skin="switch" lay-text="禁用|正常" {{ d.status == 1 ? 'checked' : '' }}/>
+<script type="text/html" id="userStatus">
+      <input <pepper:noauth code="SYSTEM_SETTINGS_ADMIN_USER_TO_EDIT">disabled</pepper:noauth> data-id="{{d.id}}" lay-filter="status-switch" type="checkbox" lay-skin="switch" lay-text="正常|禁用" {{ d.status == '正常' ? 'checked' : '' }}/>
 </script>
 
 <script type="text/javascript">
@@ -131,12 +131,12 @@
 			}, {
 				fixed : 'right',
 				width : 100,
-				templet : '#statusDemo',
+				templet : '#userStatus',
 				title : '状态'
 			}, {
 				fixed : 'right',
 				width : 250,
-				toolbar : '#barDemo',
+				toolbar : '#bar',
 				title : '操作'
 			} ] ],
 			request : {
@@ -236,9 +236,9 @@
 
 		//点击状态开关
 		layui.form.on('switch(status-switch)', function(data) {
-			var status = 1;//正常
+			var status = "NORMAL";//正常
 			if (!data.elem.checked) {
-				status = 0;//禁用
+				status = "DISABLE";//禁用
 			}
 			var id = $(data.elem).attr("data-id");
 			baseUtil.AJpost("${ctx}/console/user/statusOnOff", {

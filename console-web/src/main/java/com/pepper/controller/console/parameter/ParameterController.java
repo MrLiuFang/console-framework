@@ -1,14 +1,20 @@
 package com.pepper.controller.console.parameter;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.constraints.NotBlank;
 
 import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.core.Pager;
 import com.pepper.core.ResultData;
 import com.pepper.core.base.BaseController;
 import com.pepper.core.base.impl.BaseControllerImpl;
+import com.pepper.core.validator.Validator.Insert;
+import com.pepper.core.validator.Validator.Update;
 import com.pepper.model.console.parameter.Parameter;
 import com.pepper.service.authentication.aop.Authorize;
 import com.pepper.service.console.parameter.ParameterService;
@@ -22,6 +28,7 @@ import com.pepper.service.console.parameter.ParameterService;
  */
 @Controller
 @RequestMapping("/console/parameter")
+@Validated
 public class ParameterController extends BaseControllerImpl implements BaseController{
 
 	@Reference
@@ -70,7 +77,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/toEdit")
 	@Authorize
-	public String toEdit(String id) {
+	public String toEdit(@NotBlank(message="请选择要编辑的数据")String id) {
 		request.setAttribute("parameter", parameterService.findById(id));
 		return "parameter/parameter_update";
 	}
@@ -83,7 +90,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/add")
 	@Authorize
 	@ResponseBody
-	public ResultData add(Parameter parameter) {
+	public ResultData add(@Validated(value= {Insert.class}) Parameter parameter,BindingResult bindingResult) {
 		parameterService.save(parameter);
 		return new ResultData().setLoadUrl("/console/parameter/index");
 	}
@@ -96,7 +103,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/update")
 	@Authorize
 	@ResponseBody
-	public ResultData update(Parameter parameter) {
+	public ResultData update(@Validated(value= {Update.class}) Parameter parameter,BindingResult bindingResult) {
 		parameterService.update(parameter);
 		return new ResultData().setLoadUrl("/console/parameter/index");
 	}
@@ -109,7 +116,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/delete")
 	@Authorize
 	@ResponseBody
-	public ResultData delete(String id) {
+	public ResultData delete(@NotBlank(message="请选择要删除的数据") String id) {
 		parameterService.deleteById(id);
 		return new ResultData();
 	}

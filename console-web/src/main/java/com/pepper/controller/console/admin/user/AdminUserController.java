@@ -8,18 +8,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,7 +30,8 @@ import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
 import com.pepper.core.constant.SearchConstant;
 import com.pepper.core.exception.BusinessException;
-import com.pepper.core.validator.Insert;
+import com.pepper.core.validator.Validator.Insert;
+import com.pepper.core.validator.Validator.Update;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.enums.UserType;
 import com.pepper.model.console.role.Role;
@@ -152,7 +150,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/toEdit")
 	@Authorize
-	public String toEdit(String id) {
+	public String toEdit(@NotBlank(message="请选择要修改的角色")String id) {
 		RoleUser roleUser = roleUserService.findByUserId(id);
 		List<Map<String, Object>> roleSelectItems = getRoleSelectItems(roleUser);
 		request.setAttribute("roles", roleSelectItems);
@@ -169,7 +167,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/update")
 	@Authorize
-	public ResultData update(AdminUser adminUser, String roleId) {
+	public ResultData update(@Validated({Update.class})AdminUser adminUser, BindingResult bindingResult, @NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUpdateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
@@ -216,7 +214,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/updateUserInfo")
 	@Authorize(authorizeResources = false)
-	public ResultData updateUserInfo(AdminUser adminUser, String roleId) {
+	public ResultData updateUserInfo(AdminUser adminUser,@NotBlank(message="请选择角色")  String roleId) {
 		adminUser.setUpdateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
@@ -231,7 +229,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/toView")
 	@Authorize
-	public String toView(String id) {
+	public String toView(@NotBlank(message="请选择要查看的角色") String id) {
 		RoleUser roleUser = roleUserService.findByUserId(id);
 		List<Map<String, Object>> roleSelectItems = getRoleSelectItems(roleUser);
 		request.setAttribute("roles", roleSelectItems);
@@ -248,7 +246,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/delete")
 	@Authorize
 	@ResponseBody
-	public ResultData delete(String id) {
+	public ResultData delete(@NotBlank(message="请选择要删除的角色") String id) {
 		adminUserService.deleteUser(id);
 		return new ResultData();
 	}
@@ -256,7 +254,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Authorize
 	@RequestMapping(value = "/roleList")
 	@ResponseBody
-	public ResultData roleList(String userId) {
+	public ResultData roleList(@NotBlank(message="请选择用户") String userId) {
 		RoleUser roleUser = roleUserService.findByUserId(userId);
 		List<Map<String, Object>> roleList = getRoleSelectItems(roleUser);
 		ResultData rd = new ResultData().setData("list", roleList);
@@ -273,7 +271,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/saveUserRole")
 	@Authorize
 	@ResponseBody
-	public ResultData saveUserRole(RoleUser roleUser) {
+	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
 		adminUserService.saveUserRole(roleUser);
 		return new ResultData();
 	}
@@ -287,8 +285,11 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/rePwd")
 	@Authorize
 	@ResponseBody
-	public ResultData rePwd(String userId) {
+	public ResultData rePwd(@NotBlank(message="请选择用户") String userId) {
 		AdminUser adminUser = adminUserService.findById(userId);
+		if(adminUser == null) {
+			throw new BusinessException("该用户不存在");
+		}
 		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
 		adminUserService.save(adminUser);
 		return new ResultData();
@@ -302,9 +303,12 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/toRePwd")
 	@Authorize(authorizeResources = false)
-	public String toRePwd(String id) {
-		AdminUser user = adminUserService.findById(id);
-		request.setAttribute("adminUser", user);
+	public String toRePwd(@NotBlank(message="请选择用户") String id) {
+		AdminUser adminUser = adminUserService.findById(id);
+		if(adminUser == null) {
+			throw new BusinessException("该用户不存在");
+		}
+		request.setAttribute("adminUser", adminUser);
 		return "/admin/user/admin_user_repwd";
 	}
 
@@ -318,14 +322,12 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/changePwd")
 	@Authorize(authorizeResources = false)
 	@ResponseBody
-	public ResultData changePwd(String userId, String oldPwd, String newPwd) {
-		if (!StringUtils.hasText(oldPwd) || !StringUtils.hasText(newPwd)) {
-			throw new BusinessException("请输入原密码以及新密码！");
-		}
+	public ResultData changePwd(@NotBlank(message="请选择用户") String userId, @NotBlank(message="请输入旧密码") String oldPwd,@NotBlank(message="请输入新密码") String newPwd) {
+		
 		AdminUser user = adminUserService.findById(userId);
-		if (user.getPassword().equals(Md5Util.encryptPassword(oldPwd))) {
-			user.setPassword(Md5Util.encryptPassword(newPwd));
-			adminUserService.save(user);
+		if (user.getPassword().equals(Md5Util.encryptPassword(oldPwd,user.getAccount()))) {
+			user.setPassword(Md5Util.encryptPassword(newPwd,user.getAccount()));
+			adminUserService.update(user);
 		} else {
 			throw new BusinessException("原密码错误！");
 		}
@@ -341,7 +343,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/userInfo")
 	@Authorize(authorizeResources = false)
-	public String userInfo(String id) throws JsonProcessingException{
+	public String userInfo(@NotBlank(message="数据错误！")String id) throws JsonProcessingException{
 		RoleUser roleUser = roleUserService.findByUserId(id);
 		List<Map<String, Object>> roleSelectItems = getRoleSelectItems(roleUser);
 		AdminUser user = adminUserService.findById(id);
@@ -367,7 +369,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/checkExist")
 	@ResponseBody
-	public Object checkExist(String account) {
+	public Object checkExist(@NotBlank(message="请输入用户名")String account) {
 		AdminUser user = null;
 		if (StringUtils.hasText(account)) {
 			user = adminUserService.findByAccount(account);
@@ -387,8 +389,11 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/statusOnOff")
 	@ResponseBody
-	public Object statusOnOff(String id, Status status) {
+	public Object statusOnOff(@NotBlank(message="请选择用户")String id, @NotNull(message="请选择状态")Status status) {
 		AdminUser user = adminUserService.findById(id);
+		if(user == null) {
+			new BusinessException("该用户不存在！");
+		}
 		user.setStatus(status);
 		adminUserService.save(user);
 		return new ResultData();

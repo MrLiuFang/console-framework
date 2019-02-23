@@ -6,10 +6,10 @@
 		<div class="layadmin-tips">
 			<i class="layui-icon" face=""></i>
 
-			<div class="layui-text" style="font-size: 20px;">好像出错了呢</div>
+			<div class="layui-text" style="font-size: 20px;">
+				<c:if test="${not empty message}">${message}</c:if>
+				<c:if test="${empty message}">好像出错了呢！</c:if>
+			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	<c:if test="${not empty message}">layui.layer.msg("${message}");</c:if>
-</script>

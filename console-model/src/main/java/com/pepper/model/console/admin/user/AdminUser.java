@@ -4,17 +4,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.ScriptAssert;
-
 import com.pepper.common.emuns.Gender;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseModel;
-import com.pepper.core.validator.Insert;
-import com.pepper.core.validator.Update;
+import com.pepper.core.validator.Validator.Insert;
+import com.pepper.core.validator.Validator.Update;
 import com.pepper.model.console.enums.UserType;
 
 /**
@@ -38,37 +36,46 @@ public class AdminUser extends BaseModel {
 	 * 用户姓名
 	 */
 	@NotBlank(message="用户姓名不能为空",groups={Insert.class,Update.class})
-	@Length(min=1,max=30,message="用戶姓名'${validatedValue}'长度在{min}和{max}之间",groups={Insert.class,Update.class})
+//	@Length(min=3,max=30,message="用戶姓名'${validatedValue}'请输入{min}至{max}个字符",groups={Insert.class,Update.class})
+	@Length(min=3,max=30,message="用戶姓名请输入{min}至{max}个字符",groups={Insert.class,Update.class})
 	@Column(name = "name",length=30,nullable=false)
 	private String name;
 
 	/**
 	 * 登录帐号
 	 */
-	@Column(name = "account", unique = true)
+	@NotBlank(message="用户帐号不能为空",groups={Insert.class})
+	@Length(min=3,max=30,message="用戶帐号请输入{min}至{max}个字符",groups={Insert.class})
+	@Column(name = "account", unique = true,length=30)
 	private String account;
 
 	/**
 	 * 帐号密码
 	 */
+//	@NotBlank(message="密码不能为空",groups={Insert.class})
 	@Column(name = "password", nullable=false,length=32)
 	private String password;
 
 	/**
 	 * 用户昵称
 	 */
-	@Column(name = "nick_name",length=32)
+	@Length(min=3,max=30,message="用戶昵称请输入{min}至{max}个字符",groups={Insert.class})
+	@Column(name = "nick_name",length=30)
 	private String nickName;
 
 	/**
 	 * 用户手机
 	 */
+	@NotBlank(message="电话号码不能为空",groups={Insert.class,Update.class})
+	@Length(min=3,max=30,message="电话号码请输入{min}至{max}个字符",groups={Insert.class,Update.class})
 	@Column(name = "mobile",length=20)
 	private String mobile;
 
 	/**
 	 * 邮箱
 	 */
+	@Email(message="请输入正确的邮箱",groups={Insert.class,Update.class})
+	@NotBlank(message="邮箱不能为空",groups={Insert.class,Update.class})
 	@Column(name = "email",length=32)
 	private String email;
 
