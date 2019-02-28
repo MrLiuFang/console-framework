@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+//import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
@@ -133,6 +134,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
+//	@GlobalTransactional
 	public ResultData add(@Validated({Insert.class})AdminUser adminUser,BindingResult bindingResult,@NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());

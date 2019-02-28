@@ -17,7 +17,7 @@
 			<artifactId>console-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-configuration</artifactId>
@@ -36,6 +36,16 @@
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-authentication</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>discreteness-register-uri</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.dubbo</groupId>
@@ -48,6 +58,10 @@
 		<dependency>
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
 		</dependency>
 
 		<dependency>
@@ -75,6 +89,26 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- 分布式事物 -->
+		
+		<!-- <dependency>
+			<groupId>com.alibaba.fescar</groupId>
+			<artifactId>fescar-dubbo</artifactId>
+			<version>0.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.dubbo</groupId>
+					<artifactId>dubbo</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.fescar</groupId>
+			<artifactId>fescar-spring</artifactId>
+			<version>0.2.2</version>
+		</dependency> -->
+		
 	</dependencies>
 
 </project>

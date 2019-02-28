@@ -61,7 +61,7 @@
 				<artifactId>discreteness-configuration</artifactId>
 				<version>${pepper.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.pepper</groupId>
 				<artifactId>discreteness-config</artifactId>
@@ -74,6 +74,11 @@
 				<version>${pepper.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-register-uri</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
