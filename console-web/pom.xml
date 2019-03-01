@@ -38,11 +38,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.pepper</groupId>
-			<artifactId>discreteness-register-uri</artifactId>
-		</dependency>
-		
-		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
 		</dependency>
