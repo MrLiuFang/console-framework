@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.pepper.core.BaseDaoFactoryBean;
+import com.pepper.core.dubbo.DubboDynamicVersion;
 
 @DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
 		"com.pepper.core.**", "com.pepper.init.data.**" })
@@ -17,7 +19,7 @@ import com.pepper.core.BaseDaoFactoryBean;
 @EnableJpaRepositories(basePackages = "com.pepper.dao.**", repositoryFactoryBeanClass = BaseDaoFactoryBean.class)
 @EntityScan("com.pepper.model.**")
 @PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
-
+@Import(value={DubboDynamicVersion.class})
 public class Application extends SpringBootServletInitializer {
 
 	@Override
