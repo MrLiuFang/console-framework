@@ -31,11 +31,6 @@ public class Application extends SpringBootServletInitializer {
 		 * new SpringApplicationBuilder(Application.class)
 		 * .web(WebApplicationType.NONE) .run(args);
 		 */
-//		Class<Application> classz = Application.class;
-//		List<String[]> packages = new ArrayList<String[]>();
-//		packages.add(classz.getAnnotation(DubboComponentScan.class).basePackages());
-//		packages.add(classz.getAnnotation(SpringBootApplication.class).scanBasePackages());
-//		new DubboDynamicVersion(packages);
 		SpringApplication.run(Application.class, args);
 	}
 }
