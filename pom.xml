@@ -79,6 +79,12 @@
 				<artifactId>discreteness-register-uri</artifactId>
 				<version>${pepper.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>com.pepper</groupId>
+				<artifactId>discreteness-verification-code-rest</artifactId>
+				<version>${pepper.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

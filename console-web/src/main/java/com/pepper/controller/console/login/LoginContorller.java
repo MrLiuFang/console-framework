@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.common.emuns.Status;
+import com.pepper.core.ResultEnum.Code;
 import com.pepper.core.base.BaseController;
 import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
@@ -33,6 +34,7 @@ import com.pepper.service.console.role.RoleUserService;
 import com.pepper.service.redis.string.serializer.SetOperationsService;
 import com.pepper.service.redis.string.serializer.StringRedisTemplateService;
 import com.pepper.service.redis.string.serializer.ValueOperationsService;
+import com.pepper.service.verification.code.VerificationCodeService;
 
 /**
  * 后台用户登录Contorller
@@ -78,6 +80,9 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 
 	@Reference
 	private MenuService menuService;
+	
+	@Autowired
+	private VerificationCodeService verificationCodeService;
 
 
 	/**
@@ -87,14 +92,23 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public String login(AdminUser user)  {
+	public String login(AdminUser user,String vcode)  {
 
+		if (!StringUtils.hasText(vcode)) {
+			request.setAttribute("message", "验证码不能为空!");
+			return "forward:/";
+		}
 		if (!StringUtils.hasText(user.getAccount())) {
 			request.setAttribute("message", "用户名不能为空!");
 			return "forward:/";
 		}
 		if (!StringUtils.hasText(user.getPassword())) {
 			request.setAttribute("message", "密码不能为空!");
+			return "forward:/";
+		}
+		
+		if(!verificationCodeService.validateVerificationCode(vcode)){
+			request.setAttribute("message", "验证码错误!");
 			return "forward:/";
 		}
 		

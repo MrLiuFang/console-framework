@@ -58,7 +58,7 @@
 					<span class="login-icon icon-code" id="icon-code"></span><input
 						maxlength=6 autocomplete="off" class="input input-code" id="vcode"
 						name="vcode" type="text" placeholder="请输入验证码" /> <img
-						class="imgs-code" src="data:image/png;base64,${vcodeImage }"
+						class="imgs-code" src="${ctx}/verification/code"
 						id="vcode-image" />
 				</div>
 				<div class="login-code login-input">
@@ -68,7 +68,7 @@
 				<div class="login-button" id="forbidden">登录</div>
 				<footer class="footer">
 					<div class="copyright">
-						Copyright © 2018 <a href="https://www.qi-cloud.com/">Qi-cloud</a>
+						Copyright © 2017-2019 <a href="/">pepper</a>
 						All rights reserved.
 					</div>
 				</footer>
@@ -144,15 +144,7 @@
 
 		//刷新验证码
 		$("#vcode-image").click(function() {
-			var that = $(this);
-			$.ajax({
-				type : "POST",
-				url : "${ctx}/console/flashVCode",
-				data : {},
-				success : function(data) {
-					that.attr("src", "data:image/png;base64," + data.data.vcodeImage);
-				}
-			});
+			$(this).attr("src", "${ctx}/verification/code");
 		});
 	});
 </script>

@@ -38,6 +38,11 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>discreteness-verification-code-rest</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
 		</dependency>
@@ -84,13 +89,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		<dependency>
-		    <groupId>com.github.penggle</groupId>
-		    <artifactId>kaptcha</artifactId>
-		    <version>2.3.2</version>
-		</dependency>
-
 		<!-- 分布式事物 -->
 		
 		<!-- <dependency>

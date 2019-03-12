@@ -1,4 +1,4 @@
-package com.pepper.controller.gateway;
+package com.pepper.controller.console.gateway;
 
 import java.net.URL;
 
@@ -13,7 +13,7 @@ import com.pepper.core.gateway.AbsRegisterUrl;
  * @author mrliu
  *
  */
-@Component
+@Component("consoleRegisterUrl")
 @Lazy
 public class RegisterUrl extends AbsRegisterUrl {
 
