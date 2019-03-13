@@ -7,7 +7,7 @@
 <div class="layui-fluid">
 	<div class="layui-row layui-col-space15">
 		<div class="layui-card">
-			<form class="layui-form layui-form-pane" action="" id="form-query">
+			<form class="layui-form layui-form-pane" action="" id="form-query" >
 				<div class="layui-form-item">
 					<div class="layui-inline ">
 						<label class="layui-form-label">姓名</label>

@@ -9,7 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseModel;
-import com.pepper.model.console.enums.Level;
+import com.pepper.model.console.enums.MunuLevel;
 import com.pepper.model.console.enums.MenuType;
 import com.pepper.model.console.enums.UserType;
 
@@ -75,7 +75,7 @@ public class Menu extends BaseModel {
 	 * 菜单级别
 	 */
 	@Column(name = "level",nullable=false)
-	private Level level;
+	private MunuLevel level;
 
 	/**
 	 * 是否叶子节点
@@ -159,11 +159,11 @@ public class Menu extends BaseModel {
 		this.remarks = remarks;
 	}
 
-	public Level getLevel() {
+	public MunuLevel getLevel() {
 		return level;
 	}
 
-	public void setLevel(Level level) {
+	public void setLevel(MunuLevel level) {
 		this.level = level;
 	}
 

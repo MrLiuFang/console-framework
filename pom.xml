@@ -93,7 +93,6 @@
 			<groupId>com.pepper</groupId>
 			<artifactId>pepper-core</artifactId>
 		</dependency>
-
 	</dependencies>
 
 </project>

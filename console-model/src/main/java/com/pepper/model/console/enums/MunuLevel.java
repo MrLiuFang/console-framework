@@ -4,19 +4,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.pepper.core.IEnum;
 
 /**
- * 省市区级别枚举
+ * 树层级
  * 
- * @author weber
- *
+ * @author drake
  */
-public enum AreaLevelEnum implements IEnum {
-	PROVINCE(0, "省"), CITY(1, "市"), BUTCHER(2, "区"), STREET(3, "街道");
+public enum MunuLevel implements IEnum {
+	ZERO(0, "一级菜单"), ONE(1, "二级菜单"), TWO(2, "三级资源");
 
 	private final int key;
 
 	private final String desc;
 
-	private AreaLevelEnum(int key, String desc) {
+	private MunuLevel(int key, String desc) {
 		this.key = key;
 		this.desc = desc;
 	}

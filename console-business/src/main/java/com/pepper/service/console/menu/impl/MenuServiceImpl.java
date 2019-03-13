@@ -16,7 +16,7 @@ import com.pepper.common.emuns.Status;
 import com.pepper.core.base.impl.BaseServiceImpl;
 import com.pepper.core.constant.SearchConstant;
 import com.pepper.dao.console.menu.MenuDao;
-import com.pepper.model.console.enums.Level;
+import com.pepper.model.console.enums.MunuLevel;
 import com.pepper.model.console.enums.MenuType;
 import com.pepper.model.console.menu.Menu;
 import com.pepper.service.console.menu.MenuService;
@@ -106,7 +106,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 			if (StringUtils.hasText(menu.getParentId())) {
 				menu.setUrl(null);
 				menu.setParentId("0");
-				menu.setLevel(Level.ZERO);
+				menu.setLevel(MunuLevel.ZERO);
 				menu.setIsLeaf(true);
 			} else {
 				// 新增二级菜单
@@ -115,7 +115,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 					parentMenu.setIsLeaf(false);
 					menuDao.update(parentMenu);
 				}
-				menu.setLevel(Level.ONE);
+				menu.setLevel(MunuLevel.ONE);
 				menu.setIsLeaf(true);
 			}
 			// 新增资源
@@ -125,7 +125,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 				parentMenu.setIsLeaf(false);
 				menuDao.update(parentMenu);
 			}
-			menu.setLevel(Level.TWO);
+			menu.setLevel(MunuLevel.TWO);
 			menu.setIsLeaf(true);
 		}
 		save(menu);
