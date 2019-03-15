@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.pepper</groupId>
-			<artifactId>console-business</artifactId>
+			<artifactId>console-service</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>

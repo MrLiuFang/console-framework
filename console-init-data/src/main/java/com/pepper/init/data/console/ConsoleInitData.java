@@ -1,4 +1,4 @@
-package com.pepper.init.data;
+package com.pepper.init.data.console;
 
 import java.util.ArrayList;
 import java.util.List;
