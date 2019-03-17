@@ -82,7 +82,7 @@
 			
 			<dependency>
 				<groupId>com.pepper</groupId>
-				<artifactId>discreteness-verification-code-rest</artifactId>
+				<artifactId>discreteness-verification-code</artifactId>
 				<version>${pepper.version}</version>
 			</dependency>
 		</dependencies>
