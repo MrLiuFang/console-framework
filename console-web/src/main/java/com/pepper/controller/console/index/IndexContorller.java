@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseController;
 import com.pepper.core.base.impl.BaseControllerImpl;
@@ -25,7 +25,6 @@ import com.pepper.model.console.menu.Menu;
 import com.pepper.model.console.menu.MenuVo;
 import com.pepper.model.console.parameter.Parameter;
 import com.pepper.model.console.role.RoleUser;
-import com.pepper.service.authentication.ConsoleAuthorize;
 import com.pepper.service.console.admin.user.AdminUserService;
 import com.pepper.service.console.menu.MenuService;
 import com.pepper.service.console.parameter.ParameterService;
@@ -58,9 +57,6 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 	ParameterService parameterService;
 
 	@Resource
-	private ConsoleAuthorize consoleAuthorize;
-
-	@Reference
 	private RoleUserService roleUserService;
 
 	@Reference
@@ -69,13 +65,22 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 	@Reference
 	private FileService fileService;
 
-//	@Resource
-//	private CodeHelper codeHelper;
 
 	@RequestMapping("/")
 	public String index() {
-		AdminUser adminUser = (AdminUser) consoleAuthorize.getCurrentUser();
-		if (adminUser !=null ) {
+		Object object = this.getCurrentUser();
+		if(object == null){
+			setTitle("login_page_title");
+			/**
+			 * 客户定制登录页
+			 */
+			String customLoginPage = parameterService.findValueByCode(GlobalConstant.CUSTOM_LOGIN_PAGE);
+			if (StringUtils.hasText(customLoginPage)) {
+				return customLoginPage;
+			}
+			return "login";
+		}else{
+			AdminUser adminUser = (AdminUser) object;
 			if (StringUtils.hasText(adminUser.getHeadPortrait())) {
 				adminUser.setHeadPortrait(fileService.getUrl(adminUser.getHeadPortrait()));
 			}
@@ -99,27 +104,6 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 			}
 			setTitle("main_page_title");
 			return "index";
-		} else {
-//			ImageVCodeHelper vCode;
-//			try {
-//				vCode = new ImageVCodeHelper(120, 40, 4, 0);
-//				String token = UUID.randomUUID().toString();
-//				codeHelper.redis(ValifyConstant.login_v_code_redis, token, 1, vCode.getvCode());
-//				Util.setCookie(response, ValifyConstant.login_v_code_token, token, null, null);
-//				String vcodeImage = EncodeUtil.encodeBase64(vCode.getOut().toByteArray());
-//				request.setAttribute("vcodeImage", vcodeImage);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			setTitle("login_page_title");
-			/**
-			 * 客户定制登录页
-			 */
-			String customLoginPage = parameterService.findValueByCode(GlobalConstant.CUSTOM_LOGIN_PAGE);
-			if (StringUtils.hasText(customLoginPage)) {
-				return customLoginPage;
-			}
-			return "login";
 		}
 	}
 

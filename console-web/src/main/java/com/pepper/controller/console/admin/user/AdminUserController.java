@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fescar.core.context.RootContext;
+import com.alibaba.fescar.spring.annotation.GlobalTransactionScanner;
+import com.alibaba.fescar.spring.annotation.GlobalTransactional;
+import com.alibaba.fescar.spring.annotation.GlobalTransactionalInterceptor;
 //import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
@@ -37,7 +41,6 @@ import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.enums.UserType;
 import com.pepper.model.console.role.Role;
 import com.pepper.model.console.role.RoleUser;
-import com.pepper.service.authentication.ConsoleAuthorize;
 import com.pepper.service.authentication.aop.Authorize;
 import com.pepper.service.console.admin.user.AdminUserService;
 import com.pepper.service.console.parameter.ParameterService;
@@ -73,8 +76,6 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Reference
 	private FileService fileService;
 	
-	@Resource
-	private ConsoleAuthorize consoleAuthorize;
 
 	/**
 	 * 用户管理页面
@@ -134,11 +135,11 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-//	@GlobalTransactional
+	@GlobalTransactional
 	public ResultData add(@Validated({Insert.class})AdminUser adminUser,BindingResult bindingResult,@NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
-		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
+		AdminUser user = (AdminUser) this.getCurrentUser();
 		adminUser.setCreateUser(user.getId());
 		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
 		adminUserService.saveUser(adminUser, roleId);
@@ -169,9 +170,10 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/update")
 	@Authorize
+	@GlobalTransactional
 	public ResultData update(@Validated({Update.class})AdminUser adminUser, BindingResult bindingResult, @NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUpdateDate(new Date());
-		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
+		AdminUser user = (AdminUser) this.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
 		// 账号不允许修改
 		AdminUser old = adminUserService.findById(adminUser.getId());
@@ -218,7 +220,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Authorize(authorizeResources = false)
 	public ResultData updateUserInfo(AdminUser adminUser,@NotBlank(message="请选择角色")  String roleId) {
 		adminUser.setUpdateDate(new Date());
-		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
+		AdminUser user = (AdminUser) this.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
 		adminUserService.updateUser(adminUser, roleId);
 		return new ResultData().setLoadUrl("/");
@@ -273,9 +275,13 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/saveUserRole")
 	@Authorize
 	@ResponseBody
+	@Transactional
+	@GlobalTransactional
 	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
+		System.out.println("开始全局事务，XID = " + RootContext.getXID());
 		adminUserService.saveUserRole(roleUser);
-		return new ResultData();
+		throw new BusinessException("测试分布式事物");
+//		return new ResultData();
 	}
 
 	/**
