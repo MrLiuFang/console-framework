@@ -106,7 +106,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		if (roleService.findByCode(role.getCode())!=null) {
 			throw new BusinessException("角色编码已存在，请重新输入！");
 		}
-		AdminUser user = (AdminUser) this.consoleAuthorize.getCurrentUser();
+		AdminUser user = (AdminUser) this.getCurrentUser();
 		role.setCreateDate(new Date());
 		role.setCreateUser(user.getId());
 		roleService.saveRole(role, resourceIds);
@@ -149,7 +149,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 			throw new BusinessException("角色名已存在，请重新输入！");
 		}
 		role.setUpdateDate(new Date());
-		AdminUser user = (AdminUser) this.consoleAuthorize.getCurrentUser();
+		AdminUser user = (AdminUser) this.getCurrentUser();
 		role.setUpdateUser(user.getId());
 		roleService.updateRole(role, resourceIds);
 		return new ResultData().setLoadUrl("/console/role/index");

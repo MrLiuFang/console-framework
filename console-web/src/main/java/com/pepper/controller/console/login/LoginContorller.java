@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import org.apache.dubbo.config.annotation.Reference;
 import com.pepper.common.emuns.Status;
-import com.pepper.core.ResultEnum.Code;
 import com.pepper.core.base.BaseController;
 import com.pepper.core.base.impl.BaseControllerImpl;
 import com.pepper.core.constant.GlobalConstant;
@@ -48,14 +46,13 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 
 	@SuppressWarnings("unused")
 	private static Logger log = LoggerFactory.getLogger(LoginContorller.class);
-
-	
-	@Resource
-	private ConsoleAuthorize consoleAuthorize;
 	
 	@SuppressWarnings("unused")
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private ConsoleAuthorize consoleAuthorize;
 
 	@Reference
 	private ParameterService parameterService;

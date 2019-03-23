@@ -139,7 +139,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 		if (menuService.findByCode(menu.getCode())!=null) {
 			throw new BusinessException("该编码已存在！");
 		}
-		AdminUser adminUser = (AdminUser) this.consoleAuthorize.getCurrentUser();
+		AdminUser adminUser = (AdminUser) this.getCurrentUser();
 		menu.setCreateDate(new Date());
 		menu.setCreateUser(adminUser.getId());
 		menuService.addMenu(menu);
@@ -183,7 +183,7 @@ public class MenuController extends BaseControllerImpl implements BaseController
 				}
 			}
 		}
-		AdminUser adminUser = (AdminUser) this.consoleAuthorize.getCurrentUser();
+		AdminUser adminUser = (AdminUser) this.getCurrentUser();
 		menu.setUpdateDate(new Date());
 		menu.setUpdateUser(adminUser.getId());
 		menuService.updateMenu(menu);
