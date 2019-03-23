@@ -20,7 +20,7 @@ console:
     value: 旗云管理平台
     remarks: 后台管理登陆后的title
   - code: admin_user_init_pwd
-    value: '123456'
+    value: 123456
     remarks: 后台管理员初始化密码
   role:
   - name: 超级管理员角色
@@ -85,7 +85,7 @@ console:
     name: 系统设置
     code: SYSTEM_SETTINGS
     url: null
-    parentId: '0'
+    parentId: 0
     scope: 1
     sort: 0
     status: 1

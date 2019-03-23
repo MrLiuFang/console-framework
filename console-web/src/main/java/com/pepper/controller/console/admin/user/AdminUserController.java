@@ -140,7 +140,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		adminUser.setCreateDate(new Date());
 		AdminUser user = (AdminUser) consoleAuthorize.getCurrentUser();
 		adminUser.setCreateUser(user.getId());
-		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
+		adminUser.setPassword(Md5Util.encryptPassword(Md5Util.encodeByMD5(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()),adminUser.getAccount()));
 		adminUserService.saveUser(adminUser, roleId);
 		return new ResultData().setLoadUrl("/console/user/index");
 	}
@@ -292,7 +292,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		if(adminUser == null) {
 			throw new BusinessException("该用户不存在");
 		}
-		adminUser.setPassword(Md5Util.encryptPassword(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()));
+		adminUser.setPassword(Md5Util.encryptPassword(Md5Util.encodeByMD5(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()),adminUser.getAccount()));
 		adminUserService.save(adminUser);
 		return new ResultData();
 	}

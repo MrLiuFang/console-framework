@@ -30,7 +30,7 @@
 						</div>
 					</div>
 					<div class="layui-form-item ">
-						<label class="layui-form-label">邮箱</label>
+						<label class="layui-form-label">邮箱<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<input type="text" name="email" id="email" lay-verify="myEmail"
 								maxlength="50" autocomplete="off" placeholder="邮箱"
@@ -38,14 +38,14 @@
 						</div>
 					</div>
 					<div class="layui-form-item ">
-						<label class="layui-form-label">昵称</label>
+						<label class="layui-form-label">昵称<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<input type="text" name="nickName" id="nickName" maxlength="50"
 								autocomplete="off" placeholder="昵称" class="layui-input" />
 						</div>
 					</div>
 					<div class="layui-form-item ">
-						<label class="layui-form-label">电话号码</label>
+						<label class="layui-form-label">电话号码<span class="qi-req">*</span></label>
 						<div class="layui-input-inline">
 							<input type="text" name="mobile" id="mobile" maxlength="50"
 								autocomplete="off" placeholder="电话号码" class="layui-input" />
