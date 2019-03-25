@@ -143,7 +143,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		adminUser.setCreateUser(user.getId());
 		adminUser.setPassword(Md5Util.encryptPassword(Md5Util.encodeByMD5(parameterService.findByCode(GlobalConstant.ADMIN_USER_INIT_PWD).getValue()),adminUser.getAccount()));
 		adminUserService.saveUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/console/user/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/user/index");
+		return resultData;
 	}
 
 	/**
@@ -180,7 +182,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		adminUser.setAccount(old.getAccount());
 		
 		adminUserService.updateUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/console/user/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/user/index");
+		return resultData;
 	}
 
 	/**
@@ -223,7 +227,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		AdminUser user = (AdminUser) this.getCurrentUser();
 		adminUser.setUpdateUser(user.getId());
 		adminUserService.updateUser(adminUser, roleId);
-		return new ResultData().setLoadUrl("/");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/");
+		return resultData;
 	}
 
 	/**
@@ -261,8 +267,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	public ResultData roleList(@NotBlank(message="请选择用户") String userId) {
 		RoleUser roleUser = roleUserService.findByUserId(userId);
 		List<Map<String, Object>> roleList = getRoleSelectItems(roleUser);
-		ResultData rd = new ResultData().setData("list", roleList);
-		return rd;
+		ResultData resultData = new ResultData();
+		resultData.setData("list", roleList);
+		return resultData;
 	}
 
 	/**
@@ -339,7 +346,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		} else {
 			throw new BusinessException("原密码错误！");
 		}
-		return new ResultData().setLoadUrl("/");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/");
+		return resultData;
 	}
 
 	/**
@@ -378,14 +387,17 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/checkExist")
 	@ResponseBody
 	public Object checkExist(@NotBlank(message="请输入用户名")String account) {
+		ResultData resultData = new ResultData();
 		AdminUser user = null;
 		if (StringUtils.hasText(account)) {
 			user = adminUserService.findByAccount(account);
 		}
 		if (user != null) {
-			return new ResultData().setData("exist", true);
+			resultData.setData("exist", true);
+			return resultData;
 		}
-		return new ResultData().setData("exist", false);
+		resultData.setData("exist", false);
+		return resultData;
 	}
 
 	/**
