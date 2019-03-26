@@ -45,6 +45,10 @@
 			<groupId>com.pepper</groupId>
 			<artifactId>discreteness-file-business</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>leaf-area-web</artifactId>
+		</dependency>
 
 		<!-- spring cloud config client 重试机制需要引入spring-retry -->
 		<!-- <dependency> <groupId>org.springframework.retry</groupId> <artifactId>spring-retry</artifactId> 

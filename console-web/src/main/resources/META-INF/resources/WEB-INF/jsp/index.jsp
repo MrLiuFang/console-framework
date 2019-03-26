@@ -34,6 +34,4 @@
 	</div>
 </body>
 <jsp:include page="js.jsp"></jsp:include>
-<jsp:include page="upload.jsp"></jsp:include>
-<jsp:include page="regionUtil.jsp"></jsp:include>
 </html>

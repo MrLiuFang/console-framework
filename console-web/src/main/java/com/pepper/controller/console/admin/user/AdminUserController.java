@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fescar.core.context.RootContext;
-import com.alibaba.fescar.spring.annotation.GlobalTransactionScanner;
-import com.alibaba.fescar.spring.annotation.GlobalTransactional;
-import com.alibaba.fescar.spring.annotation.GlobalTransactionalInterceptor;
 //import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
@@ -135,7 +131,6 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/add")
 	@Authorize
-	@GlobalTransactional
 	public ResultData add(@Validated({Insert.class})AdminUser adminUser,BindingResult bindingResult,@NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUserType(UserType.EMPLOYEE);
 		adminUser.setCreateDate(new Date());
@@ -170,7 +165,6 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	@RequestMapping(value = "/update")
 	@Authorize
-	@GlobalTransactional
 	public ResultData update(@Validated({Update.class})AdminUser adminUser, BindingResult bindingResult, @NotBlank(message="请选择角色") String roleId) {
 		adminUser.setUpdateDate(new Date());
 		AdminUser user = (AdminUser) this.getCurrentUser();
@@ -276,12 +270,9 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@Authorize
 	@ResponseBody
 	@Transactional
-	@GlobalTransactional
 	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
-		System.out.println("开始全局事务，XID = " + RootContext.getXID());
 		adminUserService.saveUserRole(roleUser);
-		throw new BusinessException("测试分布式事物");
-//		return new ResultData();
+		return new ResultData();
 	}
 
 	/**

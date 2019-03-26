@@ -74,6 +74,12 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.pepper</groupId>
+			<artifactId>leaf-area-web</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,7 +97,7 @@
 		</dependency>
 		
 		<!-- 分布式事物 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.alibaba.fescar</groupId>
 			<artifactId>fescar-dubbo</artifactId>
 			<exclusions>
@@ -104,7 +110,7 @@
 		<dependency>
 			<groupId>com.alibaba.fescar</groupId>
 			<artifactId>fescar-spring</artifactId>
-		</dependency>
+		</dependency> -->
 		
 	</dependencies>
 
