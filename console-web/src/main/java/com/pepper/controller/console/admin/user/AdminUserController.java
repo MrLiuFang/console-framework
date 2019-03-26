@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -276,7 +275,6 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/saveUserRole")
 	@Authorize
 	@ResponseBody
-	@Transactional
 	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
 		adminUserService.saveUserRole(roleUser);
 		return new ResultData();

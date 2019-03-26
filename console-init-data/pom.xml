@@ -17,6 +17,7 @@
 			<groupId>com.pepper</groupId>
 			<artifactId>console-service</artifactId>
 			<version>${project.parent.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

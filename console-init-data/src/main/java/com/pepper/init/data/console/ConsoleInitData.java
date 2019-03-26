@@ -38,9 +38,8 @@ import com.pepper.service.console.role.RoleUserService;
  * @author mrliu
  *
  */
-@PropertySource(value = "classpath:console-init-data.yml", ignoreResourceNotFound = true, encoding = "UTF-8",factory=YamlPropertySourceFactory.class)
+@PropertySource(value = "classpath:console-init-data.yml",name="console-init-data",  ignoreResourceNotFound = true, encoding = "UTF-8",factory=YamlPropertySourceFactory.class)
 @Component
-//@Order(value=Ordered.LOWEST_PRECEDENCE)
 @ConfigurationProperties(prefix="console")
 @Lazy
 public class ConsoleInitData implements ApplicationListener<ContextRefreshedEvent> {
