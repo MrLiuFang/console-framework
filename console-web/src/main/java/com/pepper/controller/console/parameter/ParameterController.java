@@ -92,7 +92,9 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	public ResultData add(@Validated(value= {Insert.class}) Parameter parameter,BindingResult bindingResult) {
 		parameterService.save(parameter);
-		return new ResultData().setLoadUrl("/console/parameter/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/parameter/index");
+		return resultData;
 	}
 
 	/**
@@ -105,7 +107,9 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@ResponseBody
 	public ResultData update(@Validated(value= {Update.class}) Parameter parameter,BindingResult bindingResult) {
 		parameterService.update(parameter);
-		return new ResultData().setLoadUrl("/console/parameter/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/parameter/index");
+		return resultData;
 	}
 
 	/**

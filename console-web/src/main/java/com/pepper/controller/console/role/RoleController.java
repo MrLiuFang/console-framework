@@ -110,7 +110,9 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		role.setCreateDate(new Date());
 		role.setCreateUser(user.getId());
 		roleService.saveRole(role, resourceIds);
-		return new ResultData().setLoadUrl("/console/role/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/role/index");
+		return resultData;
 	}
 
 	/**
@@ -152,7 +154,9 @@ public class RoleController extends BaseControllerImpl implements BaseController
 		AdminUser user = (AdminUser) this.getCurrentUser();
 		role.setUpdateUser(user.getId());
 		roleService.updateRole(role, resourceIds);
-		return new ResultData().setLoadUrl("/console/role/index");
+		ResultData resultData = new ResultData();
+		resultData.setLoadUrl("/console/role/index");
+		return resultData;
 	}
 
 	/**
@@ -165,11 +169,14 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@RequestMapping(value = "delete")
 	@ResponseBody
 	public ResultData delete(String id) {
+		ResultData resultData = new ResultData();
 		if (roleUserService.findByRoleId(id)!=null) {
-			return new ResultData().setMessage("已关联用户，不允许删除！").setStatus(500);
+			resultData.setMessage("已关联用户，不允许删除！");
+			resultData.setStatus(com.pepper.core.ResultEnum.Status.FAIL.getKey());
+			return resultData;
 		}
 		roleService.deleteRole(id);
-		return new ResultData();
+		return resultData;
 	}
 
 	/**
