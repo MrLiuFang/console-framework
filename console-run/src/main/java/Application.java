@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.pepper.core.BaseDaoFactoryBean;
 import com.pepper.core.dubbo.DubboDynamicVersion;
+import com.pepper.core.dubbo.DubboToMvc;
 
-@DubboDynamicVersion
+//@DubboDynamicVersion
+@DubboToMvc
 @SpringBootApplication(scanBasePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
 		"com.pepper.core.**", "com.pepper.model.**", "com.pepper.init.data.console.**", "com.pepper.register.**" })
 @EnableJpaRepositories(basePackages = "com.pepper.dao.**", repositoryFactoryBeanClass = BaseDaoFactoryBean.class)

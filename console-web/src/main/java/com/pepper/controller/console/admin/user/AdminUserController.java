@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 //import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pepper.common.emuns.Scope;
@@ -275,9 +277,11 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/saveUserRole")
 	@Authorize
 	@ResponseBody
+	@GlobalTransactional(timeoutMills = 300000, name = "my_test_tx_group")
 	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
 		adminUserService.saveUserRole(roleUser);
-		return new ResultData();
+		throw new BusinessException("测试分布式事物");
+//		return new ResultData();
 	}
 
 	/**
