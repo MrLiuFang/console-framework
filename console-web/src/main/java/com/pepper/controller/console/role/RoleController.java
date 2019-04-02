@@ -72,7 +72,7 @@ public class RoleController extends BaseControllerImpl implements BaseController
 	@Authorize
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public Pager<Role> list() {
+	public Object list() {
 		Pager<Role> pager = new Pager<Role>();
 		pager.getJpqlParameter().setSearchParameter(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
 		pager = roleService.findNavigator(pager);

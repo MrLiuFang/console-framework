@@ -188,6 +188,10 @@ public class LoginContorller extends BaseControllerImpl implements BaseControlle
 		consoleAuthorize.deleteAuthorizeInfo(token);
 		consoleAuthorize.deleteUserResources(userId);
 		consoleAuthorize.deleteResourceCode(userId);
+		Cookie cookieToken = new Cookie(GlobalConstant.AUTHORIZE_TOKEN, null);
+		cookieToken.setMaxAge(-1);
+		cookieToken.setPath("/");
+		response.addCookie(cookieToken);
 		return "redirect:/";
 	}
 
