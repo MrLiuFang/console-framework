@@ -275,8 +275,10 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/saveUserRole")
 	@Authorize
 	@ResponseBody
+//	@GlobalTransactional(timeoutMills = 300000, name = "my_test_tx_group")
 	public ResultData saveUserRole(@Validated(value= {Insert.class}) RoleUser roleUser,BindingResult bindingResult) {
 		adminUserService.saveUserRole(roleUser);
+//		throw new BusinessException("测试分布式事物");
 		return new ResultData();
 	}
 
@@ -375,7 +377,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/checkExist")
 	@ResponseBody
-	public Object checkExist(@NotBlank(message="请输入用户名")String account) {
+	public ResultData checkExist(@NotBlank(message="请输入用户名")String account) {
 		ResultData resultData = new ResultData();
 		AdminUser user = null;
 		if (StringUtils.hasText(account)) {
@@ -398,7 +400,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 	 */
 	@RequestMapping(value = "/statusOnOff")
 	@ResponseBody
-	public Object statusOnOff(@NotBlank(message="请选择用户")String id, @NotNull(message="请选择状态")Status status) {
+	public ResultData statusOnOff(@NotBlank(message="请选择用户")String id, @NotNull(message="请选择状态")Status status) {
 		AdminUser user = adminUserService.findById(id);
 		if(user == null) {
 			new BusinessException("该用户不存在！");

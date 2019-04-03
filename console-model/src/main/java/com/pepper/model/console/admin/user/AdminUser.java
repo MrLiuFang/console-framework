@@ -1,13 +1,16 @@
 package com.pepper.model.console.admin.user;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.Length;
+
 import com.pepper.common.emuns.Gender;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseModel;
@@ -36,8 +39,8 @@ public class AdminUser extends BaseModel {
 	 * 用户姓名
 	 */
 	@NotBlank(message="用户姓名不能为空",groups={Insert.class,Update.class})
-//	@Length(min=3,max=30,message="用戶姓名'${validatedValue}'请输入{min}至{max}个字符",groups={Insert.class,Update.class})
-	@Length(min=3,max=30,message="用戶姓名请输入{min}至{max}个字符",groups={Insert.class,Update.class})
+//	@Size(min=3,max=30,message="用戶姓名'${validatedValue}'请输入{min}至{max}个字符",groups={Insert.class,Update.class})
+	@Size(min=3,max=30,message="用戶姓名请输入{min}至{max}个字符",groups={Insert.class,Update.class})
 	@Column(name = "name")
 	private String name;
 
@@ -45,7 +48,7 @@ public class AdminUser extends BaseModel {
 	 * 登录帐号
 	 */
 	@NotBlank(message="用户帐号不能为空",groups={Insert.class})
-	@Length(min=3,max=30,message="用戶帐号请输入{min}至{max}个字符",groups={Insert.class})
+	@Size(min=3,max=30,message="用戶帐号请输入{min}至{max}个字符",groups={Insert.class})
 	@Column(name = "account", unique = true,length=30)
 	private String account;
 
@@ -59,7 +62,7 @@ public class AdminUser extends BaseModel {
 	/**
 	 * 用户昵称
 	 */
-	@Length(min=3,max=30,message="用戶昵称请输入{min}至{max}个字符",groups={Insert.class})
+	@Size(min=3,max=30,message="用戶昵称请输入{min}至{max}个字符",groups={Insert.class})
 	@Column(name = "nick_name")
 	private String nickName;
 
@@ -67,7 +70,7 @@ public class AdminUser extends BaseModel {
 	 * 用户手机
 	 */
 	@NotBlank(message="电话号码不能为空",groups={Insert.class,Update.class})
-	@Length(min=3,max=30,message="电话号码请输入{min}至{max}个字符",groups={Insert.class,Update.class})
+	@Size(min=3,max=30,message="电话号码请输入{min}至{max}个字符",groups={Insert.class,Update.class})
 	@Column(name = "mobile")
 	private String mobile;
 

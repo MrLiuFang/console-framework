@@ -53,7 +53,7 @@ public class ParameterController extends BaseControllerImpl implements BaseContr
 	@RequestMapping(value = "/list")
 	@Authorize
 	@ResponseBody
-	public Pager<Parameter> list() {
+	public Object list() {
 		Pager<Parameter> pager = new Pager<Parameter>();
 		pager = parameterService.findNavigator(pager);
 		return pager;
