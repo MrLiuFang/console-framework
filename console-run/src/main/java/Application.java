@@ -22,7 +22,7 @@ import com.pepper.core.dubbo.DubboToMvc;
 @EntityScan("com.pepper.model.**")
 @PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
 @DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
-		"com.pepper.core.**", "com.pepper.init.data.console.**" })
+		"com.pepper.core.**", "com.pepper.init.data.**" })
 @EnableTransactionManagement
 public class Application extends SpringBootServletInitializer {
 
