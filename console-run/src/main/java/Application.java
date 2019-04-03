@@ -1,6 +1,5 @@
 
 import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
-import org.apache.dubbo.config.spring.context.annotation.DubboConfigConfiguration.Single;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,12 +11,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.pepper.core.BaseDaoFactoryBean;
 import com.pepper.core.dubbo.DubboDynamicVersion;
-import com.pepper.core.dubbo.DubboToMvc;
 
 @DubboDynamicVersion
 //@DubboToMvc
 @SpringBootApplication(scanBasePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
-		"com.pepper.core.**", "com.pepper.model.**", "com.pepper.init.data.console.**", "com.pepper.register.**" })
+		"com.pepper.core.**", "com.pepper.model.**", "com.pepper.init.data.**", "com.pepper.register.**" })
 @EnableJpaRepositories(basePackages = "com.pepper.dao.**", repositoryFactoryBeanClass = BaseDaoFactoryBean.class)
 @EntityScan("com.pepper.model.**")
 @PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
