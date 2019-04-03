@@ -105,6 +105,12 @@ public class AdminUser extends BaseModel {
 	 */
 	@Column(name = "user_type")
 	private UserType userType;
+	
+	@Column(name = "department_id")
+	private String departmentId;
+	
+	@Column(name = "is_work")
+	private Boolean isWork;
 
 	/**
 	 * 最后登录时间
@@ -200,5 +206,21 @@ public class AdminUser extends BaseModel {
 		return gender;
 	}
 
+	public String getDepartmentId() {
+		return departmentId;
+	}
 
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public Boolean getIsWork() {
+		return isWork;
+	}
+
+	public void setIsWork(Boolean isWork) {
+		this.isWork = isWork;
+	}
+
+	
 }
