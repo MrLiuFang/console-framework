@@ -7,7 +7,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.pepper.core.BaseDaoFactoryBean;
 import com.pepper.core.dubbo.DubboDynamicVersion;
@@ -21,7 +20,6 @@ import com.pepper.core.dubbo.DubboDynamicVersion;
 @PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
 @DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
 		"com.pepper.core.**", "com.pepper.init.data.**" })
-@EnableTransactionManagement
 public class Application extends SpringBootServletInitializer {
 
 	@Override
