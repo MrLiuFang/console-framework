@@ -1,5 +1,7 @@
 package com.pepper.service.console.admin.user;
 
+import java.util.List;
+
 import com.pepper.core.Pager;
 import com.pepper.core.base.BaseService;
 import com.pepper.model.console.admin.user.AdminUser;
@@ -76,6 +78,8 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	 * @param userId
 	 */
 	public void updateLoginTime(String userId);
+	
+	public List<AdminUser> findUserByBepartmentId(String departmentId);
 	
 
 }

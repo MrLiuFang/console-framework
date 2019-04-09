@@ -1,6 +1,6 @@
 package com.pepper.dao.console.admin.user;
 
-import com.pepper.core.Pager;
+import java.util.List;
 
 /**
  * 
@@ -9,5 +9,5 @@ import com.pepper.core.Pager;
  */
 public interface AdminUserDaoEx<T> {
 
-	public Pager<T> list(Pager<T> pager);
+	public List<T> findUserByBepartmentId(String departmentId);
 }

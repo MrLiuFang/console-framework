@@ -101,4 +101,9 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 		
 	}
 
+	@Override
+	public List<AdminUser> findUserByBepartmentId(String departmentId) {
+		return adminUserDao.findUserByBepartmentId(departmentId);
+	}
+
 }

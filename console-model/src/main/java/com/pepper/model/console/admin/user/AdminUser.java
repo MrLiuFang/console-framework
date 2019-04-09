@@ -111,6 +111,9 @@ public class AdminUser extends BaseModel {
 	
 	@Column(name = "is_work")
 	private Boolean isWork;
+	
+	@Column(name = "is_manager")
+	private Boolean isManager;
 
 	/**
 	 * 最后登录时间
@@ -222,5 +225,12 @@ public class AdminUser extends BaseModel {
 		this.isWork = isWork;
 	}
 
-	
+	public Boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Boolean isManager) {
+		this.isManager = isManager;
+	}
+
 }

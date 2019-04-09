@@ -166,7 +166,12 @@ public class IndexContorller extends BaseControllerImpl implements BaseControlle
 	public String error500() {
 		return "500";
 	}
-
+	
+//	@RequestMapping("/customError500")
+//	public String customError500() {
+//		return "customError500";
+//	}
+	
 	@RequestMapping("/notLogin")
 	public String notLogin() {
 		return "notLogin";
