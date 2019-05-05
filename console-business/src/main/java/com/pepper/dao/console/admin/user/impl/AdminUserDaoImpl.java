@@ -19,7 +19,7 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 	
 
 	@Override
-	public List<AdminUser> findUserByBepartmentId(String departmentId) {
+	public List<AdminUser> findUserByDepartmentId(String departmentId) {
 		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		String jpql = "SELECT  au from AdminUser au left join RoleUser ru on au.id = ru.userId left join Role r on ru.roleId = r.id "

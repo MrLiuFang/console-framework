@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface AdminUserDaoEx<T> {
 
-	public List<T> findUserByBepartmentId(String departmentId);
+	public List<T> findUserByDepartmentId(String departmentId);
 }

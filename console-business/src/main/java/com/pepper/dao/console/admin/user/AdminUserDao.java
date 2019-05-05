@@ -1,5 +1,7 @@
 package com.pepper.dao.console.admin.user;
 
+import java.util.List;
+
 import com.pepper.core.base.BaseDao;
 import com.pepper.model.console.admin.user.AdminUser;
 /**
@@ -25,5 +27,7 @@ public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx<AdminUs
 	 * @param account
 	 */
 	AdminUser findByAccount(String account);
+	
+	List<AdminUser> findByDepartmentIdAndIdNot(String departmentId,String id);
 
 }
