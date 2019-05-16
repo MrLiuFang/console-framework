@@ -29,5 +29,8 @@ public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx<AdminUs
 	AdminUser findByAccount(String account);
 	
 	List<AdminUser> findByDepartmentIdAndIdNot(String departmentId,String id);
+	
+	
+	public List<AdminUser> findByDepartmentIdAndIsManager(String departmentId,Boolean isManager);
 
 }
