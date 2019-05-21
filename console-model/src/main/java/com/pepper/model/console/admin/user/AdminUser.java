@@ -114,6 +114,9 @@ public class AdminUser extends BaseModel {
 	
 	@Column(name = "is_manager")
 	private Boolean isManager;
+	
+	@Column(name = "department_group_id")
+	private String departmentGroupId;
 
 	/**
 	 * 最后登录时间
@@ -231,6 +234,14 @@ public class AdminUser extends BaseModel {
 
 	public void setIsManager(Boolean isManager) {
 		this.isManager = isManager;
+	}
+
+	public String getDepartmentGroupId() {
+		return departmentGroupId;
+	}
+
+	public void setDepartmentGroupId(String departmentGroupId) {
+		this.departmentGroupId = departmentGroupId;
 	}
 
 }
