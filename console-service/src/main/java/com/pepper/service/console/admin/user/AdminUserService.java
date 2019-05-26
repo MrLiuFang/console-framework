@@ -79,6 +79,10 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	 */
 	public void updateLoginTime(String userId);
 	
+	List<AdminUser> findByDepartmentGroupId(String departmentGroupId);
+	
+	List<AdminUser> findByDepartmentGroupId(String departmentGroupId,Boolean  isManager);
+	
 	public List<AdminUser> findUserByDepartmentId(String departmentId);
 	
 	public List<AdminUser> findByDepartmentId(String departmentId,String id);

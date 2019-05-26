@@ -118,4 +118,14 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 		return adminUserDao.findByDepartmentIdAndIsManager(departmentId, true);
 	}
 
+	@Override
+	public List<AdminUser> findByDepartmentGroupId(String departmentGroupId) {
+		return adminUserDao.findByDepartmentGroupId(departmentGroupId);
+	}
+
+	@Override
+	public List<AdminUser> findByDepartmentGroupId(String departmentGroupId, Boolean isManager) {
+		return adminUserDao.findByDepartmentGroupIdAndIsManager(departmentGroupId, isManager);
+	}
+
 }
