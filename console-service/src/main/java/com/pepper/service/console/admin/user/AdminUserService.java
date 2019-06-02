@@ -88,4 +88,6 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	public List<AdminUser> findByDepartmentId(String departmentId,String id);
 	
 	public List<AdminUser> findDepartmentManager(String departmentId);
+	
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId);
 }
