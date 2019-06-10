@@ -83,6 +83,8 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	
 	List<AdminUser> findByDepartmentGroupId(String departmentGroupId,Boolean  isManager);
 	
+	List<AdminUser> findByDepartmentGroupIdAndIdNot(String departmentGroupId,String id);
+	
 	public List<AdminUser> findUserByDepartmentId(String departmentId);
 	
 	public List<AdminUser> findByDepartmentId(String departmentId,String id);
