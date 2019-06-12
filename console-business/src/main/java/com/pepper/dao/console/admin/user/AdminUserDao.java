@@ -30,6 +30,7 @@ public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx<AdminUs
 	
 	List<AdminUser> findByDepartmentIdAndIdNot(String departmentId,String id);
 	
+	
 	List<AdminUser> findByDepartmentGroupId(String departmentGroupId);
 	
 	List<AdminUser> findByDepartmentGroupIdAndIdNot(String departmentGroupId,String id);

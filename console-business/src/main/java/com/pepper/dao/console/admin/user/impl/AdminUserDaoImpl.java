@@ -80,6 +80,17 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		
 		return baseDao.findNavigator(pager, jpql.toString(), searchParameter);
 	}
+
+	@Override
+	public List<AdminUser> findByDepartmentId(String departmentId, Boolean isManager) {
+		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
+		Map<String,Object> searchParameter = new HashMap<String, Object>();
+		StringBuffer jpql = new StringBuffer();
+		jpql.append(" from AdminUser t1 where t1.departmentId =:departmentId and t1.isManager =:isManager and ( t1.departmentGroupId is null or t1.departmentGroupId = '' )");
+		searchParameter.put("departmentId",departmentId);
+		searchParameter.put("isManager",isManager);
+		return baseDao.find(jpql.toString(), searchParameter);
+	}
 	
 	
 

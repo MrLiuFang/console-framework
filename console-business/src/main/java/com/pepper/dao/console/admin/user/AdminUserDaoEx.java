@@ -14,5 +14,7 @@ public interface AdminUserDaoEx<T> {
 
 	public List<T> findUserByDepartmentId(String departmentId);
 	
+	List<AdminUser> findByDepartmentId(String departmentId,Boolean isManager);
+	
 	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId);
 }
