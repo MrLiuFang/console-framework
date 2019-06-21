@@ -35,7 +35,7 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		return list;
 	}
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId){
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork){
 		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
@@ -46,6 +46,10 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		if(StringUtils.hasText(roleId)) {
 			jpql.append( " and r.code = :roleId " );
 			searchParameter.put("roleId",roleId);
+			if(roleId.equals("OPERATOR_ROLE")) {
+				jpql.append( " and au.isManager = :isManager " );
+				searchParameter.put("isManager",true);
+			}
 		}
 		
 		if(StringUtils.hasText(account)) {
@@ -76,6 +80,10 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		if(StringUtils.hasText(departmentGroupId)) {
 			jpql.append( " and au.departmentGroupId = :departmentGroupId " );
 			searchParameter.put("departmentGroupId",departmentGroupId);
+		}
+		if(isWork!=null) {
+			jpql.append( " and au.isWork = :isWork " );
+			searchParameter.put("isWork",isWork);
 		}
 		
 		return baseDao.findNavigator(pager, jpql.toString(), searchParameter);
