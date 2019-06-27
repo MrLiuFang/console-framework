@@ -35,7 +35,7 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		return list;
 	}
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork){
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord){
 		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
@@ -85,7 +85,10 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 			jpql.append( " and au.isWork = :isWork " );
 			searchParameter.put("isWork",isWork);
 		}
-		
+		if(StringUtils.hasText(keyWord)) {
+			jpql.append( " and ( au.account like :keyWord or au.mobile like :keyWord or au.email like :keyWord or au.name like :keyWord  )" );
+			searchParameter.put("keyWord","%"+keyWord+"%");
+		}
 		return baseDao.findNavigator(pager, jpql.toString(), searchParameter);
 	}
 
