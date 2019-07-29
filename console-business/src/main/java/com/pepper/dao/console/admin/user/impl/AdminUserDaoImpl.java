@@ -46,10 +46,10 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 		if(StringUtils.hasText(roleId)) {
 			jpql.append( " and r.code = :roleId " );
 			searchParameter.put("roleId",roleId);
-			if(roleId.equals("OPERATOR_ROLE")) {
-				jpql.append( " and au.isManager = :isManager " );
-				searchParameter.put("isManager",true);
-			}
+//			if(roleId.equals("OPERATOR_ROLE")) {
+//				jpql.append( " and au.isManager = :isManager " );
+//				searchParameter.put("isManager",true);
+//			}
 		}
 		
 		if(StringUtils.hasText(account)) {
