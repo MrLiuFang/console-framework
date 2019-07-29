@@ -17,7 +17,7 @@ import com.pepper.core.dubbo.DubboDynamicVersion;
 		"com.pepper.core.**", "com.pepper.model.**", "com.pepper.init.data.**", "com.pepper.register.**" })
 @EnableJpaRepositories(basePackages = "com.pepper.dao.**", repositoryFactoryBeanClass = BaseDaoFactoryBean.class)
 @EntityScan("com.pepper.model.**")
-@PropertySource(value = { "classpath:console-run.properties" }, ignoreResourceNotFound = true, encoding = "UTF-8")
+@PropertySource(value = { "file:${path}../../src/main/resources/${project}.properties","file:${path}/${project}.properties","file:/data/config/${project}.properties"}, ignoreResourceNotFound = true, encoding = "UTF-8")
 @DubboComponentScan(basePackages = { "com.pepper.controller.**", "com.pepper.service.**", "com.pepper.util.**",
 		"com.pepper.core.**", "com.pepper.init.data.**" })
 public class Application extends SpringBootServletInitializer {
@@ -32,6 +32,12 @@ public class Application extends SpringBootServletInitializer {
 		 * new SpringApplicationBuilder(Application.class)
 		 * .web(WebApplicationType.NONE) .run(args);
 		 */
+		runBefore();
 		SpringApplication.run(Application.class, args);
+	}
+	
+	private static void runBefore() {
+		System.setProperty("path", Application.class.getResource("/").getPath());
+		System.setProperty("project", "console-run");
 	}
 }
