@@ -190,7 +190,7 @@ public class AdminUserController extends BaseControllerImpl implements BaseContr
 		Map<String, Object> searchParameter = new HashMap<String, Object>();
 		searchParameter.put(SearchConstant.EQUAL+"_scope", Scope.CONSOLE);
 		searchParameter.put(SearchConstant.EQUAL+"_status", Status.NORMAL);
-		searchParameter.put(SearchConstant.NOTIN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
+		searchParameter.put(SearchConstant.NOT_IN+"_code", new String[]{"SUPER_ADMIN_ROLE","ADMIN_ROLE"});
 		List<Role> roles =  roleService.findAll(searchParameter);
 		List<Map<String, Object>> roleSelectItems = new ArrayList<Map<String, Object>>();
 		Map<String, Object> roleItems = null;

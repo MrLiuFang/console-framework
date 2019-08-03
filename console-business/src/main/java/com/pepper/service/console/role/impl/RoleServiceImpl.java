@@ -46,7 +46,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
 	@Override
 	public Pager<Role> list(Pager<Role> pager) {
-		pager.getJpqlParameter().setSearchParameter(SearchConstant.NOTEQUAL+"_code", "ADMIN_ROLE");
+		pager.getJpqlParameter().setSearchParameter(SearchConstant.NOT_EQUAL+"_code", "ADMIN_ROLE");
 		return roleDao.findNavigator(pager);
 	}
 
