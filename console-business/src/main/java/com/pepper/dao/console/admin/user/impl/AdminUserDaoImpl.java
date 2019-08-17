@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
 import com.pepper.core.Pager;
 import com.pepper.core.base.BaseDao;
-import com.pepper.core.base.curd.DaoExImpl;
 import com.pepper.dao.console.admin.user.AdminUserDaoEx;
 import com.pepper.model.console.admin.user.AdminUser;
 import com.pepper.model.console.enums.UserType;
@@ -18,12 +18,13 @@ import com.pepper.model.console.enums.UserType;
  * @author mrliu
  *
  */
-public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserDaoEx<AdminUser>{
+public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 	
+	@Autowired
+	private BaseDao<AdminUser> baseDao;
 
 	@Override
 	public List<AdminUser> findUserByDepartmentId(String departmentId) {
-		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 //		String jpql = "SELECT  au from AdminUser au left join RoleUser ru on au.id = ru.userId left join Role r on ru.roleId = r.id "
 //				+ " where au.userType = :userType and au.departmentId =:departmentId and r.code = 'EMPLOYEE_ROLE' ";
@@ -36,7 +37,6 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 	}
 	
 	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord){
-		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT  au from AdminUser au  join RoleUser ru on au.id = ru.userId  join Role r on ru.roleId = r.id "
@@ -94,7 +94,6 @@ public class AdminUserDaoImpl extends DaoExImpl<AdminUser> implements AdminUserD
 
 	@Override
 	public List<AdminUser> findByDepartmentId(String departmentId, Boolean isManager) {
-		BaseDao<AdminUser> baseDao = getPepperSimpleJpaRepository(this.getClass());
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
 		jpql.append(" from AdminUser t1 where t1.departmentId =:departmentId and t1.isManager =:isManager and ( t1.departmentGroupId is null or t1.departmentGroupId = '' )");
