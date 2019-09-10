@@ -93,5 +93,7 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	
 	List<AdminUser> findByDepartmentId(String departmentId,Boolean isManager);
 	
+	List<AdminUser> findByDepartmentIdAndIsManagerAndDepartmentGroupIdIsNullOrDepartmentGroupId(String departmentId,Boolean isManager );
+	
 	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord);
 }

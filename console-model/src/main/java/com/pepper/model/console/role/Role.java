@@ -30,23 +30,30 @@ public class Role extends BaseModel {
 	/**
 	 * 角色编码
 	 */
-	@Column(name = "code",nullable=false,length=200,unique=true)
+	@Column(name = "code",length=200)
 	private String code;
 
 	/**
 	 * 角色作用域
 	 */
-	@Column(name = "scope",nullable=false)
+	@Column(name = "scope")
 	private Scope scope;
 
 	/**
 	 * 状态
 	 */
-	@Column(name = "status",nullable=false)
+	@Column(name = "status")
 	private Status status;
 
 	@Column(name = "remarks",length=500)
 	private String remarks;
+	
+	
+	@Column(name = "is_isms")
+	private Boolean isIsms;
+	
+	@Column(name = "is_default")
+	private Boolean isDefault;
 
 	public String getRemarks() {
 		return remarks;
@@ -87,6 +94,21 @@ public class Role extends BaseModel {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
+
+	public Boolean getIsIsms() {
+		return isIsms;
+	}
+
+	public void setIsIsms(Boolean isIsms) {
+		this.isIsms = isIsms;
+	}
+
+	public Boolean getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Boolean isDefault) {
+		this.isDefault = isDefault;
+	}
 	
 }

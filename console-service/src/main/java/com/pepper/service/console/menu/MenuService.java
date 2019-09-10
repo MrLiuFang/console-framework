@@ -44,6 +44,8 @@ public interface MenuService extends BaseService<Menu> {
 	 * @return
 	 */
 	public List<Menu> queryMenu(Status status, Scope scope, String parentId);
+	
+	public List<Menu> queryMenu(String parentId,Boolean isIsms);
 
 	/**
 	 * 根据作用域获取树list
@@ -60,6 +62,14 @@ public interface MenuService extends BaseService<Menu> {
 	 * @return
 	 */
 	public Menu findByCode(String code);
+	
+	/**
+	 * 根据code查询
+	 * 
+	 * @param code
+	 * @return
+	 */
+	public Menu findByUrl(String url);
 
 	/**
 	 * 根据parentId查询

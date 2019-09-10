@@ -145,4 +145,5 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 		return roleDao.findByName(name);
 	}
 
+
 }

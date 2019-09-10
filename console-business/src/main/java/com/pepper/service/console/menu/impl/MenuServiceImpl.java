@@ -45,7 +45,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
 	@Override
 	public Menu findByCode(String code) {
-		return menuDao.findByCode(code);
+		return menuDao.findOneByCode(code);
 	}
 
 	@Override
@@ -185,6 +185,19 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	@Override
 	public List<String> findAllResourceUrl() {
 		return menuDao.findAllResourceUrl();
+	}
+
+	@Override
+	public List<Menu> queryMenu(String parentId, Boolean isIsms) {
+		Map<String, Object> searchParameter = new HashMap<String, Object>();
+		searchParameter.put(SearchConstant.IS_TRUE + "_isIsms", true);
+		searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
+		return menuDao.findAll(searchParameter);
+	}
+
+	@Override
+	public Menu findByUrl(String url) {
+		return menuDao.findOneByUrl(url);
 	}
 
 }

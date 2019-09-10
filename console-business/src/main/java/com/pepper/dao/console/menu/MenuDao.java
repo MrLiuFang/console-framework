@@ -36,7 +36,9 @@ public interface MenuDao extends BaseDao<Menu> {
 	 * @param code
 	 * @return
 	 */
-	Menu findByCode(String code);
+	Menu findOneByCode(String code);
+	
+	Menu findOneByUrl(String url);
 
 	/**
 	 * 根据parentId查询

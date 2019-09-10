@@ -32,13 +32,13 @@ public class Menu extends BaseModel {
 	/**
 	 * 采单编码
 	 */
-	@Column(name = "code" ,nullable=false,unique=true,length=200)
+	@Column(name = "code" ,length=200)
 	private String code;
 
 	/**
 	 * url
 	 */
-	@Column(name = "url" ,unique=true,nullable=false,length=200)
+	@Column(name = "url" ,length=200)
 	private String url;
 
 	/**
@@ -50,19 +50,19 @@ public class Menu extends BaseModel {
 	/**
 	 * 排序
 	 */
-	@Column(name = "sort",nullable=false)
+	@Column(name = "sort")
 	private Integer sort;
 
 	/**
 	 * 作用域
 	 */
-	@Column(name = "scope",nullable=false)
+	@Column(name = "scope")
 	private Scope scope;
 
 	/**
 	 * 状态
 	 */
-	@Column(name = "status",nullable=false)
+	@Column(name = "status")
 	private Status status;
 
 	/**
@@ -74,26 +74,29 @@ public class Menu extends BaseModel {
 	/**
 	 * 菜单级别
 	 */
-	@Column(name = "level",nullable=false)
+	@Column(name = "level")
 	private MunuLevel level;
 
 	/**
 	 * 是否叶子节点
 	 */
-	@Column(name = "is_leaf",nullable=false)
+	@Column(name = "is_leaf")
 	private Boolean isLeaf;
 
 	/**
 	 * 菜单类型
 	 */
-	@Column(name = "menu_type",nullable=false)
+	@Column(name = "menu_type")
 	private MenuType menuType;
 	
 	/**
 	 * 使用用户角色（超级管理员&管理员不能使用功能模块，只能使用某些权限配置）
 	 */
-	@Column(name = "use_type",nullable=false)
+	@Column(name = "use_type")
 	private UserType useType;
+	
+	@Column(name = "is_isms")
+	private Boolean isIsms;
 
 	public String getName() {
 		return name;
@@ -190,4 +193,13 @@ public class Menu extends BaseModel {
 	public void setUseType(UserType useType) {
 		this.useType = useType;
 	}
+
+	public Boolean getIsIsms() {
+		return isIsms;
+	}
+
+	public void setIsIsms(Boolean isIsms) {
+		this.isIsms = isIsms;
+	}
+	
 }

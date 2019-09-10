@@ -40,5 +40,7 @@ public interface AdminUserDao extends BaseDao<AdminUser> ,AdminUserDaoEx<AdminUs
 	
 	public List<AdminUser> findByDepartmentIdAndIsManager(String departmentId,Boolean isManager);
 	
+	public List<AdminUser> findByDepartmentIdAndIsManagerAndDepartmentGroupIdIsNullOrDepartmentGroupId(String departmentId,Boolean isManager,String departmentGroupId );
+	
 
 }

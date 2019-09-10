@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.pepper.common.emuns.Gender;
 import com.pepper.common.emuns.Status;
@@ -123,6 +124,15 @@ public class AdminUser extends BaseModel {
 	 */
 	@Column(name = "last_login_time")
 	private Date lastLoginTime;
+	
+	@Column(name = "is_never_expire")
+	private Boolean isNeverExpire;
+	
+	@Column(name = "update_password_date")
+	private Date updatePasswordDate;
+	
+	@Column(name = "automatic_logut_date")
+	private Date automaticLogOutDate;
 
 	public Date getLastLoginTime() {
 		return lastLoginTime;
@@ -244,4 +254,29 @@ public class AdminUser extends BaseModel {
 		this.departmentGroupId = departmentGroupId;
 	}
 
+	public Boolean getIsNeverExpire() {
+		return isNeverExpire;
+	}
+
+	public void setIsNeverExpire(Boolean isNeverExpire) {
+		this.isNeverExpire = isNeverExpire;
+	}
+
+	public Date getUpdatePasswordDate() {
+		return updatePasswordDate;
+	}
+
+	public void setUpdatePasswordDate(Date updatePasswordDate) {
+		this.updatePasswordDate = updatePasswordDate;
+	}
+
+	public Date getAutomaticLogOutDate() {
+		return automaticLogOutDate;
+	}
+
+	public void setAutomaticLogOutDate(Date automaticLogOutDate) {
+		this.automaticLogOutDate = automaticLogOutDate;
+	}
+
+	
 }

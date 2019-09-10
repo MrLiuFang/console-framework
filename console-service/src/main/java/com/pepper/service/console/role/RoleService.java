@@ -86,7 +86,7 @@ public interface RoleService extends BaseService<Role> {
 	 * @return: Role
 	 */
 	Role findByUserId(String userId);
-
+	
 	/**
 	 * 根据角色名获取记录
 	 * 
