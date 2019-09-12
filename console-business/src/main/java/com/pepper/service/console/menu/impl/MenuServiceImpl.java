@@ -7,7 +7,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.util.StringUtils;
 
@@ -19,7 +21,11 @@ import com.pepper.dao.console.menu.MenuDao;
 import com.pepper.model.console.enums.MunuLevel;
 import com.pepper.model.console.enums.MenuType;
 import com.pepper.model.console.menu.Menu;
+import com.pepper.model.console.menu.MenuVo;
 import com.pepper.service.console.menu.MenuService;
+import com.pepper.service.console.role.RoleMenuService;
+
+import javassist.expr.NewArray;
 
 /**
  *
@@ -32,6 +38,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 
 	@Resource
 	private MenuDao menuDao;
+	
+	@Reference
+	private RoleMenuService roleMenuService;
 
 	@Override
 	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Status status) {
@@ -188,16 +197,51 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	}
 
 	@Override
-	public List<Menu> queryMenu(String parentId, Boolean isIsms) {
+	public List<MenuVo> queryMenu(String parentId, Boolean isIsms) {
 		Map<String, Object> searchParameter = new HashMap<String, Object>();
 		searchParameter.put(SearchConstant.IS_TRUE + "_isIsms", true);
 		searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
-		return menuDao.findAll(searchParameter);
+		List<Menu> listRootMenu = menuDao.findAll(searchParameter);
+		return setChildMenu(listRootMenu,new ArrayList<String>());
 	}
+	
+	
 
 	@Override
 	public Menu findByUrl(String url) {
 		return menuDao.findOneByUrl(url);
 	}
 
+	@Override
+	public List<MenuVo> queryAllMenuByRoleId(String roleId) {
+		List<Menu> list = this.queryRootMenuByRoleId(roleId, Status.NORMAL);
+		return setChildMenu(list,roleMenuService.findMenuIdsByRoleId(roleId));
+	}
+
+	private List<MenuVo> setChildMenu(List<Menu> listRootMenu,List<String> id){
+		List<MenuVo> listMenu = new ArrayList<MenuVo>();
+		for (Menu rootMenu : listRootMenu) {
+			MenuVo menuVo = new MenuVo();
+			BeanUtils.copyProperties(rootMenu, menuVo);
+			listMenu.add(menuVo);
+			
+			List<Menu> listChildMenu = id.size()>0? menuDao.findByParentIdAndIdIn(rootMenu.getId(),id) :findByParentId(rootMenu.getId());
+			List<MenuVo> listChileMenu = new ArrayList<MenuVo>();
+			for (Menu childMennu : listChildMenu) {
+				MenuVo childMenuVo = new MenuVo();
+				BeanUtils.copyProperties(childMennu, childMenuVo);
+				List<Menu> listChildMenu1 = id.size()>0? menuDao.findByParentIdAndIdIn(rootMenu.getId(),id) :findByParentId(rootMenu.getId());
+				List<MenuVo> listChileMenu1 = new ArrayList<MenuVo>();
+				for(Menu menu : listChildMenu1) {
+					MenuVo childMenuVo1 = new MenuVo();
+					BeanUtils.copyProperties(menu, childMenuVo1);
+					listChileMenu1.add(childMenuVo1);
+				}
+				childMenuVo.setChild(listChileMenu1);
+				listChileMenu.add(childMenuVo);
+			}
+			menuVo.setChild(listChileMenu);
+		}
+		return listMenu;
+	}
 }

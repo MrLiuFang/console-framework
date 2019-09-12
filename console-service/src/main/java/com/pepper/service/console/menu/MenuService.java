@@ -7,6 +7,7 @@ import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseService;
 import com.pepper.model.console.menu.Menu;
+import com.pepper.model.console.menu.MenuVo;
 
 /**
  * 
@@ -33,6 +34,8 @@ public interface MenuService extends BaseService<Menu> {
 	 */
 
 	public List<Menu> queryRootMenuByRoleId(String roleId, Status status);
+	
+	public List<MenuVo> queryAllMenuByRoleId(String roleId);
 
 	/**
 	 * 根据菜单使用用户类型，菜单状态，菜单作用域,父节点ID 查找菜单（parentId=null 查找第一级菜单,parentId<>null
@@ -45,7 +48,7 @@ public interface MenuService extends BaseService<Menu> {
 	 */
 	public List<Menu> queryMenu(Status status, Scope scope, String parentId);
 	
-	public List<Menu> queryMenu(String parentId,Boolean isIsms);
+	public List<MenuVo> queryMenu(String parentId,Boolean isIsms);
 
 	/**
 	 * 根据作用域获取树list

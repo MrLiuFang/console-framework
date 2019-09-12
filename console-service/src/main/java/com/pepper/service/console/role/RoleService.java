@@ -106,4 +106,6 @@ public interface RoleService extends BaseService<Role> {
 	 * @return
 	 */
 	Pager<Role> list(Pager<Role> pager);
+	
+	List<Role> findByUserId1(String userId);
 }

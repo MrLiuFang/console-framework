@@ -47,6 +47,8 @@ public interface MenuDao extends BaseDao<Menu> {
 	 * @return
 	 */
 	List<Menu> findByParentId(String parentId);
+	
+	List<Menu> findByParentIdAndIdIn(String parentId,List<String> id);
 
 	/**
 	 * 根据parentId查询除了id记录外，还有没有其他子记录

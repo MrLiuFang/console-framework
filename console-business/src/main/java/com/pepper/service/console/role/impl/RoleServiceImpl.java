@@ -145,5 +145,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 		return roleDao.findByName(name);
 	}
 
+	@Override
+	public List<Role> findByUserId1(String userId) {
+		return roleDao.findByUserId1(userId);
+	}
+
 
 }

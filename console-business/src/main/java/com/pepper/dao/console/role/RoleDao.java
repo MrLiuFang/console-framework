@@ -62,6 +62,9 @@ public interface RoleDao extends BaseDao<Role> {
 	 */
 	@Query(" select r from Role r , RoleUser u where r.id=u.roleId and u.userId = ?1")
 	Role findByUserId(String userId);
+	
+	@Query(" select r from Role r , RoleUser u where r.id=u.roleId and u.userId = ?1")
+	List<Role> findByUserId1(String userId);
 
 	/**
 	 * 根据name获取记录

@@ -65,12 +65,12 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 	@Override
 	public AdminUser saveUser(AdminUser adminUser, String roleId) {
 		adminUser = adminUserDao.save(adminUser);
-		RoleUser roleUser = new RoleUser();
-		roleUser.setCreateDate(new Date());
-		roleUser.setCreateUser(adminUser.getCreateUser());
-		roleUser.setRoleId(roleId);
-		roleUser.setUserId(adminUser.getId());
-		roleUserService.save(roleUser);
+//		RoleUser roleUser = new RoleUser();
+//		roleUser.setCreateDate(new Date());
+//		roleUser.setCreateUser(adminUser.getCreateUser());
+//		roleUser.setRoleId(roleId);
+//		roleUser.setUserId(adminUser.getId());
+//		roleUserService.save(roleUser);
 		return adminUser;
 	}
 
