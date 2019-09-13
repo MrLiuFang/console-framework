@@ -39,7 +39,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord){
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
-		jpql.append("SELECT  au from AdminUser au  join RoleUser ru on au.id = ru.userId  join Role r on ru.roleId = r.id "
+		jpql.append("SELECT distinct au from AdminUser au left join RoleUser ru on au.id = ru.userId left join Role r on ru.roleId = r.id "
 				+ " where au.userType = :userType   ");
 		searchParameter.put("userType", UserType.EMPLOYEE);
 		

@@ -13,7 +13,9 @@ import com.pepper.model.console.role.RoleUser;
 
 public interface RoleUserDao extends BaseDao<RoleUser> {
 
-	RoleUser findByUserId(String userId);
+//	RoleUser findByUserId(String userId);
+	
+	List<RoleUser> findByUserId(String userId);
 
 	List<RoleUser> findByRoleId(String roleId);
 
