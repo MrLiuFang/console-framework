@@ -230,14 +230,14 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 			for (Menu childMennu : listChildMenu) {
 				MenuVo childMenuVo = new MenuVo();
 				BeanUtils.copyProperties(childMennu, childMenuVo);
-				List<Menu> listChildMenu1 = id.size()>0? menuDao.findByParentIdAndIdIn(rootMenu.getId(),id) :findByParentId(rootMenu.getId());
-				List<MenuVo> listChileMenu1 = new ArrayList<MenuVo>();
+				List<Menu> listChildMenu1 = id.size()>0? menuDao.findByParentIdAndIdIn(childMennu.getId(),id) :findByParentId(childMennu.getId());
+				List<MenuVo> listChildMenuVo = new ArrayList<MenuVo>();
 				for(Menu menu : listChildMenu1) {
 					MenuVo childMenuVo1 = new MenuVo();
 					BeanUtils.copyProperties(menu, childMenuVo1);
-					listChileMenu1.add(childMenuVo1);
+					listChildMenuVo.add(childMenuVo1);
 				}
-				childMenuVo.setChild(listChileMenu1);
+				childMenuVo.setChild(listChildMenuVo);
 				listChileMenu.add(childMenuVo);
 			}
 			menuVo.setChild(listChileMenu);
