@@ -37,7 +37,7 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
 
 	@Override
 	public RoleMenu findByRoleAndMenu(String roleId, String menuId) {
-		return roleMenuDao.findByRoleIdAndMenuId(roleId, menuId);
+		return roleMenuDao.findOneByRoleIdAndMenuId(roleId, menuId);
 	}
 
 	@Override
@@ -54,5 +54,11 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
 	public List<RoleMenu> findByRoleId(String roleId) {
 		return roleMenuDao.findByRoleId(roleId);
 	}
+
+	@Override
+	public List<RoleMenu> findByRoleIdAndMustExistIsTrue(String roleId) {
+		return roleMenuDao.findByRoleIdAndMustExistIsTrue(roleId);
+	}
+
 
 }

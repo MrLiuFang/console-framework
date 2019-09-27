@@ -28,6 +28,9 @@ public class RoleMenu extends BaseModel {
 	 */
 	@Column(name = "menu_id", nullable = false)
 	private String menuId;
+	
+	@Column(name = "must_exist")
+	private Boolean mustExist;
 
 	public String getRoleId() {
 		return roleId;

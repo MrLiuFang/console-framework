@@ -57,6 +57,10 @@ public interface RoleMenuService extends BaseService<RoleMenu> {
 	 * @param roleId
 	 * @return
 	 */
+	
 	public List<RoleMenu> findByRoleId(String roleId);
+	
+	
+	List<RoleMenu> findByRoleIdAndMustExistIsTrue(String roleId);
 
 }

@@ -18,6 +18,9 @@ public interface RoleMenuDao extends BaseDao<RoleMenu> {
 	List<RoleMenu> findByMenuId(String menuId);
 
 	List<RoleMenu> findByRoleId(String roleId);
+	
+	
+	List<RoleMenu> findByRoleIdAndMustExistIsTrue(String roleId);
 
 	/**
 	 * 根据角色id和菜单id获取对象
@@ -26,7 +29,7 @@ public interface RoleMenuDao extends BaseDao<RoleMenu> {
 	 * @param menuId
 	 * @return
 	 */
-	RoleMenu findByRoleIdAndMenuId(String roleId, String menuId);
+	RoleMenu findOneByRoleIdAndMenuId(String roleId, String menuId);
 
 	/**
 	 * 根据角色id返回menuId，格式List<String>
