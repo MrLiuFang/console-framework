@@ -133,6 +133,18 @@ public class AdminUser extends BaseModel {
 	
 	@Column(name = "automatic_logut_date")
 	private Date automaticLogOutDate;
+	
+	private String userNo;
+
+	
+
+	public String getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
 
 	public Date getLastLoginTime() {
 		return lastLoginTime;

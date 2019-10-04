@@ -28,6 +28,9 @@ public class Menu extends BaseModel {
 	 */
 	@Column(name = "name" ,nullable=false)
 	private String name;
+	
+	@Column(name = "zh_name" ,nullable=false)
+	private String zhName;
 
 	/**
 	 * 采单编码
@@ -200,6 +203,14 @@ public class Menu extends BaseModel {
 
 	public void setIsIsms(Boolean isIsms) {
 		this.isIsms = isIsms;
+	}
+
+	public String getZhName() {
+		return zhName;
+	}
+
+	public void setZhName(String zhName) {
+		this.zhName = zhName;
 	}
 	
 }

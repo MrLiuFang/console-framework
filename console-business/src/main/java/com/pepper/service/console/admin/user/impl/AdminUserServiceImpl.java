@@ -3,6 +3,8 @@ package com.pepper.service.console.admin.user.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+
 import javax.annotation.Resource;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -65,12 +67,14 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 	@Override
 	public AdminUser saveUser(AdminUser adminUser, String roleId) {
 		adminUser = adminUserDao.save(adminUser);
-//		RoleUser roleUser = new RoleUser();
-//		roleUser.setCreateDate(new Date());
-//		roleUser.setCreateUser(adminUser.getCreateUser());
-//		roleUser.setRoleId(roleId);
-//		roleUser.setUserId(adminUser.getId());
-//		roleUserService.save(roleUser);
+		if(Objects.nonNull(roleId)) {
+			RoleUser roleUser = new RoleUser();
+			roleUser.setCreateDate(new Date());
+			roleUser.setCreateUser(adminUser.getCreateUser());
+			roleUser.setRoleId(roleId);
+			roleUser.setUserId(adminUser.getId());
+			roleUserService.save(roleUser);
+		}
 		return adminUser;
 	}
 
