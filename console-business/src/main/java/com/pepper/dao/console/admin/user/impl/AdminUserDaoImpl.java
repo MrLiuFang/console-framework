@@ -67,7 +67,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 			searchParameter.put("email","%"+email+"%");
 		}
 		
-		if(StringUtils.hasText(email)) {
+		if(StringUtils.hasText(name)) {
 			jpql.append( "and au.name like :name " );
 			searchParameter.put("name","%"+name+"%");
 		}

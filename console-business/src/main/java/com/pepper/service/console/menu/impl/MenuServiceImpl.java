@@ -201,7 +201,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 		Map<String, Object> searchParameter = new HashMap<String, Object>();
 		searchParameter.put(SearchConstant.IS_TRUE + "_isIsms", true);
 		searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
-		List<Menu> listRootMenu = menuDao.findAll(searchParameter);
+		
+		Map<String, Object> sortParameter = new HashMap<String, Object>();
+		sortParameter.put("sort", Direction.ASC.name());
+		List<Menu> listRootMenu = menuDao.findAll(searchParameter,sortParameter);
 		return setChildMenu(listRootMenu,new ArrayList<String>());
 	}
 	
