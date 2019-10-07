@@ -24,6 +24,7 @@ import com.pepper.model.console.menu.Menu;
 import com.pepper.model.console.menu.MenuVo;
 import com.pepper.service.console.menu.MenuService;
 import com.pepper.service.console.role.RoleMenuService;
+import com.pepper.service.file.FileService;
 
 import javassist.expr.NewArray;
 
@@ -41,6 +42,9 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 	
 	@Reference
 	private RoleMenuService roleMenuService;
+	
+	@Reference
+	private FileService fileService;
 
 	@Override
 	public List<Menu> queryRoleChildMenu(String parentMenuId, String roleId, Status status) {
@@ -225,6 +229,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 		List<MenuVo> listMenu = new ArrayList<MenuVo>();
 		for (Menu rootMenu : listRootMenu) {
 			MenuVo menuVo = new MenuVo();
+			menuVo.setPdfUrl(fileService.getUrl(menuVo.getPdf()));
 			BeanUtils.copyProperties(rootMenu, menuVo);
 			listMenu.add(menuVo);
 			

@@ -100,6 +100,17 @@ public class Menu extends BaseModel {
 	
 	@Column(name = "is_isms")
 	private Boolean isIsms;
+	
+	@Column(name = "pdf")
+	private String pdf;
+
+	public String getPdf() {
+		return pdf;
+	}
+
+	public void setPdf(String pdf) {
+		this.pdf = pdf;
+	}
 
 	public String getName() {
 		return name;
