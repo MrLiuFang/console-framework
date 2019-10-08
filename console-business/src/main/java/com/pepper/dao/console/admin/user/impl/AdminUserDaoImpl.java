@@ -89,6 +89,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 			jpql.append( " and ( au.account like :keyWord or au.mobile like :keyWord or au.email like :keyWord or au.name like :keyWord  )" );
 			searchParameter.put("keyWord","%"+keyWord+"%");
 		}
+		jpql.append( " order by  au.departmentId , au.departmentGroupId ,au.account" );
 		return baseDao.findNavigator(pager, jpql.toString(), searchParameter);
 	}
 
