@@ -229,20 +229,21 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 		List<MenuVo> listMenu = new ArrayList<MenuVo>();
 		for (Menu rootMenu : listRootMenu) {
 			MenuVo menuVo = new MenuVo();
-			menuVo.setPdfUrl(fileService.getUrl(menuVo.getPdf()));
 			BeanUtils.copyProperties(rootMenu, menuVo);
+			menuVo.setPdfUrl(fileService.getUrl(rootMenu.getPdf()));
 			listMenu.add(menuVo);
-			
 			List<Menu> listChildMenu = id.size()>0? menuDao.findByParentIdAndIdIn(rootMenu.getId(),id) :findByParentId(rootMenu.getId());
 			List<MenuVo> listChileMenu = new ArrayList<MenuVo>();
 			for (Menu childMennu : listChildMenu) {
 				MenuVo childMenuVo = new MenuVo();
 				BeanUtils.copyProperties(childMennu, childMenuVo);
+				childMenuVo.setPdfUrl(fileService.getUrl(childMennu.getPdf()));
 				List<Menu> listChildMenu1 = id.size()>0? menuDao.findByParentIdAndIdIn(childMennu.getId(),id) :findByParentId(childMennu.getId());
 				List<MenuVo> listChildMenuVo = new ArrayList<MenuVo>();
 				for(Menu menu : listChildMenu1) {
 					MenuVo childMenuVo1 = new MenuVo();
 					BeanUtils.copyProperties(menu, childMenuVo1);
+					childMenuVo1.setPdfUrl(fileService.getUrl(menu.getPdf()));
 					listChildMenuVo.add(childMenuVo1);
 				}
 				childMenuVo.setChild(listChildMenuVo);
