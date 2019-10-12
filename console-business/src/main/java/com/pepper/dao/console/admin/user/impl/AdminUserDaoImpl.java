@@ -3,10 +3,12 @@ package com.pepper.dao.console.admin.user.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import com.pepper.common.emuns.Status;
 import com.pepper.core.Pager;
 import com.pepper.core.base.BaseDao;
 import com.pepper.dao.console.admin.user.AdminUserDaoEx;
@@ -36,7 +38,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 		return list;
 	}
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord){
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String keyWord){
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct au from AdminUser au left join RoleUser ru on au.id = ru.userId left join Role r on ru.roleId = r.id "
@@ -44,12 +46,17 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 		searchParameter.put("userType", UserType.EMPLOYEE);
 		
 		if(StringUtils.hasText(roleId)) {
-			jpql.append( " and r.code = :roleId " );
+			jpql.append( " and r.id = :roleId " );
 			searchParameter.put("roleId",roleId);
 //			if(roleId.equals("OPERATOR_ROLE")) {
 //				jpql.append( " and au.isManager = :isManager " );
 //				searchParameter.put("isManager",true);
 //			}
+		}
+		
+		if(Objects.nonNull(status)) {
+			jpql.append( " and au.status = :status " );
+			searchParameter.put("status",status);
 		}
 		
 		if(StringUtils.hasText(account)) {

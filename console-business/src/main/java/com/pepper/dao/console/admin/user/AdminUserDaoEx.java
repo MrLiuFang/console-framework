@@ -2,6 +2,7 @@ package com.pepper.dao.console.admin.user;
 
 import java.util.List;
 
+import com.pepper.common.emuns.Status;
 import com.pepper.core.Pager;
 import com.pepper.model.console.admin.user.AdminUser;
 
@@ -16,5 +17,5 @@ public interface AdminUserDaoEx<T> {
 	
 	List<AdminUser> findByDepartmentId(String departmentId,Boolean isManager);
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord);
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String keyWord);
 }

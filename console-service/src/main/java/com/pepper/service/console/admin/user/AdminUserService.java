@@ -2,6 +2,7 @@ package com.pepper.service.console.admin.user;
 
 import java.util.List;
 
+import com.pepper.common.emuns.Status;
 import com.pepper.core.Pager;
 import com.pepper.core.base.BaseService;
 import com.pepper.model.console.admin.user.AdminUser;
@@ -95,5 +96,5 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	
 	List<AdminUser> findByDepartmentIdAndIsManagerAndDepartmentGroupIdIsNullOrDepartmentGroupId(String departmentId,Boolean isManager );
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,String keyWord);
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String keyWord);
 }
