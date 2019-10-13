@@ -6,6 +6,7 @@ import java.util.Map;
 import com.pepper.common.emuns.Scope;
 import com.pepper.common.emuns.Status;
 import com.pepper.core.base.BaseService;
+import com.pepper.model.console.enums.MenuType;
 import com.pepper.model.console.menu.Menu;
 import com.pepper.model.console.menu.MenuVo;
 
@@ -111,4 +112,14 @@ public interface MenuService extends BaseService<Menu> {
 	 * @return
 	 */
 	public List<String> findAllResourceUrl();
+
+	/**
+	 * 查询所有目录
+	 * @param parentId
+	 * @param isIsms
+	 * @param menuType
+	 * @param list
+	 * @return
+	 */
+	List<MenuVo> queryMenu(String parentId, Boolean isIsms, MenuType menuType);
 }

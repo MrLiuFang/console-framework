@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -212,7 +213,46 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 		return setChildMenu(listRootMenu,new ArrayList<String>());
 	}
 	
+	@Override
+	public List<MenuVo> queryMenu(String parentId, Boolean isIsms,MenuType menuType){
+		Map<String, Object> searchParameter = new HashMap<String, Object>();
+		searchParameter.put(SearchConstant.IS_TRUE + "_isIsms", true);
+		if(Objects.nonNull(parentId)) {
+			searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
+		}
+		if(Objects.nonNull(menuType)) {
+			searchParameter.put(SearchConstant.EQUAL + "_menuType", menuType);
+		}
+		Map<String, Object> sortParameter = new HashMap<String, Object>();
+		sortParameter.put("sort", Direction.ASC.name());
+		List<Menu> listMenu = menuDao.findAll(searchParameter,sortParameter);
+		List<MenuVo> list = new ArrayList<MenuVo>();
+		for(Menu menu : listMenu) {
+			MenuVo menuVo = new MenuVo();
+			BeanUtils.copyProperties(menu, menuVo);
+			menuVo.setPdfUrl(fileService.getUrl(menu.getPdf()));
+			menuVo.setChild(queryMenu(menuVo.getId(), isIsms, menuType));
+			list.add(menuVo);
+		}
+		return list;
+	}
 	
+//	public void queryChildCatalogMenu(String parentId, Boolean isIsms,MenuType menuType, List<Menu> list){
+//		Map<String, Object> searchParameter = new HashMap<String, Object>();
+//		searchParameter.put(SearchConstant.IS_TRUE + "_isIsms", true);
+//		searchParameter.put(SearchConstant.EQUAL + "_parentId", parentId);
+//		searchParameter.put(SearchConstant.EQUAL + "_menuType", menuType);
+//		Map<String, Object> sortParameter = new HashMap<String, Object>();
+//		sortParameter.put("sort", Direction.ASC.name());
+//		List<Menu> listMenu = menuDao.findAll(searchParameter,sortParameter);
+//		List<MenuVo> listChild = new ArrayList<MenuVo>();
+//		for(Menu menu : listMenu) {
+//			MenuVo menuVo = new MenuVo();
+//			BeanUtils.copyProperties(menu, menuVo);
+//			menuVo.setPdfUrl(fileService.getUrl(menu.getPdf()));
+//			listChild.add(menuVo);
+//		}
+//	}
 
 	@Override
 	public Menu findByUrl(String url) {
