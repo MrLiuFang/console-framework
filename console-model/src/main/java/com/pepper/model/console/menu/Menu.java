@@ -103,6 +103,9 @@ public class Menu extends BaseModel {
 	
 	@Column(name = "pdf")
 	private String pdf;
+	
+	@Column(name = "icon")
+	private String icon;
 
 	public String getPdf() {
 		return pdf;
@@ -222,6 +225,14 @@ public class Menu extends BaseModel {
 
 	public void setZhName(String zhName) {
 		this.zhName = zhName;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 }

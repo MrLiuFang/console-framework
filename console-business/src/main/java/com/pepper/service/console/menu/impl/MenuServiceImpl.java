@@ -231,6 +231,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 			MenuVo menuVo = new MenuVo();
 			BeanUtils.copyProperties(menu, menuVo);
 			menuVo.setPdfUrl(fileService.getUrl(menu.getPdf()));
+			menuVo.setIconUrl(fileService.getUrl(menu.getIcon()));
 			menuVo.setChild(queryMenu(menuVo.getId(), isIsms, menuType));
 			list.add(menuVo);
 		}
@@ -271,6 +272,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 			MenuVo menuVo = new MenuVo();
 			BeanUtils.copyProperties(rootMenu, menuVo);
 			menuVo.setPdfUrl(fileService.getUrl(rootMenu.getPdf()));
+			menuVo.setIconUrl(fileService.getUrl(rootMenu.getIcon()));
 			listMenu.add(menuVo);
 			List<Menu> listChildMenu = id.size()>0? menuDao.findByParentIdAndIdIn(rootMenu.getId(),id) :findByParentId(rootMenu.getId());
 			List<MenuVo> listChileMenu = new ArrayList<MenuVo>();
@@ -278,12 +280,14 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
 				MenuVo childMenuVo = new MenuVo();
 				BeanUtils.copyProperties(childMennu, childMenuVo);
 				childMenuVo.setPdfUrl(fileService.getUrl(childMennu.getPdf()));
+				menuVo.setIconUrl(fileService.getUrl(childMennu.getIcon()));
 				List<Menu> listChildMenu1 = id.size()>0? menuDao.findByParentIdAndIdIn(childMennu.getId(),id) :findByParentId(childMennu.getId());
 				List<MenuVo> listChildMenuVo = new ArrayList<MenuVo>();
 				for(Menu menu : listChildMenu1) {
 					MenuVo childMenuVo1 = new MenuVo();
 					BeanUtils.copyProperties(menu, childMenuVo1);
 					childMenuVo1.setPdfUrl(fileService.getUrl(menu.getPdf()));
+					menuVo.setIconUrl(fileService.getUrl(menu.getIcon()));
 					listChildMenuVo.add(childMenuVo1);
 				}
 				childMenuVo.setChild(listChildMenuVo);

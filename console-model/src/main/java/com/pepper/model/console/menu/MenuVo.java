@@ -16,6 +16,8 @@ public class MenuVo extends Menu {
 	
 	private String pdfUrl;
 	
+	private String iconUrl;
+	
 	
 	private List<MenuVo> child;
 
@@ -33,6 +35,14 @@ public class MenuVo extends Menu {
 
 	public void setPdfUrl(String pdfUrl) {
 		this.pdfUrl = pdfUrl;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
 	}
 	
 	
