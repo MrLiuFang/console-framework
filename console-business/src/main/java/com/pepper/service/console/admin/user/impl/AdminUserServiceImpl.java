@@ -135,8 +135,8 @@ public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser> implements 
 	}
 
 	@Override
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String keyWord){
-		return adminUserDao.findAdminUser(pager,account, mobile, email, name, departmentId, departmentGroupId, roleId,isWork, status, keyWord);
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String roleCode,String keyWord){
+		return adminUserDao.findAdminUser(pager,account, mobile, email, name, departmentId, departmentGroupId, roleId,isWork, status,roleCode, keyWord);
 	}
 
 	@Override

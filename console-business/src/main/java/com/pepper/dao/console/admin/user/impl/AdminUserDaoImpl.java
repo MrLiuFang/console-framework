@@ -38,7 +38,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 		return list;
 	}
 	
-	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String keyWord){
+	public Pager<AdminUser> findAdminUser(Pager<AdminUser> pager,String account,String mobile,String email,String name,String departmentId,String departmentGroupId,String roleId,Boolean isWork,Status status,String roleCode,String keyWord){
 		Map<String,Object> searchParameter = new HashMap<String, Object>();
 		StringBuffer jpql = new StringBuffer();
 		jpql.append("SELECT distinct au from AdminUser au  join RoleUser ru on au.id = ru.userId  join Role r on ru.roleId = r.id "
@@ -52,6 +52,11 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 //				jpql.append( " and au.isManager = :isManager " );
 //				searchParameter.put("isManager",true);
 //			}
+		}
+		
+		if(StringUtils.hasText(roleCode)) {
+			jpql.append( " and r.code = :roleCode " );
+			searchParameter.put("roleCode",roleCode);
 		}
 		
 		if(Objects.nonNull(status)) {
