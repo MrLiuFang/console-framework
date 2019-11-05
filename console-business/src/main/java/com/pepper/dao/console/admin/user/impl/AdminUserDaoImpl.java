@@ -33,6 +33,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 		String jpql = "SELECT  au from AdminUser au  join RoleUser ru on au.id = ru.userId  join Role r on ru.roleId = r.id "
 				+ " where au.userType = :userType  and r.code = 'EMPLOYEE_ROLE' ";
 		searchParameter.put("userType", UserType.EMPLOYEE);
+		searchParameter.put("status", Status.NORMAL);
 //		searchParameter.put("departmentId", departmentId);
 		List<AdminUser> list = baseDao.find(jpql, searchParameter);
 		return list;
@@ -112,6 +113,7 @@ public class AdminUserDaoImpl  implements AdminUserDaoEx<AdminUser>{
 		jpql.append(" from AdminUser t1 where t1.departmentId =:departmentId and t1.isManager =:isManager and ( t1.departmentGroupId is null or t1.departmentGroupId = '' )");
 		searchParameter.put("departmentId",departmentId);
 		searchParameter.put("isManager",isManager);
+		searchParameter.put("status", Status.NORMAL);
 		return baseDao.find(jpql.toString(), searchParameter);
 	}
 	
